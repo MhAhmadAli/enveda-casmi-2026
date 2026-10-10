@@ -177,7 +177,7 @@ def load_split(path, meta_cols):
 N_BINS = int(round(MAX_MZ / BIN_WIDTH))
 
 
-def bin_matrix(mz_all, it_all, off, n, pmz, neutral_loss=False):
+def _bin_chunk(mz_all, it_all, off, n, pmz, neutral_loss):
     n = np.asarray(n, dtype=np.int64)
     off = np.asarray(off, dtype=np.int64)
     total = int(n.sum())
@@ -187,10 +187,12 @@ def bin_matrix(mz_all, it_all, off, n, pmz, neutral_loss=False):
     within = np.arange(total, dtype=np.int64) - np.repeat(
         np.concatenate(([0], np.cumsum(n)[:-1])), n)
     idx = starts + within
-    row_id = np.repeat(np.arange(len(n), dtype=np.int64), n)
-    mz = mz_all[idx].astype(np.float64)
-    val = it_all[idx].astype(np.float64)
-    p = np.asarray(pmz, dtype=np.float64)[row_id]
+    del starts, within
+    row_id = np.repeat(np.arange(len(n), dtype=np.int32), n)
+    mz = mz_all[idx].astype(np.float32)
+    val = it_all[idx].astype(np.float32)
+    del idx
+    p = np.asarray(pmz, dtype=np.float32)[row_id]
 
     if neutral_loss:
         pos = p - mz
@@ -199,33 +201,68 @@ def bin_matrix(mz_all, it_all, off, n, pmz, neutral_loss=False):
         pos = mz
         keep = mz < p - GUARD
     keep &= (pos >= 0) & (pos < MAX_MZ) & (val > 0) & np.isfinite(pos)
+    del p, mz
     pos, val, row_id = pos[keep], val[keep] ** POWER, row_id[keep]
+    del keep
     if pos.size == 0:
         return sparse.csr_matrix((len(n), N_BINS), dtype=np.float32)
 
+    # soft binning: split each peak linearly across its two neighbouring centres
     f = pos / BIN_WIDTH - 0.5
-    lo = np.floor(f).astype(np.int64)
-    w = f - lo
+    del pos
+    lo = np.floor(f).astype(np.int32)
+    w = (f - lo).astype(np.float32)
+    del f
     b = np.concatenate([lo, lo + 1])
+    del lo
     val = np.concatenate([val * (1.0 - w), val * w])
+    del w
     row_id = np.concatenate([row_id, row_id])
     ok = (b >= 0) & (b < N_BINS) & (val > 0)
     b, val, row_id = b[ok], val[ok], row_id[ok]
+    del ok
 
-    flat = row_id * N_BINS + b
+    flat = row_id.astype(np.int64) * N_BINS + b
+    del b
     order = np.argsort(flat, kind="stable")
     flat, val, row_id = flat[order], val[order], row_id[order]
+    del order
     uniq, start = np.unique(flat, return_index=True)
-    val = np.add.reduceat(val, start)
+    del flat
+    val = np.add.reduceat(val.astype(np.float32), start)
     row_id = row_id[start]
-    nrm = np.sqrt(np.bincount(row_id, weights=val * val, minlength=len(n)))
+    del start
+    nrm = np.sqrt(np.bincount(row_id, weights=(val.astype(np.float64) ** 2),
+                              minlength=len(n)))
     nrm[nrm == 0] = 1.0
-    val = val / nrm[row_id]
+    val = (val / nrm[row_id]).astype(np.float32)
     counts = np.bincount(row_id, minlength=len(n))
     indptr = np.concatenate(([0], np.cumsum(counts))).astype(np.int64)
     return sparse.csr_matrix(
-        (val.astype(np.float32), (uniq % N_BINS).astype(np.int32), indptr),
-        shape=(len(n), N_BINS))
+        (val, (uniq % N_BINS).astype(np.int32), indptr), shape=(len(n), N_BINS))
+
+
+def bin_matrix(mz_all, it_all, off, n, pmz, neutral_loss=False, chunk=150_000):
+    """Binned sparse matrix, assembled in row chunks.
+
+    Binning everything in one pass needs ~20-30 GB of transient index/value arrays
+    for a 2.4M-spectrum library, which is fine locally but kills a Kaggle kernel.
+    Chunking caps transient memory at roughly chunk/total of that while producing an
+    identical matrix.
+    """
+    nrows = len(n)
+    if nrows <= chunk:
+        return _bin_chunk(mz_all, it_all, off, n, pmz, neutral_loss)
+    parts = []
+    for s in range(0, nrows, chunk):
+        e = min(s + chunk, nrows)
+        parts.append(_bin_chunk(mz_all, it_all, off[s:e], n[s:e], pmz[s:e],
+                                neutral_loss))
+        gc.collect()
+    out = sparse.vstack(parts, format="csr")
+    del parts
+    gc.collect()
+    return out
 
 
 # %% [markdown]
@@ -348,7 +385,7 @@ for nl in (False, True):
     R = bin_matrix(ref_mz, ref_it, r_off, r_n, r_pmz, neutral_loss=nl)
     Q = bin_matrix(test_mz, test_it, q_off, q_n, q_pmz, neutral_loss=nl)
     log(f"  binned {'neutral-loss' if nl else 'direct'}: ref nnz {R.nnz:,}")
-    CH = 64
+    CH = 32
     for s in range(0, nq, CH):
         e = min(s + CH, nq)
         prod = (R @ Q[s:e].T).tocsc()

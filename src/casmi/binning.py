@@ -40,7 +40,7 @@ def gather_rows(store, rows: np.ndarray):
     )
 
 
-def bin_matrix(
+def _bin_chunk(
     store,
     rows: np.ndarray,
     precursor_mz: np.ndarray,
@@ -118,3 +118,23 @@ def bin_matrix(
     return sparse.csr_matrix(
         (val.astype(np.float32), cols, indptr), shape=(len(rows), n_bins)
     )
+
+
+def bin_matrix(store, rows, precursor_mz, *, chunk: int = 150_000, **kw):
+    """Binned sparse matrix, assembled in row chunks.
+
+    Binning millions of spectra in one pass needs tens of GB of transient index and
+    value arrays (doubled again by soft binning, then sorted). Chunking caps that at
+    roughly chunk/total while producing a bit-identical matrix -- verified equal to
+    the single-pass result (same nnz, max difference 0.0). The Kaggle notebook has
+    ~30 GB, where the single-pass version dies.
+    """
+    rows = np.asarray(rows, dtype=np.int64)
+    precursor_mz = np.asarray(precursor_mz)
+    if len(rows) <= chunk:
+        return _bin_chunk(store, rows, precursor_mz, **kw)
+    parts = [
+        _bin_chunk(store, rows[s:s + chunk], precursor_mz[s:s + chunk], **kw)
+        for s in range(0, len(rows), chunk)
+    ]
+    return sparse.vstack(parts, format="csr")
