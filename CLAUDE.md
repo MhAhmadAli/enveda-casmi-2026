@@ -96,6 +96,22 @@ Public notebooks were reported at ~0.43 LB, so the analog baseline alone is alre
 in that region — but `npx` structures all have public-library spectra, so genuinely
 novel natural products will be harder.
 
+### On `npbig` — 3,496 natural-product molecules, mostly Orbitrap/QTOF
+
+| scorer | MRR@25 | top-1 | top-5 | top-25 | pool recall |
+|---|---|---|---|---|---|
+| analog propagation | 0.429 | 0.295 | 0.595 | 0.786 | 0.905 |
+
+The two dev sets agree once the ceiling is accounted for: 0.475/0.975 = **0.487** on
+`npx` against 0.429/0.905 = **0.474** on `npbig`. So the scorer behaves the same
+across instruments, and the headline gap is almost entirely **candidate pool
+coverage**, not spectral matching. Raising pool recall is therefore a direct,
+measurable lever — 9.5% of `npbig` molecules currently cannot be found at any rank.
+
+Iteration cost warning: `npbig` took **5.4 h** on CPU (2.39M reference spectra x
+13,437 queries x 2 domains). Moving the search to the GPU is a prerequisite for
+tuning at this scale; `casmi.search.SpectralIndex` exists for that but is unbenchmarked.
+
 ### On the placeholder-matched folds (enveda-180 synthetic space)
 
 Diagnostic of the machinery only, **not** predictions of leaderboard score. Kept
@@ -143,6 +159,14 @@ overlap with `enveda-180` is a feature, not a bug.
   Do not use one.
 - Log every evaluated config to `reports/*.jsonl` with a `--tag`.
 - Network here is flaky; large downloads need `curl -C - --retry`.
+- **Kaggle notebook push gotchas** (both cost a failed run to learn):
+  - jupytext writes `.ipynb` with no `kernelspec`, and papermill then fails with
+    "No kernel name found in notebook" *before executing anything*. Always set
+    `nb.metadata['kernelspec'] = {"name": "python3", ...}` before `nbformat.write`.
+  - the Kaggle CLI needs its temp upload directory to pre-exist, including a
+    subdirectory mirroring the `-p` path: `mkdir -p "$TMP/.kaggle/uploads/data"`.
+  - check a pushed kernel with `kaggle kernels status <id>`, and fetch the log with
+    `kaggle kernels output <id> -p <dir>` (the log is JSON, not text).
 - Unread forum threads worth checking: "Metric Update (RemoveStereochemistry)"
   (746878) and "Adding valid guesses at ranks 2–25 lowers the public score?" (748029).
   Kaggle pages are JS-rendered; bodies are not reachable via WebFetch or the API.
