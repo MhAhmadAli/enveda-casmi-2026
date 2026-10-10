@@ -51,15 +51,41 @@ def log(*a):
     print(f"[{time.time()-T0:7.1f}s]", *a, flush=True)
 
 
-IN = "/kaggle/input/enveda-CASMI26-molecule-id-mass-spectra"
-if not os.path.isdir(IN):
-    IN = "enveda-CASMI26-molecule-id-mass-spectra"
-POOL = None
-for cand in ["/kaggle/input/casmi26-candidate-pool", "data/kaggle_dataset"]:
-    if os.path.isdir(cand):
-        POOL = cand
-        break
-assert POOL, "candidate pool dataset not attached"
+# Kaggle's mount layout is not guaranteed: datasets appear under
+# /kaggle/input/datasets/<owner>/<slug> and competition data under a similarly
+# nested path, neither of which matches the slug-only path the docs imply. So both
+# locations are discovered by looking for a file we know they contain.
+def find_dir(marker, extra_roots=()):
+    roots = ["/kaggle/input", *extra_roots, "data", "."]
+    seen = []
+    for root in roots:
+        if not os.path.isdir(root):
+            continue
+        for dirpath, dirnames, filenames in os.walk(root):
+            if dirpath.count(os.sep) - root.count(os.sep) > 4:
+                dirnames[:] = []
+                continue
+            seen.append(dirpath)
+            if marker in filenames:
+                return dirpath, seen
+    return None, seen
+
+
+def require_dir(marker, what):
+    found, seen = find_dir(marker)
+    if found is None:
+        print(f"could not locate {what} (looking for {marker}); searched:")
+        for d in seen[:300]:
+            try:
+                print("   ", d, sorted(os.listdir(d))[:8])
+            except OSError:
+                pass
+        raise FileNotFoundError(what)
+    return found
+
+
+IN = require_dir("test.parquet", "competition data")
+POOL = require_dir("pool_index.parquet", "candidate pool dataset")
 log(f"competition data: {IN}")
 log(f"candidate pool:   {POOL}")
 

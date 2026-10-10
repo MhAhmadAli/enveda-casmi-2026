@@ -167,6 +167,12 @@ overlap with `enveda-180` is a feature, not a bug.
     subdirectory mirroring the `-p` path: `mkdir -p "$TMP/.kaggle/uploads/data"`.
   - check a pushed kernel with `kaggle kernels status <id>`, and fetch the log with
     `kaggle kernels output <id> -p <dir>` (the log is JSON, not text).
+  - **mount paths are nested, not slug-only**: datasets land at
+    `/kaggle/input/datasets/<owner>/<slug>` and competition data at a similarly
+    nested path -- NOT `/kaggle/input/<slug>` as the docs imply. Never hard-code
+    either; discover them by walking `/kaggle/input` for a known filename
+    (`test.parquet`, `pool_index.parquet`). `submit_analog.py` has `require_dir()`
+    for this, which also prints the tree on failure.
 - Unread forum threads worth checking: "Metric Update (RemoveStereochemistry)"
   (746878) and "Adding valid guesses at ranks 2–25 lowers the public score?" (748029).
   Kaggle pages are JS-rendered; bodies are not reachable via WebFetch or the API.
