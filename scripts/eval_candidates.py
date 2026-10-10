@@ -53,6 +53,12 @@ def main() -> None:
                     help="reference library subset; natural-product spectra are "
                          "mostly Orbitrap/QTOF so 'all' is the right default now")
     ap.add_argument("--scorer", default="analog", choices=["random", "analog"])
+    ap.add_argument("--regime", default="disjoint", choices=["disjoint", "inlib"],
+                    help="disjoint = every spectrum of the true structure removed "
+                         "(Class 2, a novel molecule). inlib = only the query spectra "
+                         "are withheld, so the structure's other spectra (typically on "
+                         "another instrument) remain (Class 1). The hidden test is a "
+                         "MIXTURE of the two, so both must be measured.")
     ap.add_argument("--ppm", type=float, default=10.0, help="candidate mass window")
     ap.add_argument("--topk-spectra", type=int, default=500)
     ap.add_argument("--top-analogs", type=int, default=100)
@@ -77,11 +83,13 @@ def main() -> None:
     print(f"pool: {len(pool.df):,} structures", flush=True)
 
     ref = reference_table(CACHE, instrument=args.instrument)
-    # structure-disjoint: drop every spectrum of every held-out structure
-    ref = ref[~ref.key14.isin(set(truth.values))].reset_index(drop=True)
+    if args.regime == "disjoint":
+        # Class 2: drop every spectrum of every held-out structure
+        ref = ref[~ref.key14.isin(set(truth.values))].reset_index(drop=True)
+    # the query spectra themselves are never part of the reference
     ref = ref[~ref.row.isin(set(val.row.tolist()))].reset_index(drop=True)
-    print(f"reference (disjoint): {len(ref):,} spectra / {ref.key14.nunique():,} "
-          f"structures", flush=True)
+    print(f"reference ({args.regime}): {len(ref):,} spectra / "
+          f"{ref.key14.nunique():,} structures", flush=True)
 
     store = PeakStore.load("train")
     meta_pmz = pd.read_parquet(f"{CACHE}/train_meta.parquet",
@@ -169,7 +177,7 @@ def main() -> None:
     tr = [truth[m] for m in mols]
     score = mrr(ranked, tr)
     acc = topk_accuracy(ranked, tr)
-    res = {"val": args.val, "instrument": args.instrument,
+    res = {"val": args.val, "instrument": args.instrument, "regime": args.regime,
            "scorer": args.scorer, "ppm": args.ppm,
            "domain": args.domain, "sim_power": args.sim_power,
            "top_analogs": args.top_analogs, "topk_spectra": args.topk_spectra,
