@@ -1,0 +1,14 @@
+{
+  "id": "ahmadali1243534/casmi26-retrieval-probe",
+  "title": "CASMI26 retrieval probe",
+  "code_file": "submit_retrieval.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "competition_sources": ["enveda-CASMI26-molecule-id-mass-spectra"],
+  "dataset_sources": [],
+  "kernel_sources": []
+}

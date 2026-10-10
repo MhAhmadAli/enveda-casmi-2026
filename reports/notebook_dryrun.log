@@ -1,0 +1,35 @@
+[    0.0s] loading test
+[    0.0s]   row group 1/1: 93,500 peaks
+[    0.0s] test: 1213 spectra, 400 molecules
+[    0.0s] loading train (timsTOF only)
+[    2.2s]   row group 1/21: 7,839,734 peaks
+[    4.5s]   row group 2/21: 15,798,594 peaks
+[    6.8s]   row group 3/21: 23,754,557 peaks
+[    9.1s]   row group 4/21: 31,671,693 peaks
+[   11.4s]   row group 5/21: 39,674,385 peaks
+[   13.8s]   row group 6/21: 47,621,662 peaks
+[   16.1s]   row group 7/21: 55,553,886 peaks
+[   18.5s]   row group 8/21: 63,476,786 peaks
+[   20.5s]   row group 9/21: 70,051,917 peaks
+[   22.8s]   row group 21/21: 70,204,819 peaks
+[   23.9s] reference: 1,154,969 spectra, 183,191 structures
+[   37.2s] reference binned: nnz 115,494,843
+[   37.2s] query binned: nnz 152,981
+[   39.4s]   searched 64/1213
+[   51.3s]   searched 384/1213
+[   63.4s]   searched 704/1213
+[   74.9s]   searched 1024/1213
+[   81.8s] search done
+[   98.9s] masses for 183,191 structures
+[   99.3s] submission rows 400, mean candidates 25.0
+[   99.3s] wrote submission.csv
+  molecule_id                                             smiles
+0    m_005e53  CN(Cc1ncccc1C(=O)O)CC1(c2ccc(Br)cc2)CC1;Cc1cnc...
+1    m_006153  COc1ccc(N2CC(C(=O)Nc3nncn3C3CC3)CC2=O)cc1;COc1...
+2    m_00b5aa  COc1ccnc(CN2CCOCC3(CCCC3)C2)c1OC;COc1ccnc(CN2C...
+3    m_01e922  Cc1ccc(C(=O)OCC2CCCCC2)c(=O)[nH]1;Cc1ccc(C(=O)...
+4    m_0259d4  O=C(NCCCn1ccnc1)NCCc1coc(-c2ccccc2)n1;Cc1ccc(-...
+{
+ "n_rows": 400,
+ "n_with_candidates": 400
+}

@@ -1,0 +1,10 @@
+numpy
+pandas
+pyarrow
+rdkit
+scipy
+scikit-learn
+lightgbm
+torch
+tqdm
+matplotlib
