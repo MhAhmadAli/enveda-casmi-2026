@@ -201,6 +201,44 @@ Transferable lessons:
 - Analog propagation (`tanimoto(candidate, analog) * spectral_sim**4`) is the
   strongest non-neural scorer: 4.6x the random floor on real natural products.
 
+### Class-1 channel rebuilt: entropy similarity on a mass-restricted search
+
+`scripts/eval_direct.py` + `src/casmi/entropy.py`. The architectural point, taken
+from the public notebook: a *direct* search never needs to scan the library. Only
+spectra whose **neutral mass already matches the query** can be the same compound --
+about 480 of 2.4M. At that scale exact peak alignment and entropy similarity are
+affordable, where binning was a compromise forced by scanning everything.
+
+On `npx --regime inlib` (518 molecules, Class 1):
+
+| method | MRR@25 | top-1 | top-25 | runtime |
+|---|---|---|---|---|
+| binned-cosine analog propagation | 0.793 | 0.745 | 0.907 | ~270 s |
+| **entropy similarity, mass-restricted** | **0.880** | **0.828** | 0.985 | **2.4 s** |
+
+**+0.087 MRR and ~110x faster.** On 518 molecules the noise floor is ~+/-0.015, so
+the headline gain is real (~6 sigma) but the hyperparameter micro-tuning below is
+NOT -- do not read those as settled.
+
+Sweep findings (npx inlib, all within ~1 sigma of each other except where noted):
+
+- **entropy weighting helps**: 0.868 vs 0.860 without. Confirms Li et al.
+- tolerance 0.005 Da >= 0.01 >= 0.02; `min_rel` 0.005 >= 0.002 >= 0.001;
+  `max_peaks` 512 == 256.
+- ppm window 8.5-10 is the sweet spot. **5 ppm loses top-25** (0.973 vs 0.987): the
+  window starts excluding the truth.
+- **The +1.4 ppm timsTOF offset is real but not worth correcting.** Our independent
+  measurement of query-vs-truth mass error is median **+1.54 ppm** (p5 -1.50,
+  p95 +3.66), matching their note -- but applying the correction slightly *hurt*
+  (0.8706 -> 0.8678), because a +/-10 ppm window already absorbs a 1.5 ppm shift.
+- Current best config: `--ppm 8.5 --tol 0.005 --min-rel 0.005`, entropy weight on,
+  no offset -> 0.8797.
+
+Direct search scores **exactly 0.000** on `--regime disjoint`, confirming the two
+channels are strictly complementary: Class 1 needs direct search (0.880), Class 2
+needs analog propagation (0.475). A competitive submission must run both and combine
+them, which is what V16->V17 did.
+
 ## Candidate pool
 
 COCONUT 2.0 (Oct 2026, **CC0**, so legal to re-upload as a Kaggle dataset) plus all
