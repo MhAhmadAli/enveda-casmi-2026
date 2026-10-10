@@ -73,7 +73,11 @@ products. That inverts the role of the training libraries:
     scripts/probe_test_regime.py offline test-vs-validation distribution comparison
     scripts/verify_leak.py       peak-level proof the visible test is duplicated
     src/casmi/{chem,binning,search,retrieval,metric,spectra}.py
-    notebooks/submit_retrieval.py  self-contained Kaggle notebook (schema check only)
+    notebooks/submit_retrieval.py  early retrieval-only notebook (schema check only;
+                                 scores 0.000 on disjoint structures - do not submit)
+    notebooks/submit_analog.py   the real submission notebook (analog propagation)
+    notebooks/kernels/<name>/    one dir per pushed kernel + its kernel-metadata.json
+    data/kaggle_dataset/         payload for the casmi26-candidate-pool Kaggle dataset
 
 Everything reads `data/cache`, so no script touches the 3 GB original.
 Hardware: RTX 5090 (32 GB, 174 TFLOP/s fp16), i9-14900K, 96 GB RAM.
@@ -148,6 +152,19 @@ train structures: **729,600 unique structures**, Morgan fps precomputed
 (`data/cache/pool_fp_packed.npy`, 1,859 informative bits, mean 50 bits set).
 Since the hidden test is natural products, COCONUT is the right backbone — its 0.2%
 overlap with `enveda-180` is a feature, not a bug.
+
+## Submission path (working as of 2026-10-10)
+
+- Kaggle dataset `ahmadali1243534/casmi26-candidate-pool` (private, 225 MB):
+  `pool_index.parquet`, `pool_fp_packed.npy`, `structures.parquet`.
+- Kernel `ahmadali1243534/casmi26-analog-candidate-ranking` v5 runs **COMPLETE in
+  12.8 min** (766 s) against the 540 min cap, and its `submission.csv` is
+  byte-identical to the local run: 400 rows, 25 unique valid SMILES each, no
+  fallbacks triggered.
+- Submit with:
+  `kaggle competitions submit enveda-CASMI26-molecule-id-mass-spectra
+   -k <owner>/<kernel> -v <version> -f submission.csv -m "<msg>"`
+  (code competitions take `-k/-v`, not a bare file upload.)
 
 ## Conventions and traps
 

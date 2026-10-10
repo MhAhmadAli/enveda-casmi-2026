@@ -1,83 +1,42 @@
-[{"stream_name":"stderr","time":10.541677366,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
-,{"stream_name":"stderr","time":10.54174234,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
-,{"stream_name":"stderr","time":10.541747785,"data":"0.00s - to python to disable frozen modules.\n"}
-,{"stream_name":"stderr","time":10.541750778,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
-,{"stream_name":"stderr","time":11.446180543,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
-,{"stream_name":"stderr","time":11.446230424,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
-,{"stream_name":"stderr","time":11.446236351,"data":"0.00s - to python to disable frozen modules.\n"}
-,{"stream_name":"stderr","time":11.446422973,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
-,{"stream_name":"stdout","time":14.607085821,"data":"[    0.0s] competition data: /kaggle/input/competitions/enveda-CASMI26-molecule-id-mass-spectra\n"}
-,{"stream_name":"stdout","time":14.608136887,"data":"[    0.0s] candidate pool:   /kaggle/input/datasets/ahmadali1243534/casmi26-candidate-pool\n"}
-,{"stream_name":"stdout","time":18.873624882,"data":"[    4.3s] pool: 729,596 structures, fp (729596, 256)\n"}
-,{"stream_name":"stdout","time":19.148034538,"data":"[    4.5s]   row group 1/1, 93,500 peaks\n"}
-,{"stream_name":"stdout","time":19.149027205,"data":"[    4.5s] test: 1213 spectra, 400 molecules, instruments {'timsTOF': 1213}\n"}
-,{"stream_name":"stdout","time":66.379511485,"data":"[   51.8s]   row group 5/21, 39,906,128 peaks\n"}
-,{"stream_name":"stdout","time":113.598397116,"data":"[   99.0s]   row group 10/21, 83,348,955 peaks\n"}
-,{"stream_name":"stdout","time":146.134852774,"data":"[  131.5s]   row group 15/21, 114,422,825 peaks\n"}
-,{"stream_name":"stdout","time":170.515968867,"data":"[  155.9s]   row group 20/21, 133,407,612 peaks\n"}
-,{"stream_name":"stdout","time":171.015448695,"data":"[  156.3s]   row group 21/21, 133,560,514 peaks\n"}
-,{"stream_name":"stdout","time":176.930118742,"data":"[  162.3s] library: 2,539,608 spectra\n"}
-,{"stream_name":"stdout","time":179.052748088,"data":"[  164.5s] library usable: 2,430,955 spectra / 273,783 structures\n"}
-,{"stream_name":"stderr","time":216.409036258,"data":"Kernel died while waiting for execute reply.\n"}
-,{"stream_name":"stderr","time":216.592207736,"data":"Traceback (most recent call last):\n"}
-,{"stream_name":"stderr","time":216.594807953,"data":"  File \"/usr/local/lib/python3.13/dist-packages/nbclient/client.py\", line 949, in async_execute_cell\n"}
-,{"stream_name":"stderr","time":216.594841801,"data":"    exec_reply = await self.task_poll_for_reply\n"}
-,{"stream_name":"stderr","time":216.594848727,"data":"                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":216.594854718,"data":"  File \"/usr/local/lib/python3.13/dist-packages/nbclient/client.py\", line 730, in _async_poll_for_reply\n"}
-,{"stream_name":"stderr","time":216.594861184,"data":"    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))\n"}
-,{"stream_name":"stderr","time":216.594866741,"data":"          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":216.594871849,"data":"  File \"/usr/local/lib/python3.13/dist-packages/nbclient/util.py\", line 96, in ensure_async\n"}
-,{"stream_name":"stderr","time":216.594878511,"data":"    result = await obj\n"}
-,{"stream_name":"stderr","time":216.594883655,"data":"             ^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":216.594911216,"data":"  File \"/usr/local/lib/python3.13/dist-packages/jupyter_client/channels.py\", line 224, in get_msg\n"}
-,{"stream_name":"stderr","time":216.594917761,"data":"    ready = await self.socket.poll(timeout)\n"}
-,{"stream_name":"stderr","time":216.594921672,"data":"            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":216.594925867,"data":"asyncio.exceptions.CancelledError\n"}
-,{"stream_name":"stderr","time":216.594934301,"data":"\n"}
-,{"stream_name":"stderr","time":216.594938829,"data":"During handling of the above exception, another exception occurred:\n"}
-,{"stream_name":"stderr","time":216.594943449,"data":"\n"}
-,{"stream_name":"stderr","time":216.594947824,"data":"Traceback (most recent call last):\n"}
-,{"stream_name":"stderr","time":216.598697643,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
-,{"stream_name":"stderr","time":216.598729386,"data":"    import sys;import papermill as pm;pm.execute_notebook(\"__notebook__.ipynb\",\"__notebook__.ipynb\",progress_bar=False,log_output=True,stdout_file=sys.stdout,stderr_file=sys.stderr,allow_errors=False,timeout=43200)\n"}
-,{"stream_name":"stderr","time":216.598736995,"data":"                                      ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":216.598742007,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 116, in execute_notebook\n"}
-,{"stream_name":"stderr","time":216.598746497,"data":"    nb = papermill_engines.execute_notebook_with_engine(\n"}
-,{"stream_name":"stderr","time":216.598750586,"data":"        engine_name,\n"}
-,{"stream_name":"stderr","time":216.598754514,"data":"    ...\u003c9 lines\u003e...\n"}
-,{"stream_name":"stderr","time":216.598760328,"data":"        **engine_kwargs,\n"}
-,{"stream_name":"stderr","time":216.598769596,"data":"    )\n"}
-,{"stream_name":"stderr","time":216.598772998,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/engines.py\", line 49, in execute_notebook_with_engine\n"}
-,{"stream_name":"stderr","time":216.59877628,"data":"    return self.get_engine(engine_name).execute_notebook(nb, kernel_name, **kwargs)\n"}
-,{"stream_name":"stderr","time":216.598779208,"data":"           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":216.598782026,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/engines.py\", line 371, in execute_notebook\n"}
-,{"stream_name":"stderr","time":216.598784967,"data":"    cls.execute_managed_notebook(nb_man, kernel_name, log_output=log_output, **kwargs)\n"}
-,{"stream_name":"stderr","time":216.598787747,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":216.598790462,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/engines.py\", line 443, in execute_managed_notebook\n"}
-,{"stream_name":"stderr","time":216.598793508,"data":"    return PapermillNotebookClient(nb_man, **final_kwargs).execute()\n"}
-,{"stream_name":"stderr","time":216.598815728,"data":"           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n"}
-,{"stream_name":"stderr","time":216.598820597,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/clientwrap.py\", line 45, in execute\n"}
-,{"stream_name":"stderr","time":216.598826268,"data":"    self.papermill_execute_cells()\n"}
-,{"stream_name":"stderr","time":216.598830532,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n"}
-,{"stream_name":"stderr","time":216.598848267,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/clientwrap.py\", line 72, in papermill_execute_cells\n"}
-,{"stream_name":"stderr","time":216.598852778,"data":"    self.execute_cell(cell, index)\n"}
-,{"stream_name":"stderr","time":216.598856765,"data":"    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\n"}
-,{"stream_name":"stderr","time":216.598860701,"data":"  File \"/usr/local/lib/python3.13/dist-packages/nbclient/util.py\", line 84, in wrapped\n"}
-,{"stream_name":"stderr","time":216.598864876,"data":"    return just_run(coro(*args, **kwargs))\n"}
-,{"stream_name":"stderr","time":216.598870597,"data":"  File \"/usr/local/lib/python3.13/dist-packages/nbclient/util.py\", line 62, in just_run\n"}
-,{"stream_name":"stderr","time":216.598874877,"data":"    return loop.run_until_complete(coro)\n"}
-,{"stream_name":"stderr","time":216.598879023,"data":"           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n"}
-,{"stream_name":"stderr","time":216.598884893,"data":"  File \"/usr/lib/python3.13/asyncio/base_events.py\", line 726, in run_until_complete\n"}
-,{"stream_name":"stderr","time":216.598893896,"data":"    return future.result()\n"}
-,{"stream_name":"stderr","time":216.598896608,"data":"           ~~~~~~~~~~~~~^^\n"}
-,{"stream_name":"stderr","time":216.598899306,"data":"  File \"/usr/local/lib/python3.13/dist-packages/nbclient/client.py\", line 953, in async_execute_cell\n"}
-,{"stream_name":"stderr","time":216.598903134,"data":"    raise DeadKernelError(\"Kernel died\")\n"}
-,{"stream_name":"stderr","time":216.598920793,"data":"nbclient.exceptions.DeadKernelError: Kernel died\n"}
-,{"stream_name":"stderr","time":221.041786369,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
-,{"stream_name":"stderr","time":221.041827858,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
-,{"stream_name":"stderr","time":221.651400457,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
-,{"stream_name":"stderr","time":221.651437421,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
-,{"stream_name":"stderr","time":223.991600156,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
-,{"stream_name":"stderr","time":224.097719123,"data":"[NbConvertApp] Writing 31560 bytes to __notebook__.ipynb\n"}
-,{"stream_name":"stderr","time":227.5543953,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
-,{"stream_name":"stderr","time":228.872145899,"data":"[NbConvertApp] Writing 376699 bytes to __results__.html\n"}
+[{"stream_name":"stderr","time":7.402866329,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.402918369,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.402924038,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.402927609,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":8.123928069,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.123965767,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.123971994,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.12397706,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":10.349269874,"data":"[    0.0s] competition data: /kaggle/input/competitions/enveda-CASMI26-molecule-id-mass-spectra\n"}
+,{"stream_name":"stdout","time":10.351311027,"data":"[    0.0s] candidate pool:   /kaggle/input/datasets/ahmadali1243534/casmi26-candidate-pool\n"}
+,{"stream_name":"stdout","time":14.296926717,"data":"[    4.0s] pool: 729,596 structures, fp (729596, 256)\n"}
+,{"stream_name":"stdout","time":14.560060961,"data":"[    4.2s]   row group 1/1, 93,500 peaks\n"}
+,{"stream_name":"stdout","time":14.561015814,"data":"[    4.2s] test: 1213 spectra, 400 molecules, instruments {'timsTOF': 1213}\n"}
+,{"stream_name":"stdout","time":68.129654034,"data":"[   57.8s]   row group 5/21, 39,906,128 peaks\n"}
+,{"stream_name":"stdout","time":122.856860221,"data":"[  112.5s]   row group 10/21, 83,348,955 peaks\n"}
+,{"stream_name":"stdout","time":161.468356777,"data":"[  151.1s]   row group 15/21, 114,422,825 peaks\n"}
+,{"stream_name":"stdout","time":188.994443471,"data":"[  178.7s]   row group 20/21, 133,407,612 peaks\n"}
+,{"stream_name":"stdout","time":189.485316629,"data":"[  179.0s]   row group 21/21, 133,560,514 peaks\n"}
+,{"stream_name":"stdout","time":194.216957712,"data":"[  183.9s] library: 2,539,608 spectra\n"}
+,{"stream_name":"stdout","time":196.364780381,"data":"[  186.0s] library usable: 2,430,955 spectra / 273,783 structures\n"}
+,{"stream_name":"stdout","time":226.3957942,"data":"[  216.1s]   binned direct: ref nnz 227,579,843\n"}
+,{"stream_name":"stdout","time":520.342976148,"data":"[  510.0s]   searched direct\n"}
+,{"stream_name":"stdout","time":554.803104065,"data":"[  544.5s]   binned neutral-loss: ref nnz 227,707,897\n"}
+,{"stream_name":"stdout","time":774.759034026,"data":"[  764.4s]   searched neutral-loss\n"}
+,{"stream_name":"stdout","time":774.930398269,"data":"[  764.6s] analogs collected\n"}
+,{"stream_name":"stdout","time":776.856087652,"data":"[  766.5s] ranked 400 molecules; {\"no_candidates\": 0, \"widened\": 0, \"no_analogs\": 0}\n"}
+,{"stream_name":"stdout","time":776.95124275,"data":"[  766.6s] wrote submission.csv: 400 rows, candidates/row min 25 median 25 max 25\n"}
+,{"stream_name":"stdout","time":776.96040445,"data":"  molecule_id                                             smiles\n"}
+,{"stream_name":"stdout","time":776.960432872,"data":"0    m_005e53  CN(Cc1ncccc1C(=O)O)CC1(c2ccc(Br)cc2)CC1;Cc1cnc...\n"}
+,{"stream_name":"stdout","time":776.960439257,"data":"1    m_006153  COc1ccc(N2CC(C(=O)Nc3nncn3C3CC3)CC2=O)cc1;COc1...\n"}
+,{"stream_name":"stdout","time":776.960445559,"data":"2    m_00b5aa  COc1ccnc(CN2CCOCC3(CCCC3)C2)c1OC;COc1cc(CN2CCN...\n"}
+,{"stream_name":"stdout","time":776.960465676,"data":"3    m_01e922  Cc1ccc(C(=O)OCC2CCCCC2)c(=O)[nH]1;CCC=CCCCNc1c...\n"}
+,{"stream_name":"stdout","time":776.960470854,"data":"4    m_0259d4  O=C(NCCCn1ccnc1)NCCc1coc(-c2ccccc2)n1;Cc1ccc(-...\n"}
+,{"stream_name":"stderr","time":780.730956981,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":780.730994608,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":780.935592253,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":780.935621669,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":781.875494137,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":781.996693299,"data":"[NbConvertApp] Writing 35191 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":785.297356596,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":786.071835328,"data":"[NbConvertApp] Writing 383809 bytes to __results__.html\n"}
 ]
