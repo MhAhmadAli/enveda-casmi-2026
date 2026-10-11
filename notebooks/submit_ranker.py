@@ -89,8 +89,59 @@ IN = require_dir("test.parquet", "competition data")
 # marker is the ranker, not pool_index.parquet: the local dev cache also
 # holds a pool_index.parquet, and only the shipped payload has the model
 POOL = require_dir("ranker.joblib", "candidate pool + ranker dataset")
-PKG = require_dir("channels.py", "shipped casmi package")
-sys.path.insert(0, os.path.dirname(PKG))
+def locate_package():
+    """Return a sys.path entry from which `import casmi` works.
+
+    Two layouts are possible: the dataset may expose casmi/ as a real directory,
+    or the CLI may have stored it as an archive. For the archive case the files are
+    extracted to a writable dir -- numba compiles kernels in casmi.entropy and
+    wants a real path, so importing straight from the zip is not relied on.
+    """
+    found, seen = find_dir("channels.py")
+    if found is not None:
+        return os.path.dirname(found), f"directory {found}"
+
+    import zipfile
+    for root in ("/kaggle/input", "data", "."):
+        if not os.path.isdir(root):
+            continue
+        for dirpath, _, filenames in os.walk(root):
+            for fn in filenames:
+                if not fn.endswith(".zip"):
+                    continue
+                zp = os.path.join(dirpath, fn)
+                try:
+                    with zipfile.ZipFile(zp) as z:
+                        names = z.namelist()
+                        if not any(n.endswith("channels.py") for n in names):
+                            continue
+                        out = "/tmp/casmi_pkg" if os.path.isdir("/tmp") else "casmi_pkg"
+                        os.makedirs(out, exist_ok=True)
+                        z.extractall(out)
+                        inner, _ = find_dir_under(out, "channels.py")
+                        if inner:
+                            return os.path.dirname(inner), f"archive {zp}"
+                except zipfile.BadZipFile:
+                    continue
+    print("could not locate the casmi package; searched:")
+    for d in seen[:300]:
+        try:
+            print("   ", d, sorted(os.listdir(d))[:8])
+        except OSError:
+            pass
+    raise FileNotFoundError("shipped casmi package")
+
+
+def find_dir_under(root, marker):
+    for dirpath, _, filenames in os.walk(root):
+        if marker in filenames:
+            return os.path.join(dirpath, marker), dirpath
+    return None, None
+
+
+PKG_PATH, PKG_HOW = locate_package()
+sys.path.insert(0, PKG_PATH)
+PKG = PKG_HOW
 log(f"competition data: {IN}")
 log(f"candidate pool:   {POOL}")
 log(f"casmi package:    {PKG}")

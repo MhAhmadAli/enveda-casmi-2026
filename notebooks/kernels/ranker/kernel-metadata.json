@@ -1,0 +1,14 @@
+{
+  "id": "ahmadali1243534/casmi26-two-channel-ranker",
+  "title": "CASMI26 two-channel ranker",
+  "code_file": "submit_ranker.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "competition_sources": ["enveda-CASMI26-molecule-id-mass-spectra"],
+  "dataset_sources": ["ahmadali1243534/casmi26-candidate-pool"],
+  "kernel_sources": []
+}
