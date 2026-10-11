@@ -96,6 +96,9 @@ def main() -> None:
     ap.add_argument("--priors", default="0.3,0.6",
                     help="assumed Class-1 fractions to train at and average over")
     ap.add_argument("--seeds", default="0,1")
+    ap.add_argument("--fp-features", default="",
+                    help="dev sets with fp-channel features to merge, "
+                         "e.g. npx,npbig (reports/fp_features_<name>.parquet)")
     ap.add_argument("--hard-max-tanimoto", type=float, default=0.6)
     ap.add_argument("--save-model", default="",
                     help="after cross-validation, refit on ALL molecules and "
@@ -108,6 +111,34 @@ def main() -> None:
     df = load(args.features.split(","))
     print(f"{len(df):,} candidate rows, {df.molecule_id.nunique()} molecules, "
           f"{int(df.label.sum())} positives")
+
+    feature_cols = list(FEATURES)
+    if args.fp_features:
+        # The fingerprint channel is computed per (molecule, candidate) and merged
+        # on that key. Its features are added to the ranker's inputs only if every
+        # requested file exists, so a partial merge cannot silently train a model on
+        # mostly-NaN columns.
+        parts = []
+        for n in args.fp_features.split(","):
+            fp = f"reports/fp_features_{n}.parquet"
+            if not os.path.exists(fp):
+                raise SystemExit(f"missing {fp}; run eval_fpmodel.py --val {n} "
+                                 f"--out-features {fp}")
+            d = pd.read_parquet(fp)
+            d["molecule_id"] = n + "_" + d.molecule_id.astype(str)
+            parts.append(d)
+        fpdf = pd.concat(parts, ignore_index=True)
+        before = len(df)
+        df = df.merge(fpdf, on=["molecule_id", "key14"], how="left")
+        assert len(df) == before, "fp merge changed the row count"
+        fp_cols = ["fp_score", "fp_margin", "fp_rank"]
+        cover = df.fp_score.notna().mean()
+        print(f"fp channel merged: {cover:.1%} of candidate rows covered")
+        # a molecule the fp channel never saw keeps neutral values rather than NaN
+        df["fp_score"] = df.fp_score.fillna(df.fp_score.min())
+        df["fp_margin"] = df.fp_margin.fillna(df.fp_margin.min())
+        df["fp_rank"] = df.fp_rank.fillna(df.n_candidates)
+        feature_cols += fp_cols
 
     # structure-grouped folds: a structure's every adduct/molecule stays together
     truth_of_mol = truth_key_of_molecule(df)
@@ -140,14 +171,14 @@ def main() -> None:
         te = ~tr
         if not te.any():
             continue
-        Xte = df.loc[te, FEATURES].to_numpy(np.float32)
+        Xte = df.loc[te, feature_cols].to_numpy(np.float32)
         preds = np.zeros(int(te.sum()))
         n_models = 0
         for prior in priors:
             # weight the two regimes so the training mixture matches `prior`
             w = np.where(df.loc[tr, "regime"].to_numpy() == "inlib",
                          prior, 1.0 - prior).astype(np.float64)
-            Xtr = df.loc[tr, FEATURES].to_numpy(np.float32)
+            Xtr = df.loc[tr, feature_cols].to_numpy(np.float32)
             ytr = df.loc[tr, "label"].to_numpy()
             for seed in seeds:
                 clf = HistGradientBoostingClassifier(
@@ -167,7 +198,10 @@ def main() -> None:
         results.append(evaluate(df[hard].reset_index(drop=True), oof[hard],
                                 f"ranker (hard <= {args.hard_max_tanimoto})"))
     # baselines on the same rows, for a like-for-like comparison
-    for name, col in [("channel 2 alone", "c2"), ("channel 1 alone", "c1")]:
+    baselines = [("channel 2 alone", "c2"), ("channel 1 alone", "c1")]
+    if args.fp_features:
+        baselines.append(("fp channel alone", "fp_score"))
+    for name, col in baselines:
         results.append(evaluate(df, df[col].to_numpy(), name))
         if hard.any():
             results.append(evaluate(df[hard].reset_index(drop=True),
@@ -180,7 +214,7 @@ def main() -> None:
         # and seed bagging so the shipped ensemble matches what was measured.
         import joblib
         models = []
-        X = df[FEATURES].to_numpy(np.float32)
+        X = df[feature_cols].to_numpy(np.float32)
         y = df.label.to_numpy()
         for prior in priors:
             w = np.where(df.regime.to_numpy() == "inlib", prior, 1.0 - prior)
@@ -192,7 +226,7 @@ def main() -> None:
                 clf.fit(X, y, sample_weight=w)
                 models.append(clf)
         os.makedirs(os.path.dirname(args.save_model) or ".", exist_ok=True)
-        joblib.dump({"models": models, "features": FEATURES, "priors": priors,
+        joblib.dump({"models": models, "features": feature_cols, "priors": priors,
                      "seeds": seeds, "n_train_molecules": int(df.molecule_id.nunique())},
                     args.save_model, compress=3)
         print(f"saved {len(models)} models to {args.save_model}")
@@ -231,7 +265,7 @@ def main() -> None:
     print(res.to_string(index=False))
     os.makedirs("reports", exist_ok=True)
     res.to_csv("reports/ranker_results.csv", index=False)
-    json.dump({"features": FEATURES, "priors": priors, "seeds": seeds,
+    json.dump({"features": feature_cols, "priors": priors, "seeds": seeds,
                "folds": args.folds, "tag": args.tag,
                "results": results}, open("reports/ranker_results.json", "w"),
               indent=1)

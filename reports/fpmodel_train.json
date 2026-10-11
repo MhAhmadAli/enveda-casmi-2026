@@ -1,0 +1,8 @@
+{
+ "n_params": 4719599,
+ "n_bits": 2031,
+ "train_spectra": 29658,
+ "epochs": 1,
+ "holdout_loss": 0.15124785900115967,
+ "held_out_dev_structures": 1750
+}

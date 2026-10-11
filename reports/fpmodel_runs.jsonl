@@ -1,0 +1,1 @@
+{"val": "nphard", "scorer": "fp_model", "ppm": 8.5, "n_molecules": 770, "mrr@25": 0.3139, "top1": 0.1987, "top5": 0.4455, "top10": 0.5455, "top25": 0.6896, "runtime_s": 1.9, "tag": "ep1"}
