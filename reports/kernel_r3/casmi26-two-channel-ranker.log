@@ -1,0 +1,76 @@
+[{"stream_name":"stderr","time":8.122602357,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.12265484,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.122661636,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.122666788,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":8.899511405,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.899570595,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.899577016,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.899582239,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":11.223729397,"data":"[    0.0s] competition data: /kaggle/input/competitions/enveda-CASMI26-molecule-id-mass-spectra\n"}
+,{"stream_name":"stdout","time":11.224701906,"data":"[    0.0s] candidate pool:   /kaggle/input/datasets/ahmadali1243534/casmi26-candidate-pool\n"}
+,{"stream_name":"stdout","time":11.22560084,"data":"[    0.0s] casmi package:    directory /kaggle/input/datasets/ahmadali1243534/casmi26-candidate-pool/casmi\n"}
+,{"stream_name":"stdout","time":16.413385767,"data":"[    5.2s] pool: 729,596 structures\n"}
+,{"stream_name":"stdout","time":16.642078664,"data":"[    5.4s]   row group 1/1, 93,500 peaks\n"}
+,{"stream_name":"stdout","time":16.642967904,"data":"[    5.4s] test: 1213 spectra, 400 molecules\n"}
+,{"stream_name":"stdout","time":65.99861699,"data":"[   54.8s]   row group 5/21, 39,906,128 peaks\n"}
+,{"stream_name":"stdout","time":116.445792626,"data":"[  105.2s]   row group 10/21, 83,348,955 peaks\n"}
+,{"stream_name":"stdout","time":153.005744747,"data":"[  141.8s]   row group 15/21, 114,422,825 peaks\n"}
+,{"stream_name":"stdout","time":178.954003883,"data":"[  167.7s]   row group 20/21, 133,407,612 peaks\n"}
+,{"stream_name":"stdout","time":179.331732363,"data":"[  168.1s]   row group 21/21, 133,560,514 peaks\n"}
+,{"stream_name":"stdout","time":184.380649214,"data":"[  173.2s] library: 2,539,608 spectra\n"}
+,{"stream_name":"stdout","time":185.81470425,"data":"[  174.6s] library usable: 2,430,955 spectra / 273,783 structures\n"}
+,{"stream_name":"stdout","time":190.578265929,"data":"[  179.4s] [test] library 2,430,955 spectra / 273,783 structures\n"}
+,{"stream_name":"stdout","time":454.160090416,"data":"[  442.9s] [test]   prefiltered direct\n"}
+,{"stream_name":"stdout","time":665.060765442,"data":"[  653.8s] [test]   prefiltered neutral-loss\n"}
+,{"stream_name":"stdout","time":677.237184772,"data":"[  666.0s] [test]   channels done\n"}
+,{"stream_name":"stdout","time":679.042934306,"data":"[  667.8s] [test] features: 52,979 rows over 400 molecules\n"}
+,{"stream_name":"stdout","time":682.846378128,"data":"[  671.6s] fp model on cpu: epoch 7, 2022 bits\n"}
+,{"stream_name":"stderr","time":683.030272412,"data":"/kaggle/input/datasets/ahmadali1243534/casmi26-candidate-pool/casmi/fpmodel.py:90: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True\n"}
+,{"stream_name":"stderr","time":683.030316023,"data":"  self.enc = nn.TransformerEncoder(layer, num_layers=cfg.n_layers)\n"}
+,{"stream_name":"stderr","time":683.030323195,"data":"\n"}
+,{"stream_name":"stderr","time":683.030343107,"data":"/kaggle/input/datasets/ahmadali1243534/casmi26-candidate-pool/casmi/fpmodel.py:90: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True\n"}
+,{"stream_name":"stderr","time":683.030368592,"data":"  self.enc = nn.TransformerEncoder(layer, num_layers=cfg.n_layers)\n"}
+,{"stream_name":"stdout","time":709.506962633,"data":"[  698.3s] predicted fingerprints for 1213 spectra\n"}
+,{"stream_name":"stdout","time":710.587606735,"data":"[  699.4s] fp channel merged: 100.0% of rows covered\n"}
+,{"stream_name":"stdout","time":712.744464873,"data":"[  701.5s] ranker: 4 models over 20 features, trained on 3709 molecules\n"}
+,{"stream_name":"stderr","time":712.748991204,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/base.py:380: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.9.1 when using version 1.6.1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\n"}
+,{"stream_name":"stderr","time":712.749025468,"data":"https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations\n"}
+,{"stream_name":"stderr","time":712.749033277,"data":"  warnings.warn(\n"}
+,{"stream_name":"stderr","time":712.749039207,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/base.py:380: InconsistentVersionWarning: Trying to unpickle estimator _BinMapper from version 1.9.1 when using version 1.6.1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\n"}
+,{"stream_name":"stderr","time":712.749045838,"data":"https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations\n"}
+,{"stream_name":"stderr","time":712.74905212,"data":"  warnings.warn(\n"}
+,{"stream_name":"stderr","time":712.749062283,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/base.py:380: InconsistentVersionWarning: Trying to unpickle estimator HistGradientBoostingClassifier from version 1.9.1 when using version 1.6.1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\n"}
+,{"stream_name":"stderr","time":712.749069266,"data":"https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations\n"}
+,{"stream_name":"stderr","time":712.749075253,"data":"  warnings.warn(\n"}
+,{"stream_name":"stderr","time":712.74907897,"data":"\n"}
+,{"stream_name":"stderr","time":712.749082822,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/base.py:380: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.9.1 when using version 1.6.1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\n"}
+,{"stream_name":"stderr","time":712.749087086,"data":"https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations\n"}
+,{"stream_name":"stderr","time":712.749090817,"data":"  warnings.warn(\n"}
+,{"stream_name":"stderr","time":712.749094517,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/base.py:380: InconsistentVersionWarning: Trying to unpickle estimator _BinMapper from version 1.9.1 when using version 1.6.1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\n"}
+,{"stream_name":"stderr","time":712.749098853,"data":"https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations\n"}
+,{"stream_name":"stderr","time":712.749102649,"data":"  warnings.warn(\n"}
+,{"stream_name":"stderr","time":712.749165052,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/base.py:380: InconsistentVersionWarning: Trying to unpickle estimator HistGradientBoostingClassifier from version 1.9.1 when using version 1.6.1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\n"}
+,{"stream_name":"stderr","time":712.749186401,"data":"https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations\n"}
+,{"stream_name":"stderr","time":712.749192066,"data":"  warnings.warn(\n"}
+,{"stream_name":"stdout","time":715.808209461,"data":"[  704.6s] scored\n"}
+,{"stream_name":"stdout","time":716.404464093,"data":"[  705.2s] wrote submission.csv: 400 rows, candidates/row min 1 median 25 max 25\n"}
+,{"stream_name":"stdout","time":716.412957957,"data":"{\n"}
+,{"stream_name":"stdout","time":716.413010784,"data":" \"rows\": 400,\n"}
+,{"stream_name":"stdout","time":716.413017022,"data":" \"molecules_scored\": 400,\n"}
+,{"stream_name":"stdout","time":716.41302205,"data":" \"rows_filled_by_fallback\": 0\n"}
+,{"stream_name":"stdout","time":716.41302694,"data":"}\n"}
+,{"stream_name":"stdout","time":716.413031549,"data":"  molecule_id                                             smiles\n"}
+,{"stream_name":"stdout","time":716.413036542,"data":"0    m_005e53  CN(Cc1ncccc1C(=O)O)CC1(c2ccc(Br)cc2)CC1;Cc1cnc...\n"}
+,{"stream_name":"stdout","time":716.413042013,"data":"1    m_006153  COc1ccc(N2CC(C(=O)Nc3nncn3C3CC3)CC2=O)cc1;COc1...\n"}
+,{"stream_name":"stdout","time":716.41305715,"data":"2    m_00b5aa  COc1ccnc(CN2CCOCC3(CCCC3)C2)c1OC;COc1cc(CN2CCN...\n"}
+,{"stream_name":"stdout","time":716.413061281,"data":"3    m_01e922  Cc1ccc(C(=O)OCC2CCCCC2)c(=O)[nH]1;Cc1cc(O)ccc1...\n"}
+,{"stream_name":"stdout","time":716.413064477,"data":"4    m_0259d4  O=C(NCCCn1ccnc1)NCCc1coc(-c2ccccc2)n1;Cc1ccc(-...\n"}
+,{"stream_name":"stderr","time":721.29634422,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":721.296382185,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":721.500616999,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":721.500645609,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":722.527701623,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":722.637642974,"data":"[NbConvertApp] Writing 31855 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":726.122582196,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":726.8962877,"data":"[NbConvertApp] Writing 358648 bytes to __results__.html\n"}
+]
