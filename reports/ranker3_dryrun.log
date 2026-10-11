@@ -1,0 +1,37 @@
+[    0.0s] competition data: .\enveda-CASMI26-molecule-id-mass-spectra
+[    0.0s] candidate pool:   data\kaggle_dataset
+[    0.0s] casmi package:    directory data\kaggle_dataset\casmi
+[    0.6s] pool: 729,596 structures
+[    0.6s]   row group 1/1, 93,500 peaks
+[    0.6s] test: 1213 spectra, 400 molecules
+[   11.3s]   row group 5/21, 39,906,128 peaks
+[   22.2s]   row group 10/21, 83,348,955 peaks
+[   31.2s]   row group 15/21, 114,422,825 peaks
+[   38.5s]   row group 20/21, 133,407,612 peaks
+[   38.6s]   row group 21/21, 133,560,514 peaks
+[   40.4s] library: 2,539,608 spectra
+[   40.9s] library usable: 2,430,955 spectra / 273,783 structures
+[   43.4s] [test] library 2,430,955 spectra / 273,783 structures
+[  140.7s] [test]   prefiltered direct
+[  221.5s] [test]   prefiltered neutral-loss
+[  222.2s] [test]   channels done
+[  223.3s] [test] features: 52,979 rows over 400 molecules
+D:\Ahmad\kaggle\enveda-casmi-2026\.venv\Lib\site-packages\torch\nn\modules\transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+[  224.5s] fp model on cuda: epoch 7, 2022 bits
+[  225.0s] predicted fingerprints for 1213 spectra
+[  225.7s] fp channel merged: 100.0% of rows covered
+[  226.3s] ranker: 4 models over 20 features, trained on 3709 molecules
+[  226.5s] scored
+[  226.7s] wrote submission.csv: 400 rows, candidates/row min 1 median 25 max 25
+{
+ "rows": 400,
+ "molecules_scored": 400,
+ "rows_filled_by_fallback": 0
+}
+  molecule_id                                             smiles
+0    m_005e53  CN(Cc1ncccc1C(=O)O)CC1(c2ccc(Br)cc2)CC1;Cc1cnc...
+1    m_006153  COc1ccc(N2CC(C(=O)Nc3nncn3C3CC3)CC2=O)cc1;COc1...
+2    m_00b5aa  COc1ccnc(CN2CCOCC3(CCCC3)C2)c1OC;COc1cc(CN2CCN...
+3    m_01e922  Cc1ccc(C(=O)OCC2CCCCC2)c(=O)[nH]1;Cc1cc(O)ccc1...
+4    m_0259d4  O=C(NCCCn1ccnc1)NCCc1coc(-c2ccccc2)n1;Cc1ccc(-...

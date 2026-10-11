@@ -1,1 +1,4 @@
 {"val": "nphard", "scorer": "fp_model", "ppm": 8.5, "n_molecules": 770, "mrr@25": 0.3139, "top1": 0.1987, "top5": 0.4455, "top10": 0.5455, "top25": 0.6896, "runtime_s": 1.9, "tag": "ep1"}
+{"val": "nphard", "scorer": "fp_model", "ppm": 8.5, "n_molecules": 770, "mrr@25": 0.3465, "top1": 0.2273, "top5": 0.4844, "top10": 0.5701, "top25": 0.7052, "runtime_s": 1.7, "tag": "final"}
+{"val": "npx", "scorer": "fp_model", "ppm": 8.5, "n_molecules": 518, "mrr@25": 0.5342, "top1": 0.3938, "top5": 0.7201, "top10": 0.7934, "top25": 0.8861, "runtime_s": 1.6, "tag": "feats"}
+{"val": "npbig", "scorer": "fp_model", "ppm": 8.5, "n_molecules": 3496, "mrr@25": 0.4126, "top1": 0.2769, "top5": 0.5775, "top10": 0.6782, "top25": 0.7926, "runtime_s": 4.9, "tag": "feats"}

@@ -15,6 +15,7 @@
 # |---|---|---|
 # | 1 — direct | the molecule itself, if its structure has library spectra | spectral entropy on raw peaks, over library spectra whose **neutral mass matches** |
 # | 2 — analog | structural relatives of a novel molecule | binned cosine, direct + neutral-loss domains, propagated by `tanimoto x cos^4` |
+# | 3 — fingerprint | the structure itself, with no library involved | set transformer over peaks predicts 2,022 Morgan bits; candidates scored by naive-Bayes log-likelihood against the bit prior |
 #
 # Measured separately on held-out natural products (structure-disjoint):
 #
@@ -217,11 +218,17 @@ def load_split(path, meta_cols):
 
 # %%
 pool = CandidatePool.load(POOL, with_fp=True)
+pool_row_of_key = {}
+for _r, _k in enumerate(pool.key14):
+    if _k not in pool_row_of_key:
+        pool_row_of_key[_k] = _r
 log(f"pool: {len(pool.df):,} structures")
 
 test_meta, test_store = load_split(
     f"{IN}/test.parquet",
-    ["molecule_id", "spectrum_id", "adduct", "instrument_type", "precursor_mz"])
+    ["molecule_id", "spectrum_id", "adduct", "instrument_type", "precursor_mz",
+     "collision_energy_ev"])
+test_meta_raw = test_meta
 log(f"test: {len(test_meta)} spectra, {test_meta.molecule_id.nunique()} molecules")
 
 train_meta, train_store = load_split(
@@ -265,8 +272,73 @@ library = SpectraSet(
 # %%
 feat = compute_features(queries, library, pool, CFG, truth=None,
                         regime="test", log=log)
-del train_store, test_store
+del train_store          # the library is finished with; queries.store is still needed
 gc.collect()
+
+# %% [markdown]
+# ## Channel 3: predicted fingerprints
+#
+# Independent of the library entirely — the model reads the spectrum and predicts
+# which substructures are present, so a molecule with no close library relative is
+# no harder for it. A molecule's several collision energies are averaged in
+# probability space, since different energies expose different substructures.
+
+# %%
+import torch  # noqa: E402
+
+from casmi.fpmodel import (FPModelConfig, build_model,  # noqa: E402
+                           candidate_scores, predict_fingerprints)
+
+fp_dev = "cuda" if torch.cuda.is_available() else "cpu"
+ck = torch.load(f"{POOL}/fpmodel.pt", map_location=fp_dev, weights_only=False)
+fp_cfg = FPModelConfig(**ck["cfg"])
+fp_model = build_model(fp_cfg).to(fp_dev)
+fp_model.load_state_dict(ck["state"])
+keep_bits, bit_prior, add_map = ck["keep_bits"], ck["prior"], ck["adduct_id"]
+log(f"fp model on {fp_dev}: epoch {ck.get('epoch')}, {fp_cfg.n_bits} bits")
+
+# collision energy: the column is a list per spectrum, so take its maximum, and
+# fall back to 0 when absent rather than failing on a hidden-test schema variant
+if "collision_energy_ev" in test_meta_raw.columns:
+    ce_q = np.array([
+        (max(x) if x is not None and len(x) else 0.0)
+        for x in test_meta_raw.collision_energy_ev], dtype=np.float32)
+else:
+    ce_q = np.zeros(len(test_meta), np.float32)
+aid_q = np.array([add_map.get(str(a), 0) for a in queries.adduct], np.int64)
+
+pred = predict_fingerprints(fp_model, queries.store, queries.rows,
+                            queries.precursor_mz.astype(np.float32),
+                            aid_q, ce_q, fp_cfg, fp_dev)
+log(f"predicted fingerprints for {len(pred)} spectra")
+
+pred_by_mol = {}
+for m, g in pd.DataFrame({"m": queries.group,
+                          "i": np.arange(len(pred))}).groupby("m"):
+    pred_by_mol[m] = pred[g.i.to_numpy()].mean(axis=0)
+
+# attach fp features to the candidate rows the other channels produced
+fp_rows = []
+for mol, g in feat.groupby("molecule_id", sort=False):
+    rows_pool = np.array([pool_row_of_key[k] for k in g.key14], dtype=np.int64)
+    bits = np.unpackbits(pool.packed_fp[rows_pool], axis=1)[:, keep_bits]
+    sc = candidate_scores(pred_by_mol[mol], bits, bit_prior)
+    order = np.argsort(-sc)
+    rank = np.empty(len(sc), np.int64)
+    rank[order] = np.arange(1, len(sc) + 1)
+    fp_rows.append(pd.DataFrame({
+        "molecule_id": mol, "key14": g.key14.to_numpy(),
+        "fp_score": sc.astype(np.float32),
+        "fp_margin": (sc - sc.max()).astype(np.float32),
+        "fp_rank": rank}))
+fp_df = pd.concat(fp_rows, ignore_index=True)
+before = len(feat)
+feat = feat.merge(fp_df, on=["molecule_id", "key14"], how="left")
+assert len(feat) == before, "fp merge changed the row count"
+log(f"fp channel merged: {feat.fp_score.notna().mean():.1%} of rows covered")
+feat["fp_score"] = feat.fp_score.fillna(feat.fp_score.min())
+feat["fp_margin"] = feat.fp_margin.fillna(feat.fp_margin.min())
+feat["fp_rank"] = feat.fp_rank.fillna(feat.n_candidates)
 
 # %%
 import joblib  # noqa: E402

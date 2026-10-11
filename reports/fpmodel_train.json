@@ -1,8 +1,8 @@
 {
- "n_params": 4719599,
- "n_bits": 2031,
- "train_spectra": 29658,
- "epochs": 1,
- "holdout_loss": 0.15124785900115967,
+ "n_params": 5507046,
+ "n_bits": 2022,
+ "train_spectra": 2311658,
+ "epochs": 8,
+ "holdout_loss": 0.05935723868743429,
  "held_out_dev_structures": 1750
 }

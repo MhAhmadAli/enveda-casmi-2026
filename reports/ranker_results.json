@@ -16,7 +16,10 @@
   "abs_ppm_err",
   "n_candidates",
   "n_query_spectra",
-  "n_analogs"
+  "n_analogs",
+  "fp_score",
+  "fp_margin",
+  "fp_rank"
  ],
  "priors": [
   0.3,
@@ -27,20 +30,20 @@
   1
  ],
  "folds": 4,
- "tag": "banded",
+ "tag": "three-channel-final",
  "results": [
   {
    "split": "ranker (all molecules)",
-   "mrr_inlib": 0.7455,
+   "mrr_inlib": 0.7519,
    "n_inlib": 3709,
-   "mrr_disjoint": 0.5267,
+   "mrr_disjoint": 0.5675,
    "n_disjoint": 3709
   },
   {
    "split": "ranker (hard <= 0.6)",
-   "mrr_inlib": 0.7065,
+   "mrr_inlib": 0.7148,
    "n_inlib": 705,
-   "mrr_disjoint": 0.4211,
+   "mrr_disjoint": 0.4502,
    "n_disjoint": 705
   },
   {
@@ -69,6 +72,20 @@
    "mrr_inlib": 0.6421,
    "n_inlib": 705,
    "mrr_disjoint": 0.1272,
+   "n_disjoint": 705
+  },
+  {
+   "split": "fp channel alone",
+   "mrr_inlib": 0.4642,
+   "n_inlib": 3709,
+   "mrr_disjoint": 0.4642,
+   "n_disjoint": 3709
+  },
+  {
+   "split": "fp channel alone (hard)",
+   "mrr_inlib": 0.3784,
+   "n_inlib": 705,
+   "mrr_disjoint": 0.3784,
    "n_disjoint": 705
   }
  ]
