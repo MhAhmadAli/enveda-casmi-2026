@@ -78,8 +78,14 @@ def parse_adduct(adduct: str) -> tuple[int, float, int]:
     mag = int(chg_s[:-1]) if len(chg_s) > 1 else 1
     charge = mag if chg_s[-1] == "+" else -mag
     delta = 0.0
-    for sign, token in re.findall(r"([+-])([A-Za-z0-9]+)", m.group("mods")):
-        mass = formula_mass(token)
+    # A modification may carry a leading multiplier: [M+2H]2+ loses two protons'
+    # worth of mass, [M-2H2O+H]+ loses two waters. Without this the token "2H"
+    # reaches the formula parser, which rejects a leading digit, and the whole
+    # adduct becomes unparsable -- costing the molecule its neutral mass and so
+    # every candidate it would have had.
+    for sign, mult, token in re.findall(r"([+-])(\d*)([A-Za-z][A-Za-z0-9]*)",
+                                        m.group("mods")):
+        mass = formula_mass(token) * (int(mult) if mult else 1)
         delta += mass if sign == "+" else -mass
     return n_mers, delta, charge
 

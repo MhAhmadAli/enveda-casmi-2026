@@ -1,1 +1,11 @@
 [    3.3s] [inlib] library 2,417,518 spectra / 273,115 structures
+[  649.3s] [inlib]   prefiltered direct
+[ 1072.7s] [inlib]   prefiltered NL
+[ 1077.3s] [inlib]   channels done
+[ 1085.2s] [inlib] features: 278,306 rows over 3355 molecules
+[ 1088.9s] [disjoint] library 2,389,866 spectra / 272,283 structures
+[ 1727.1s] [disjoint]   prefiltered direct
+[ 2223.3s] [disjoint]   prefiltered NL
+[ 2232.8s] [disjoint]   channels done
+[ 2250.7s] [disjoint] features: 278,306 rows over 3355 molecules
+[ 2252.8s] wrote data/cache/features_npbig.parquet: 556,612 rows, 6,284 positives, 3355 molecules
