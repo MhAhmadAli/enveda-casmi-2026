@@ -1,0 +1,26 @@
+[disjoint] library 2,379,294 spectra / 273,533 structures
+[disjoint]   prefiltered direct (104s)
+[disjoint]   prefiltered NL (186s)
+[disjoint]   channel 2 analogs collected (186s)
+[disjoint] wrote reports/per_molecule_npx_disjoint.csv
+{
+ "val": "npx",
+ "regime": "disjoint",
+ "scorer": "combined",
+ "ppm": 8.5,
+ "tol": 0.005,
+ "min_rel": 0.005,
+ "prefilter_k": 500,
+ "sim_power": 4.0,
+ "direct_weight": 0.0,
+ "gate": 0.6,
+ "entropy_weight": true,
+ "n_molecules": 518,
+ "mean_pool_candidates": 85.7,
+ "mrr@25": 0.4748,
+ "top1": 0.3359,
+ "top5": 0.6525,
+ "top10": 0.749,
+ "top25": 0.8494,
+ "runtime_s": 186.2
+}

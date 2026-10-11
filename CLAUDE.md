@@ -270,6 +270,78 @@ natural products with many close library relatives, so analog propagation has
 material to work with that a genuine unknown does not. (2) is directly measurable by
 stratifying Class-2 MRR on max Tanimoto to the nearest remaining library structure.
 
+## THE CALIBRATED DEV SET: `nphard` — use this, not `npx`
+
+The 0.21 gap between local 0.475 and leaderboard 0.265 is now explained
+quantitatively, and the fix is a dev set rather than a model change.
+
+`scripts/analyze_analog_distance.py` (GPU Tanimoto) measures, for every dev
+molecule, how similar its nearest *remaining library* structure is. `npx` molecules
+are well-studied natural products with a **median nearest relative at 0.777**, 42%
+above 0.8 and 10% above 0.9. Analog propagation feeds on exactly that material; a
+molecule newly detected in an extract has none of it.
+
+Stratifying the submitted pipeline (`eval_combined --direct-weight 0`, which
+reproduces `eval_candidates` analog propagation to 4 decimal places: 0.4748 vs
+0.4749) by that distance:
+
+| nearest relative Tanimoto | molecules | MRR@25 | top-1 | top-25 found |
+|---|---|---|---|---|
+| <= 0.5 | 41 | 0.267 | 0.146 | 0.707 |
+| 0.5-0.6 | 27 | 0.321 | 0.222 | 0.852 |
+| 0.6-0.7 | 62 | 0.436 | 0.306 | 0.919 |
+| 0.7-0.8 | 153 | 0.523 | 0.418 | 0.791 |
+| 0.8-0.9 | 183 | 0.466 | 0.300 | 0.863 |
+| > 0.9 | 52 | 0.653 | 0.462 | 1.000 |
+| **overall** | 518 | **0.475** | 0.336 | 0.849 |
+
+**The leaderboard (0.265) sits in the `<= 0.6` band (0.288).** The hidden test
+behaves like molecules with no close library relative, which is what the brief
+"detected in complex biological extracts" should have told us from the start.
+
+So `scripts/build_hard_split.py` pools every `npx` + `npbig` molecule whose nearest
+relative is <= 0.6 into **`val_nphard`: 356 structures / 770 molecules / 2,842
+spectra, noise floor +/-0.018** (the raw npx <=0.6 bucket had only 68 molecules,
++/-0.061). The submitted pipeline scores **0.326** on `nphard` against 0.265 actual
+-- still mildly optimistic (partly because `npbig` queries are Orbitrap/QTOF rather
+than timsTOF) but a usable proxy, versus 0.475 which was not.
+
+**Tune on `nphard`. Report `npx`/`npbig` only as the easy-case ceiling.**
+
+## Channel architecture: what works and what was measured to fail
+
+| scorer | Class 1 (`inlib`) | Class 2 (`disjoint`) |
+|---|---|---|
+| Channel 2 alone: binned-cosine analog propagation | 0.793 | **0.475** |
+| Channel 1 alone: entropy similarity, mass-restricted | **0.880** | 0.000 |
+| "unified": entropy-rescored analog propagation | 0.870 | 0.226 |
+| gated at 0.60 (Channel 1 leads when confident) | 0.822 | 0.372 |
+
+Two failures worth not repeating:
+
+1. **Do not rescore the analog channel with entropy similarity.** It looks elegant
+   (a Class-1 molecule is its own best analog, Tanimoto 1.0) and gains 0.077 on
+   Class 1, but it HALVES Class 2: 0.475 -> 0.226. The channels need different
+   metrics -- entropy similarity is right for identifying the *same* compound, where
+   a missing peak is real evidence against, and wrong for matching a structural
+   *analog*, where most peaks legitimately differ.
+2. **Hard confidence gating does not work.** Channel-1 best similarity is a weak
+   Class-1/Class-2 discriminator: median 0.821 vs 0.468, but 10.4% of Class-2
+   molecules exceed the Class-1 median, because a same-mass library compound that
+   fragments similarly is genuinely plausible evidence. Every threshold trades one
+   error for the other:
+
+   | gate | Class 1 routed to Ch1 | Class 2 **wrongly** routed |
+   |---|---|---|
+   | 0.6 | 78.4% | 35.5% |
+   | 0.8 | 55.4% | 14.1% |
+   | 0.9 | 19.7% | 1.7% |
+
+   Gating at 0.60 ends up worse than either channel alone in its own regime. The
+   evidence has to be *combined per candidate with calibration*, not routed
+   wholesale -- which is why V16/V17 use a GBDT over ~31 features with class priors.
+   That is the next step.
+
 ## Candidate pool
 
 COCONUT 2.0 (Oct 2026, **CC0**, so legal to re-upload as a Kaggle dataset) plus all

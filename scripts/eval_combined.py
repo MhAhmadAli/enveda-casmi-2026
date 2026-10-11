@@ -5,21 +5,29 @@ gets 0.880 on Class 1 and exactly 0.000 on Class 2; binned-cosine analog propaga
 gets 0.793 and 0.475. A competitive submission needs both, and the hidden test is a
 mixture of the two in unknown proportion.
 
-Rather than gate between them on a confidence threshold, this unifies them. The
-observation: a Class-1 molecule is *its own best analog* (Tanimoto 1.0 against
-itself), so analog propagation already covers it -- it was merely ranking it badly
-because binned cosine is a weak similarity. So:
+MEASURED, do not "simplify" this back: rescoring the analog channel with entropy
+similarity looks elegant (a Class-1 molecule is its own best analog) but it HALVES
+Class 2 -- 0.475 -> 0.226 -- while gaining 0.077 on Class 1. The two channels need
+different similarity measures:
 
-  1. prefilter cheaply: binned-cosine sparse matmul over the whole library, both the
-     direct and neutral-loss domain, keeping the top-K spectra per query. This is for
-     recall only, and its weakness as a *ranking* signal no longer matters.
-  2. rescore the survivors with entropy similarity on raw peak lists, allowing the
-     precursor-difference shift, which is what made Class 1 jump 0.793 -> 0.880.
-  3. propagate to pool candidates: score(c) = max_a tanimoto(c, a) * sim(a)**p.
-  4. optionally add an explicit mass-matched direct channel, combined by max, to
-     catch a true structure the prefilter ranked outside top-K.
+  - identifying the *same* compound: entropy similarity is right, because a peak the
+    library spectrum lacks really is evidence against the match.
+  - matching a structural *analog*: entropy similarity is wrong, because most peaks
+    legitimately differ. Binned cosine over the neutral-loss domain is more forgiving
+    and captures partial similarity better.
 
-Reported per regime so the Class-1/Class-2 trade-off of any change stays visible.
+So each channel keeps its own metric, and they are combined by confidence gating:
+
+  Channel 1 (direct)  entropy similarity over library spectra whose neutral mass
+                      matches within ppm.           Class 1 0.880 / Class 2 0.000
+  Channel 2 (analog)  binned-cosine prefilter, direct + neutral-loss domains, then
+                      score(c) = max_a tanimoto(c, a) * cos(a)**p.
+                                                    Class 1 0.793 / Class 2 0.475
+
+Gate: if Channel 1's best similarity clears `--gate`, the molecule is probably a
+library compound, so Channel 1's ordering leads and Channel 2's follows; otherwise
+the reverse. Nothing is discarded, only reordered, so a wrong gate costs ranks
+rather than the answer.
 """
 from __future__ import annotations
 
@@ -60,6 +68,11 @@ def main() -> None:
                     help="weight on the explicit mass-matched direct channel; 0 disables")
     ap.add_argument("--no-entropy-weight", action="store_true")
     ap.add_argument("--limit-mols", type=int, default=0)
+    ap.add_argument("--gate", type=float, default=0.60,
+                    help="Channel-1 similarity above which the direct "
+                         "channel leads the ranking (V14 used 0.60)")
+    ap.add_argument("--dump", action="store_true",
+                    help="write per-molecule ranks for stratified analysis")
     ap.add_argument("--tag", default="")
     args = ap.parse_args()
     ew = not args.no_entropy_weight
@@ -110,101 +123,130 @@ def run(args, regime: str, ew: bool) -> None:
     q_mol = val.molecule_id.to_numpy()
 
     # ---- step 1: cheap binned prefilter for recall, both domains ----
-    pre: list[set] = [set() for _ in range(len(q_rows))]
+    pre: list[dict] = [dict() for _ in range(len(q_rows))]
     for nl in (False, True):
         R = bin_matrix(store, ref_rows, ref_pmz, neutral_loss=nl)
         Q = bin_matrix(store, q_rows, q_pmz, neutral_loss=nl)
-        _, idx = search_cpu(R, Q, topk=args.prefilter_k)
+        sc, idx = search_cpu(R, Q, topk=args.prefilter_k)
         for qi in range(len(q_rows)):
-            pre[qi].update(int(x) for x in idx[qi] if x >= 0)
+            d = pre[qi]
+            for x, v in zip(idx[qi], sc[qi]):
+                if x >= 0 and v > d.get(int(x), -1.0):
+                    d[int(x)] = float(v)
         del R, Q
         print(f"[{regime}]   prefiltered {'NL' if nl else 'direct'} "
               f"({time.time()-t0:.0f}s)", flush=True)
 
-    # ---- steps 2-4: entropy rescore, then propagate ----
-    by_mol: dict[str, dict[str, float]] = {}
-    direct_by_mol: dict[str, dict[str, float]] = {}
+    # ---- Channel 2: analog propagation on the binned-cosine similarities ----
+    analog_by_mol = {}
     for qi in range(len(q_rows)):
-        r = int(q_rows[qi])
-        qmz, qp = prepare(all_mz[store.off[r]:store.off[r] + store.n[r]],
-                          all_in[store.off[r]:store.off[r] + store.n[r]],
-                          args.min_rel, args.max_peaks, ew)
-        if qmz.shape[0] == 0:
-            continue
+        tgt = analog_by_mol.setdefault(q_mol[qi], {})
+        for ref_i, sim in pre[qi].items():
+            k = ref_key[ref_i]
+            if sim > tgt.get(k, -1.0):
+                tgt[k] = float(sim)
+    for m in list(analog_by_mol):
+        d = analog_by_mol[m]
+        if len(d) > args.top_analogs:
+            analog_by_mol[m] = dict(
+                sorted(d.items(), key=lambda kv: -kv[1])[: args.top_analogs])
+    print(f"[{regime}]   channel 2 analogs collected ({time.time()-t0:.0f}s)",
+          flush=True)
 
-        cand = np.fromiter(pre[qi], dtype=np.int64, count=len(pre[qi]))
-        if cand.size:
-            shifts = (q_pmz[qi] - ref_pmz[cand]).astype(np.float32)
-            sims = score_against(qmz, qp, ref_rows[cand].astype(np.int64),
-                                 store.off, store.n, all_mz, all_in, args.tol,
-                                 args.min_rel, args.max_peaks, ew, shifts)
-            tgt = by_mol.setdefault(q_mol[qi], {})
-            for k, v in zip(ref_key[cand], sims):
-                v = float(v)
-                if v > tgt.get(k, -1.0):
-                    tgt[k] = v
-
-        # explicit mass-matched direct channel
-        if args.direct_weight > 0 and np.isfinite(q_nm[qi]):
+    # ---- Channel 1: entropy similarity over mass-matched library spectra ----
+    direct_by_mol = {}
+    if args.direct_weight > 0:
+        for qi in range(len(q_rows)):
+            if not np.isfinite(q_nm[qi]):
+                continue
+            r = int(q_rows[qi])
+            qmz, qp = prepare(all_mz[store.off[r]:store.off[r] + store.n[r]],
+                              all_in[store.off[r]:store.off[r] + store.n[r]],
+                              args.min_rel, args.max_peaks, ew)
+            if qmz.shape[0] == 0:
+                continue
             tol = q_nm[qi] * args.ppm * 1e-6
             lo = np.searchsorted(nm_sorted, q_nm[qi] - tol)
             hi = np.searchsorted(nm_sorted, q_nm[qi] + tol)
             dc = nm_order[lo:hi]
-            if dc.size:
-                sims = score_against(qmz, qp, ref_rows[dc].astype(np.int64),
-                                     store.off, store.n, all_mz, all_in, args.tol,
-                                     args.min_rel, args.max_peaks, ew,
-                                     np.zeros(dc.size, np.float32))
-                tgt = direct_by_mol.setdefault(q_mol[qi], {})
-                for k, v in zip(ref_key[dc], sims):
-                    v = float(v)
-                    if v > tgt.get(k, -1.0):
-                        tgt[k] = v
-        if (qi + 1) % 400 == 0:
-            print(f"[{regime}]   rescored {qi+1}/{len(q_rows)} "
-                  f"({time.time()-t0:.0f}s)", flush=True)
+            if dc.size == 0:
+                continue
+            sims = score_against(qmz, qp, ref_rows[dc].astype(np.int64),
+                                 store.off, store.n, all_mz, all_in, args.tol,
+                                 args.min_rel, args.max_peaks, ew,
+                                 np.zeros(dc.size, np.float32))
+            tgt = direct_by_mol.setdefault(q_mol[qi], {})
+            for k, v in zip(ref_key[dc], sims):
+                v = float(v)
+                if v > tgt.get(k, -1.0):
+                    tgt[k] = v
+        print(f"[{regime}]   channel 1 direct scored ({time.time()-t0:.0f}s)",
+              flush=True)
 
-    # ---- rank ----
+    # ---- rank: gate on Channel-1 confidence, never discard a candidate ----
     qinfo = val.groupby("molecule_id").agg(row=("row", "first"),
                                            adduct=("adduct", "first"))
-    ranked, n_cand = [], []
+    pmz_all = meta.precursor_mz.to_numpy()
+    ranked, n_cand, best_analog, best_direct = [], [], [], []
     for m in mols:
         try:
-            nm = precursor_to_neutral_mass(float(meta.precursor_mz.to_numpy()[qinfo.row[m]]),
-                                            qinfo.adduct[m])
+            nm = precursor_to_neutral_mass(float(pmz_all[qinfo.row[m]]),
+                                           qinfo.adduct[m])
         except Exception:
             nm = float("nan")
         cr = pool.candidates(nm, args.ppm)
         n_cand.append(len(cr))
-        analogs = {k: v for k, v in by_mol.get(m, {}).items() if k in pool_row_of_key}
-        direct = direct_by_mol.get(m, {})
 
-        scores: dict[str, float] = {}
+        analogs = {k: v for k, v in analog_by_mol.get(m, {}).items()
+                   if k in pool_row_of_key}
+        c2 = {}
         if len(cr) and analogs:
             a_keys = list(analogs)
             a_rows = np.array([pool_row_of_key[k] for k in a_keys], dtype=np.int64)
             w = np.array([analogs[k] for k in a_keys], np.float32) ** args.sim_power
             T = tanimoto_matrix(pool.unpack(cr), pool.unpack(a_rows))
-            sc = (T * w[None, :]).max(axis=1)
-            for k, v in zip(pool.key14[cr], sc):
-                if v > scores.get(k, -1.0):
-                    scores[k] = float(v)
+            sc2 = (T * w[None, :]).max(axis=1)
+            for k, v in zip(pool.key14[cr], sc2):
+                if v > c2.get(k, -1.0):
+                    c2[k] = float(v)
         elif len(cr):
             for k in pool.key14[cr]:
-                scores.setdefault(k, 0.0)
-        # direct evidence competes on the same scale, taken as a max
-        for k, v in direct.items():
-            v *= args.direct_weight
-            if v > scores.get(k, -1.0):
-                scores[k] = v
-        ranked.append([k for k, _ in sorted(scores.items(), key=lambda kv: -kv[1])])
+                c2.setdefault(k, 0.0)
+
+        c1 = direct_by_mol.get(m, {})
+        best_analog.append(max(analogs.values()) if analogs else 0.0)
+        best_direct.append(max(c1.values()) if c1 else 0.0)
+
+        l1 = [k for k, _ in sorted(c1.items(), key=lambda kv: -kv[1])]
+        l2 = [k for k, _ in sorted(c2.items(), key=lambda kv: -kv[1])]
+        lead, follow = (l1, l2) if best_direct[-1] >= args.gate else (l2, l1)
+        seen, merged = set(), []
+        for k in lead + follow:
+            if k not in seen:
+                seen.add(k)
+                merged.append(k)
+        ranked.append(merged)
 
     tr = [truth[m] for m in mols]
+    if args.dump:
+        recs = []
+        for m, lst, t, nc, ba, bd in zip(mols, ranked, tr, n_cand,
+                                         best_analog, best_direct):
+            rank = lst.index(t) + 1 if t in lst[:25] else 0
+            recs.append({"molecule_id": m, "truth_key14": t, "rank": rank,
+                         "rr": (1.0 / rank) if rank else 0.0,
+                         "n_candidates": nc,
+                         "best_analog_sim": round(ba, 4),
+                         "best_direct_sim": round(bd, 4)})
+        out = f"reports/per_molecule_{args.val}_{regime}.csv"
+        pd.DataFrame(recs).to_csv(out, index=False)
+        print(f"[{regime}] wrote {out}", flush=True)
     acc = topk_accuracy(ranked, tr)
     res = {"val": args.val, "regime": regime, "scorer": "combined",
            "ppm": args.ppm, "tol": args.tol, "min_rel": args.min_rel,
            "prefilter_k": args.prefilter_k, "sim_power": args.sim_power,
-           "direct_weight": args.direct_weight, "entropy_weight": ew,
+           "direct_weight": args.direct_weight, "gate": args.gate,
+           "entropy_weight": ew,
            "n_molecules": len(mols),
            "mean_pool_candidates": round(float(np.mean(n_cand)), 1),
            "mrr@25": round(mrr(ranked, tr), 4), "top1": round(acc[1], 4),

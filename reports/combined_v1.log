@@ -1,2 +1,50 @@
 [inlib] library 2,429,778 spectra / 273,783 structures
 [inlib]   prefiltered direct (108s)
+[inlib]   prefiltered NL (190s)
+[inlib]   rescored 400/1177 (190s)
+[inlib]   rescored 800/1177 (191s)
+{
+ "val": "npx",
+ "regime": "inlib",
+ "scorer": "combined",
+ "ppm": 8.5,
+ "tol": 0.005,
+ "min_rel": 0.005,
+ "prefilter_k": 500,
+ "sim_power": 4.0,
+ "direct_weight": 1.0,
+ "entropy_weight": true,
+ "n_molecules": 518,
+ "mean_pool_candidates": 85.7,
+ "mrr@25": 0.8695,
+ "top1": 0.8205,
+ "top5": 0.9266,
+ "top10": 0.9459,
+ "top25": 0.9672,
+ "runtime_s": 193.6
+}
+[disjoint] library 2,379,294 spectra / 273,533 structures
+[disjoint]   prefiltered direct (104s)
+[disjoint]   prefiltered NL (186s)
+[disjoint]   rescored 400/1177 (187s)
+[disjoint]   rescored 800/1177 (187s)
+{
+ "val": "npx",
+ "regime": "disjoint",
+ "scorer": "combined",
+ "ppm": 8.5,
+ "tol": 0.005,
+ "min_rel": 0.005,
+ "prefilter_k": 500,
+ "sim_power": 4.0,
+ "direct_weight": 1.0,
+ "entropy_weight": true,
+ "n_molecules": 518,
+ "mean_pool_candidates": 85.7,
+ "mrr@25": 0.2264,
+ "top1": 0.0792,
+ "top5": 0.388,
+ "top10": 0.5714,
+ "top25": 0.7683,
+ "runtime_s": 189.9
+}

@@ -1,0 +1,54 @@
+[inlib] library 2,429,778 spectra / 273,783 structures
+[inlib]   prefiltered direct (107s)
+[inlib]   prefiltered NL (189s)
+[inlib]   channel 2 analogs collected (189s)
+[inlib]   channel 1 direct scored (191s)
+[inlib] wrote reports/per_molecule_npx_inlib.csv
+{
+ "val": "npx",
+ "regime": "inlib",
+ "scorer": "combined",
+ "ppm": 8.5,
+ "tol": 0.005,
+ "min_rel": 0.005,
+ "prefilter_k": 500,
+ "sim_power": 4.0,
+ "direct_weight": 1.0,
+ "gate": 0.6,
+ "entropy_weight": true,
+ "n_molecules": 518,
+ "mean_pool_candidates": 85.7,
+ "mrr@25": 0.8216,
+ "top1": 0.7741,
+ "top5": 0.8764,
+ "top10": 0.9093,
+ "top25": 0.9402,
+ "runtime_s": 191.1
+}
+[disjoint] library 2,379,294 spectra / 273,533 structures
+[disjoint]   prefiltered direct (105s)
+[disjoint]   prefiltered NL (186s)
+[disjoint]   channel 2 analogs collected (186s)
+[disjoint]   channel 1 direct scored (186s)
+[disjoint] wrote reports/per_molecule_npx_disjoint.csv
+{
+ "val": "npx",
+ "regime": "disjoint",
+ "scorer": "combined",
+ "ppm": 8.5,
+ "tol": 0.005,
+ "min_rel": 0.005,
+ "prefilter_k": 500,
+ "sim_power": 4.0,
+ "direct_weight": 1.0,
+ "gate": 0.6,
+ "entropy_weight": true,
+ "n_molecules": 518,
+ "mean_pool_candidates": 85.7,
+ "mrr@25": 0.372,
+ "top1": 0.2876,
+ "top5": 0.4691,
+ "top10": 0.5656,
+ "top25": 0.7143,
+ "runtime_s": 186.9
+}

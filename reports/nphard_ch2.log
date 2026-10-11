@@ -1,0 +1,26 @@
+[disjoint] library 2,419,007 spectra / 273,427 structures
+[disjoint]   prefiltered direct (163s)
+[disjoint]   prefiltered NL (278s)
+[disjoint]   channel 2 analogs collected (279s)
+[disjoint] wrote reports/per_molecule_nphard_disjoint.csv
+{
+ "val": "nphard",
+ "regime": "disjoint",
+ "scorer": "combined",
+ "ppm": 8.5,
+ "tol": 0.005,
+ "min_rel": 0.005,
+ "prefilter_k": 500,
+ "sim_power": 4.0,
+ "direct_weight": 0.0,
+ "gate": 0.6,
+ "entropy_weight": true,
+ "n_molecules": 770,
+ "mean_pool_candidates": 82.2,
+ "mrr@25": 0.3263,
+ "top1": 0.213,
+ "top5": 0.4558,
+ "top10": 0.5571,
+ "top25": 0.7,
+ "runtime_s": 279.6
+}
