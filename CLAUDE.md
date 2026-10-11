@@ -573,3 +573,14 @@ runs `Chem.RemoveStereochemistry` **before** tautomer canonicalisation and pins
 now strips stereo the same way. **`structures.parquet` key14 values predate that
 fix and must be rebuilt** (`build_structures.py`), along with the Kaggle dataset; the
 kernel should install the pinned RDKit wheel as the public forks do.
+
+### Fourth submission: the public fork reproduces exactly (2026-10-11)
+
+| # | configuration | public LB |
+|---|---|---|
+| 4 | private fork of samanyu1808 "ICEBERG where GLACIER is blind" v-latest, unchanged (`notebooks/kernels/fork438`, kernel `ahmadali1243534/casmi26-public-fork-438` v1) | **0.438** |
+
+0.294 -> 0.438. This is now the baseline; our own pipeline is retired as a submission
+path and becomes a source of extra channels (fingerprint transformer, entropy direct
+search) to feed into the fork's ranker or fusion. Any change must beat 0.438 on the LB,
+and with ~124 public molecules only deltas >= ~0.02-0.03 are distinguishable.
