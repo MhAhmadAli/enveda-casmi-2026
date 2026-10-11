@@ -27,49 +27,49 @@
   1
  ],
  "folds": 4,
- "tag": "npx-only",
+ "tag": "full",
  "results": [
   {
    "split": "ranker (all molecules)",
-   "mrr_inlib": 0.8545,
-   "n_inlib": 504,
-   "mrr_disjoint": 0.5085,
-   "n_disjoint": 504
+   "mrr_inlib": 0.7482,
+   "n_inlib": 3646,
+   "mrr_disjoint": 0.5221,
+   "n_disjoint": 3646
   },
   {
    "split": "ranker (hard <= 0.6)",
-   "mrr_inlib": 0.8243,
-   "n_inlib": 65,
-   "mrr_disjoint": 0.3129,
-   "n_disjoint": 65
+   "mrr_inlib": 0.7098,
+   "n_inlib": 696,
+   "mrr_disjoint": 0.4134,
+   "n_disjoint": 696
   },
   {
    "split": "channel 2 alone",
-   "mrr_inlib": 0.8092,
-   "n_inlib": 504,
-   "mrr_disjoint": 0.488,
-   "n_disjoint": 504
+   "mrr_inlib": 0.7208,
+   "n_inlib": 3646,
+   "mrr_disjoint": 0.4769,
+   "n_disjoint": 3646
   },
   {
    "split": "channel 2 alone (hard)",
-   "mrr_inlib": 0.748,
-   "n_inlib": 65,
-   "mrr_disjoint": 0.3014,
-   "n_disjoint": 65
+   "mrr_inlib": 0.6783,
+   "n_inlib": 696,
+   "mrr_disjoint": 0.3611,
+   "n_disjoint": 696
   },
   {
    "split": "channel 1 alone",
-   "mrr_inlib": 0.8955,
-   "n_inlib": 504,
-   "mrr_disjoint": 0.0876,
-   "n_disjoint": 504
+   "mrr_inlib": 0.6534,
+   "n_inlib": 3646,
+   "mrr_disjoint": 0.1105,
+   "n_disjoint": 3646
   },
   {
    "split": "channel 1 alone (hard)",
-   "mrr_inlib": 0.8732,
-   "n_inlib": 65,
-   "mrr_disjoint": 0.0644,
-   "n_disjoint": 65
+   "mrr_inlib": 0.6418,
+   "n_inlib": 696,
+   "mrr_disjoint": 0.1274,
+   "n_disjoint": 696
   }
  ]
 }

@@ -342,6 +342,53 @@ Two failures worth not repeating:
    wholesale -- which is why V16/V17 use a GBDT over ~31 features with class priors.
    That is the next step.
 
+## External data: tested and NOT the lever (2026-10-11)
+
+Rules permit external datasets, so this was tested properly rather than assumed.
+
+| source | licence | size | new to us | measurable effect |
+|---|---|---|---|---|
+| LOTUS (Zenodo 23168035) | CC BY 4.0 | 227k rows / 152k key14 | **245 (0.2%)** | none; COCONUT 2.0 subsumes it 99.8% |
+| GNPS+MassSpecGym harmonized (Zenodo 20039648) | CC BY 4.0 | 439k spectra / 41,195 key14 | 2,569 structures (6.2%) | nearest-relative Tanimoto 0.4967 -> 0.5000, i.e. **+0.005**; 9 of 356 hard molecules improved |
+
+Conclusion: **Enveda already aggregated the major public libraries** (gnps, massbank,
+mona, riken, msdial, pluskal_ms2 = 2.54M spectra / 274k structures) and COCONUT 2.0
+already subsumes the open natural-product structure databases. Adding more of either
+is near-worthless. Gains have to come from modelling.
+
+Two further reasons structure databases specifically cannot help here:
+
+- **Coverage is unmeasurable locally.** "Absent from the pool entirely" is 0.000 on
+  every dev set, because every dev truth is a train structure by construction. So a
+  bigger pool is insurance with an invisible benefit and a measurable decoy-dilution
+  cost (candidates already average 82/molecule; PubChem would make it thousands).
+- **The 8.4% recall miss is not missing structures.** About half of the missed
+  molecules sit within 0.01 Da but outside 8.5 ppm -- precursor imprecision from
+  npbig's lower-resolution instruments. npx (timsTOF, like the real test) has 0.973
+  recall vs npbig's 0.899, so most of that gap is a proxy artifact.
+
+Useful scripts: `scripts/assess_external_spectra.py` answers "would this library
+shrink analog distance?" for any candidate source, which is the only form of the
+question that can be answered locally.
+
+## Ranker results (full dev set, out-of-fold, structure-grouped)
+
+3,866 molecules, 696 in the hard (<=0.6 Tanimoto) subset, noise +/-0.019.
+
+| scorer | Class 1 | Class 2 | **Class 2, hard (LB proxy)** |
+|---|---|---|---|
+| channel 1 alone | 0.653 | 0.111 | 0.127 |
+| channel 2 alone | 0.721 | 0.477 | 0.361 |
+| **learned ranker** | **0.748** | **0.522** | **0.413** |
+
+**+0.052 on the hard subset (~2.7 sigma), so unlike the 511-molecule result (+0.012,
+inside noise) this one is real.** Calibration: channel 2 scored 0.361 locally-hard
+and 0.265 on the leaderboard (ratio 0.73), so the ranker projects to roughly 0.30.
+
+Note Channel 1 alone is much weaker on npbig (0.653) than on npx (0.896): npbig
+queries are Orbitrap/QTOF, so its "same compound" matches are cross-instrument in a
+harder way than npx's timsTOF-vs-Orbitrap.
+
 ## Candidate pool
 
 COCONUT 2.0 (Oct 2026, **CC0**, so legal to re-upload as a Kaggle dataset) plus all
