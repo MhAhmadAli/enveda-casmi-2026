@@ -22,7 +22,8 @@ class PeakStore:
     n: np.ndarray
 
     @classmethod
-    def load(cls, split: str = "train", cache: Path = CACHE) -> "PeakStore":
+    def load(cls, split: str = "train", cache: Path | str = CACHE) -> "PeakStore":
+        cache = Path(cache)
         info = json.load(open(cache / f"{split}_cache.json"))
         npk = info["n_peaks"]
         mz = np.memmap(cache / f"{split}_mz.f32", dtype=np.float32, mode="r", shape=(npk,))

@@ -1,0 +1,32 @@
+[    0.0s] competition data: .\enveda-CASMI26-molecule-id-mass-spectra
+[    0.0s] candidate pool:   data\kaggle_dataset
+[    0.0s] casmi package:    data\kaggle_dataset\casmi
+[    0.4s] pool: 729,596 structures
+[    0.5s]   row group 1/1, 93,500 peaks
+[    0.5s] test: 1213 spectra, 400 molecules
+[   24.5s]   row group 5/21, 39,906,128 peaks
+[   52.4s]   row group 10/21, 83,348,955 peaks
+[   76.9s]   row group 15/21, 114,422,825 peaks
+[   97.5s]   row group 20/21, 133,407,612 peaks
+[   97.8s]   row group 21/21, 133,560,514 peaks
+[  100.8s] library: 2,539,608 spectra
+[  101.6s] library usable: 2,430,955 spectra / 273,783 structures
+[  105.7s] [test] library 2,430,955 spectra / 273,783 structures
+[  248.0s] [test]   prefiltered direct
+[  367.6s] [test]   prefiltered neutral-loss
+[  369.1s] [test]   channels done
+[  370.8s] [test] features: 52,979 rows over 400 molecules
+[  372.7s] ranker: 4 models over 17 features, trained on 3653 molecules
+[  373.1s] scored
+[  373.6s] wrote submission.csv: 400 rows, candidates/row min 1 median 25 max 25
+{
+ "rows": 400,
+ "molecules_scored": 400,
+ "rows_filled_by_fallback": 0
+}
+  molecule_id                                             smiles
+0    m_005e53  CN(Cc1ncccc1C(=O)O)CC1(c2ccc(Br)cc2)CC1;Cc1cnc...
+1    m_006153  COc1ccc(N2CC(C(=O)Nc3nncn3C3CC3)CC2=O)cc1;COc1...
+2    m_00b5aa  COc1ccnc(CN2CCOCC3(CCCC3)C2)c1OC;COc1cc(CN2CCN...
+3    m_01e922  Cc1ccc(C(=O)OCC2CCCCC2)c(=O)[nH]1;CCC=CCCCNc1c...
+4    m_0259d4  O=C(NCCCn1ccnc1)NCCc1coc(-c2ccccc2)n1;Cc1ccc(-...

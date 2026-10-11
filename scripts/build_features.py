@@ -13,7 +13,9 @@ import time
 import pandas as pd
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
-from casmi.channels import ChannelConfig, compute_features  # noqa: E402
+from casmi.channels import (ChannelConfig, compute_features,  # noqa: E402
+                            dev_sources)
+from casmi.retrieval import CandidatePool  # noqa: E402
 
 CACHE = "data/cache"
 
@@ -33,9 +35,12 @@ def main() -> None:
     def log(*a):
         print(f"[{time.time()-t0:7.1f}s]", *a, flush=True)
 
+    pool = CandidatePool.load(CACHE, with_fp=True)
     parts = []
     for regime in args.regimes.split(","):
-        parts.append(compute_features(val, regime, cfg, CACHE, log))
+        queries, library, truth = dev_sources(val, regime, CACHE)
+        parts.append(compute_features(queries, library, pool, cfg, truth,
+                                      regime, log))
     out = pd.concat(parts, ignore_index=True)
     path = f"{CACHE}/features_{args.val}.parquet"
     out.to_parquet(path, index=False)

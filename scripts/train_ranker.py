@@ -34,16 +34,11 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
+from casmi.channels import FEATURES  # noqa: E402
 from casmi.metric import mrr  # noqa: E402
 
 CACHE = "data/cache"
 
-FEATURES = [
-    "c1", "c1_best", "c1_margin", "c1_rank", "c1_nonzero_frac",
-    "c2", "c2_best", "c2_margin", "c2_rank", "c2_mean_top5",
-    "tanimoto_best_analog", "analog_sim_of_best",
-    "ppm_err", "abs_ppm_err", "n_candidates", "n_query_spectra", "n_analogs",
-]
 
 
 def load(val_names: list[str]) -> pd.DataFrame:
@@ -102,6 +97,9 @@ def main() -> None:
                     help="assumed Class-1 fractions to train at and average over")
     ap.add_argument("--seeds", default="0,1")
     ap.add_argument("--hard-max-tanimoto", type=float, default=0.6)
+    ap.add_argument("--save-model", default="",
+                    help="after cross-validation, refit on ALL molecules and "
+                         "persist the ensemble here for the Kaggle notebook")
     ap.add_argument("--tag", default="")
     args = ap.parse_args()
 
@@ -175,6 +173,29 @@ def main() -> None:
             results.append(evaluate(df[hard].reset_index(drop=True),
                                     df.loc[hard, col].to_numpy(),
                                     f"{name} (hard)"))
+
+    if args.save_model:
+        # Refit on every molecule. The cross-validated numbers above are the honest
+        # estimate; this fit exists only to ship, and uses the same prior hedging
+        # and seed bagging so the shipped ensemble matches what was measured.
+        import joblib
+        models = []
+        X = df[FEATURES].to_numpy(np.float32)
+        y = df.label.to_numpy()
+        for prior in priors:
+            w = np.where(df.regime.to_numpy() == "inlib", prior, 1.0 - prior)
+            for seed in seeds:
+                clf = HistGradientBoostingClassifier(
+                    max_depth=6, max_iter=300, learning_rate=0.05,
+                    min_samples_leaf=50, l2_regularization=1.0,
+                    random_state=seed)
+                clf.fit(X, y, sample_weight=w)
+                models.append(clf)
+        os.makedirs(os.path.dirname(args.save_model) or ".", exist_ok=True)
+        joblib.dump({"models": models, "features": FEATURES, "priors": priors,
+                     "seeds": seeds, "n_train_molecules": int(df.molecule_id.nunique())},
+                    args.save_model, compress=3)
+        print(f"saved {len(models)} models to {args.save_model}")
 
     res = pd.DataFrame(results)
     print()
