@@ -445,6 +445,48 @@ constraint in the 0.00-0.40 band where the hidden test appears to sit.
 
 Submissions so far: 2 of 5/day used on 2026-10-11; 2 count for final scoring.
 
+## SUBMISSION LOG and the local->LB transfer rate
+
+| # | configuration | local nphard | local band <=0.4 | public LB | rank |
+|---|---|---|---|---|---|
+| 1 | channel 2 alone (analog propagation) | 0.361 | 0.2646 | 0.265 | 1983 / 3005 |
+| 2 | + learned ranker (two channels) | 0.421 | 0.3174 | 0.270 | 1972 / 3041 |
+| 3 | + fingerprint channel (three channels) | 0.450 | 0.3598 | **0.294** | **1866 / 3041** |
+
+Field: median 0.334, top 0.484, 3,041 teams. Submission 3 passed 117 teams.
+
+### The transfer rate is the planning constraint
+
+Local gains reach the leaderboard at roughly **a quarter to a third** of their size:
+
+| change | local nphard delta | LB delta | transfer |
+|---|---|---|---|
+| two-channel ranker over channel 2 | +0.060 | +0.005 | ~8% |
+| three channels over channel 2 | +0.089 | +0.029 | ~33% |
+
+Both are consistent with a true ~20-30% transfer plus LB noise (sigma on a
+difference is roughly 0.02-0.04 at n~124). **To move the leaderboard +0.04, expect
+to need ~+0.15 locally.** That rules out incremental tuning and argues for new
+mechanisms. It also means a local gain under ~0.05 is not worth a submission.
+
+Why the attenuation: the hidden test is harder than `nphard` in ways we cannot
+observe - almost certainly lower analog distance still, and plausibly candidate-pool
+coverage, which caps every channel equally and is invisible locally because every
+dev truth is in the pool by construction.
+
+### What each channel is worth (measured, not assumed)
+
+| channel | mechanism | Class 1 | Class 2 | Class 2 hard | band <=0.4 |
+|---|---|---|---|---|---|
+| 1 direct | entropy similarity, mass-matched library | 0.654 | 0.112 | 0.127 | - |
+| 2 analog | binned cosine + tanimoto propagation | 0.719 | 0.477 | 0.361 | 0.2646 |
+| 3 fingerprint | peak transformer -> 2,022 Morgan bits | 0.464 | 0.464 | 0.378 | 0.3005 |
+| **all three** | prior-hedged GBDT over 20 features | **0.752** | **0.568** | **0.450** | **0.3598** |
+
+Channel 3 scores identically in both regimes because it never consults the library.
+That independence is why it helps where channel 2 cannot: analog propagation needs a
+close relative to exist, and in the <=0.4 band there is none.
+
 ## Candidate pool
 
 COCONUT 2.0 (Oct 2026, **CC0**, so legal to re-upload as a Kaggle dataset) plus all
