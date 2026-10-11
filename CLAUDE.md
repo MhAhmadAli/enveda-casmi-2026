@@ -536,3 +536,40 @@ overlap with `enveda-180` is a feature, not a bug.
   (746878) and "Adding valid guesses at ranks 2–25 lowers the public score?" (748029).
   Kaggle pages are JS-rendered; bodies are not reachable via WebFetch or the API.
   `GetForumTopicById` returns metadata only.
+
+## The 0.40-0.45 cluster is explained: a public lineage, not an exploit (2026-10-11)
+
+Pulled to `reports/public_kernel/<owner>_<slug>/` (read, never run). The cluster is a
+chain of public forks built on public Kaggle datasets (all GPU T4, internet off):
+
+| public notebook | claimed public LB |
+|---|---|
+| prvsiyan analog propagation (V10) | 0.335 |
+| seyitkaangunes v4n + engine fusion + union | 0.399 |
+| huseyinemreaksoy v4n fusion + PubChem join | 0.420 |
+| flexonafft baseline adaptation v80 (reproduced by canqiang E004) | 0.436 |
+| samanyu1808 ICEBERG where GLACIER is blind | 0.438 |
+
+Leaderboard top on 2026-10-11 is 0.484, so the private frontier is only ~+0.05 above
+the best public fork. Those forks' own ablations, measured on the LB:
+
+- **PubChem popularity prior**: `z(score) + 0.15-0.25*(log1p(#substances) + log1p(#PubMed))`
+  on pool candidates, +0.010-0.015. Cheap; dataset `dmitriigluzdov/casmi26-pubchem-popularity-prior`.
+- **PubChem tier** (~105M structures outside the pool), scored by the fingerprint net
+  and merged only when `lib_max < 0.7-0.9`: +0.011. This contradicts our "pool
+  coverage cannot be measured, so skip it": it was measured on the LB, and it pays.
+- **ICEBERG / GLACIER forward spectrum simulators** re-rank *same-formula* groups
+  (`z(score) + z(ICEBERG) + z(GLACIER)`), switched off for library hits; GLACIER
+  restricted to [M+H]+. Separating isomers is where they place most remaining errors.
+- Main engine v4n: FPNet fingerprints + feature families + 4-booster LightGBM over
+  COCONUT + ChEBI/LIPID MAPS + train (~711k), fused with a second two-ranker engine
+  by weighted RRF `1/(3+r1) + 0.6/(3+r2)`.
+
+### Metric: the official scorer strips stereochemistry first
+
+`metric/casmi-mean-reciprocal-rank` (pulled to `reports/public_kernel/metric/`)
+runs `Chem.RemoveStereochemistry` **before** tautomer canonicalisation and pins
+**RDKit 2026.03.3** (wheel dataset `metric/rdkit-2026-3-3-wheel`). `casmi.chem.inchikey14`
+now strips stereo the same way. **`structures.parquet` key14 values predate that
+fix and must be rebuilt** (`build_structures.py`), along with the Kaggle dataset; the
+kernel should install the pinned RDKit wheel as the public forks do.

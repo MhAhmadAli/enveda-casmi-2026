@@ -116,11 +116,16 @@ def _tautomer_enumerator():
 
 def inchikey14(smiles: str, tautomer_canonical: bool = True) -> str | None:
     """Connectivity block (first 14 chars) of the InChIKey of the tautomer-canonical
-    form of `smiles`. This is the unit the competition metric compares."""
+    form of `smiles`. This is the unit the competition metric compares.
+
+    Stereochemistry is stripped *before* tautomer canonicalisation, as the official
+    metric does: a stereocentre can pin a double bond, so the same skeleton drawn with
+    and without it would otherwise land on different canonical tautomers."""
     from rdkit import Chem
     mol = Chem.MolFromSmiles(smiles)
     if mol is None:
         return None
+    Chem.RemoveStereochemistry(mol)
     if tautomer_canonical:
         try:
             mol = _tautomer_enumerator().Canonicalize(mol)
