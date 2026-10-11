@@ -239,6 +239,37 @@ channels are strictly complementary: Class 1 needs direct search (0.880), Class 
 needs analog propagation (0.475). A competitive submission must run both and combine
 them, which is what V16->V17 did.
 
+### Ruled out: co-isolated contamination does not explain the LB gap
+
+`scripts/probe_contamination.py`. Hypothesis: the hidden test is molecules "detected
+in complex biological extracts", so its spectra carry co-isolated peaks from
+co-eluting species, while every local dev query is a clean Enveda standard. Since
+entropy similarity is symmetric, extra query peaks count against a match.
+
+Tested by injecting random contaminant peaks into `npx` queries (Class 1):
+
+| contaminant peaks | entropy (forward) | reverse (library-biased) |
+|---|---|---|
+| 0 | 0.8797 | 0.8275 |
+| 10 | 0.8724 | 0.8223 |
+| 40 (up to 1.5x base intensity) | 0.8737 | 0.8244 |
+| 120 (up to 1.5x base intensity) | 0.8576 | 0.8166 |
+
+**Rejected.** Even 120 spurious peaks brighter than the analyte cost only 0.022 MRR.
+Two conclusions worth keeping:
+
+- the entropy matcher is intrinsically robust to additive noise, so spectral
+  cleanliness is not where the missing 0.2 lives;
+- **reverse (library-biased) scoring is worse, not better** (0.828 vs 0.880), despite
+  being the textbook remedy for chimeric spectra. Do not adopt it.
+
+Remaining candidate explanations for LB 0.265 vs local 0.475, in order of
+plausibility: (1) candidate-pool coverage is worse for real extract molecules than
+the 0.905-0.975 our dev sets enjoy; (2) `npx`/`npbig` molecules are well-studied
+natural products with many close library relatives, so analog propagation has
+material to work with that a genuine unknown does not. (2) is directly measurable by
+stratifying Class-2 MRR on max Tanimoto to the nearest remaining library structure.
+
 ## Candidate pool
 
 COCONUT 2.0 (Oct 2026, **CC0**, so legal to re-upload as a Kaggle dataset) plus all

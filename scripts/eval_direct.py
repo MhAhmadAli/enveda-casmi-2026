@@ -25,28 +25,13 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
-from casmi.chem import parse_adduct, ELECTRON  # noqa: E402
+from casmi.chem import neutral_masses  # noqa: E402
 from casmi.entropy import prepare, score_against  # noqa: E402
 from casmi.metric import mrr, topk_accuracy  # noqa: E402
 from casmi.retrieval import CandidatePool, reference_table  # noqa: E402
 from casmi.spectra import PeakStore  # noqa: E402
 
 CACHE = "data/cache"
-
-
-def neutral_masses(precursor_mz: np.ndarray, adducts: pd.Series) -> np.ndarray:
-    """Vectorised neutral mass per spectrum, grouped by adduct string."""
-    out = np.full(len(precursor_mz), np.nan)
-    for add, idx in adducts.groupby(adducts).groups.items():
-        try:
-            n_mers, delta, charge = parse_adduct(str(add))
-        except Exception:
-            continue
-        pos = adducts.index.get_indexer(idx)
-        pos = pos[pos >= 0]
-        out[pos] = (precursor_mz[pos] * abs(charge) - delta
-                    + charge * ELECTRON) / n_mers
-    return out
 
 
 def main() -> None:

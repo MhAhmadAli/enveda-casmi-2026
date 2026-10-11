@@ -125,3 +125,25 @@ def inchikey14(smiles: str, tautomer_canonical: bool = True) -> str | None:
     except Exception:
         return None
     return key[:14] if key else None
+
+def neutral_masses(precursor_mz, adducts) -> "np.ndarray":
+    """Vectorised neutral monoisotopic mass for many spectra at once.
+
+    Adducts repeat heavily (a few dozen distinct strings over millions of spectra),
+    so parse each distinct string once and apply it to all its rows. Rows whose
+    adduct cannot be parsed come back as NaN rather than raising, since library
+    metadata contains occasional malformed values.
+    """
+    import numpy as np
+
+    pmz = np.asarray(precursor_mz, dtype=np.float64)
+    add = np.asarray(adducts, dtype=object)
+    out = np.full(pmz.shape, np.nan, dtype=np.float64)
+    for a in set(add.tolist()):
+        try:
+            n_mers, delta, charge = parse_adduct(str(a))
+        except Exception:
+            continue
+        sel = add == a
+        out[sel] = (pmz[sel] * abs(charge) - delta + charge * ELECTRON) / n_mers
+    return out

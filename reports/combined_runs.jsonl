@@ -1,0 +1,1 @@
+{"val": "npx", "regime": "inlib", "scorer": "combined", "ppm": 8.5, "tol": 0.005, "min_rel": 0.005, "prefilter_k": 500, "sim_power": 4.0, "direct_weight": 1.0, "entropy_weight": true, "n_molecules": 518, "mean_pool_candidates": 85.7, "mrr@25": 0.8695, "top1": 0.8205, "top5": 0.9266, "top10": 0.9459, "top25": 0.9672, "runtime_s": 193.6, "tag": "combo-v1"}

@@ -1,0 +1,30 @@
+[
+ {
+  "contaminant_peaks": 40,
+  "similarity": "entropy(forward)",
+  "mrr@25": 0.8737,
+  "top1": 0.8185,
+  "top25": 0.9846
+ },
+ {
+  "contaminant_peaks": 40,
+  "similarity": "reverse(library-biased)",
+  "mrr@25": 0.8244,
+  "top1": 0.7394,
+  "top25": 0.9846
+ },
+ {
+  "contaminant_peaks": 120,
+  "similarity": "entropy(forward)",
+  "mrr@25": 0.8576,
+  "top1": 0.7915,
+  "top25": 0.9807
+ },
+ {
+  "contaminant_peaks": 120,
+  "similarity": "reverse(library-biased)",
+  "mrr@25": 0.8166,
+  "top1": 0.7297,
+  "top25": 0.9826
+ }
+]
