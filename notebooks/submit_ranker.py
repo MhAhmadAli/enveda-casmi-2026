@@ -86,10 +86,13 @@ def require_dir(marker, what):
     return found
 
 
-IN = require_dir("test.parquet", "competition data")
+# A host notebook that mounts other datasets can pin the paths explicitly, since
+# their marker files (ranker.joblib, channels.py) are not unique to ours.
+IN = os.environ.get("CASMI_IN") or require_dir("test.parquet", "competition data")
 # marker is the ranker, not pool_index.parquet: the local dev cache also
 # holds a pool_index.parquet, and only the shipped payload has the model
-POOL = require_dir("ranker.joblib", "candidate pool + ranker dataset")
+POOL = (os.environ.get("CASMI_POOL")
+        or require_dir("ranker.joblib", "candidate pool + ranker dataset"))
 def locate_package():
     """Return a sys.path entry from which `import casmi` works.
 
@@ -98,6 +101,8 @@ def locate_package():
     extracted to a writable dir -- numba compiles kernels in casmi.entropy and
     wants a real path, so importing straight from the zip is not relied on.
     """
+    if os.environ.get("CASMI_PKG"):
+        return os.environ["CASMI_PKG"], "CASMI_PKG"
     found, seen = find_dir("channels.py")
     if found is not None:
         return os.path.dirname(found), f"directory {found}"
@@ -386,7 +391,7 @@ if missing:
     log(f"WARNING: {missing} molecules without predictions; filling with pool head")
     filler = ";".join(pd.unique(pool.smiles[:N_OUT]))
     sub["smiles"] = sub.smiles.replace("", np.nan).fillna(filler)
-sub.to_csv("submission.csv", index=False)
+sub.to_csv(os.environ.get("CASMI_OUT", "submission.csv"), index=False)
 
 n = sub.smiles.str.count(";") + 1
 log(f"wrote submission.csv: {len(sub)} rows, candidates/row min {n.min()} "
