@@ -389,6 +389,62 @@ Note Channel 1 alone is much weaker on npbig (0.653) than on npx (0.896): npbig
 queries are Orbitrap/QTOF, so its "same compound" matches are cross-instrument in a
 harder way than npx's timsTOF-vs-Orbitrap.
 
+## SECOND SUBMISSION: a +0.060 local gain bought +0.005 on the leaderboard
+
+| submission | local hard-subset MRR | public LB |
+|---|---|---|
+| channel 2 alone (analog propagation) | 0.361 | 0.265 |
+| two-channel + learned ranker | 0.421 | **0.270** |
+
+**Read this before trusting any local delta.** The projection from the first
+calibration said ~0.31; the actual move was +0.005, which at a public LB of 31% of
+~400 molecules (~124) is indistinguishable from zero.
+
+The obvious explanation was tested and rejected: the gain is **uniform across every
+analog-distance band**, so it is not concentrated somewhere the hidden test does not
+live.
+
+| nearest relative | molecules | channel 2 | ranker | delta |
+|---|---|---|---|---|
+| 0.00-0.40 | 123 | 0.2646 | 0.3174 | +0.053 |
+| 0.40-0.50 | 265 | 0.3366 | 0.4195 | +0.083 |
+| 0.50-0.60 | 317 | 0.4189 | 0.4626 | +0.044 |
+| 0.60-0.70 | 619 | 0.4575 | 0.4987 | +0.041 |
+| 0.70-0.80 | 959 | 0.4855 | 0.5421 | +0.057 |
+| 0.80-0.90 | 865 | 0.5181 | 0.5779 | +0.060 |
+| 0.90-1.01 | 561 | 0.5687 | 0.5848 | +0.016 |
+
+Note channel 2 in the 0.00-0.40 band scores 0.2646, almost exactly the first LB of
+0.265 -- so the hidden test does behave like that hardest band. But the ranker
+projects 0.317 there and delivered 0.270.
+
+Two readings remain, and they cannot be separated from one submission each:
+
+1. **The public LB cannot resolve the difference.** For a change that reorders
+   roughly half the molecules, the standard error on the *difference* is ~0.02 at
+   n=124, so a true +0.05 appearing as +0.005 is a ~2.4 sigma unlucky draw.
+2. **The hidden distribution is harder in an unobservable way**, most plausibly
+   candidate-pool coverage -- exactly the quantity that cannot be measured locally,
+   since every dev truth is in the pool by construction. Lower coverage scales down
+   both the absolute score and any delta, because molecules whose truth is absent
+   contribute zero to every scorer.
+
+### The methodological lesson
+
+`nphard` was accepted as calibrated because it reproduced the absolute *level*
+(0.326 vs 0.265). **Reproducing a level is much weaker evidence than tracking a
+delta**, and the two came apart. The proxy remains the best local instrument, but
+treat local gains as necessary-not-sufficient.
+
+Practical rule: with ~124 public molecules, only changes worth roughly **>= 0.05**
+are leaderboard-measurable. Prefer a mechanism with a large expected effect over
+tuning. The obvious candidate is the **spectrum -> fingerprint model**: V17's own
+ablation credits its neural channel with +0.03-0.07, and unlike analog propagation
+it does not require a close library relative to exist at all, which is the binding
+constraint in the 0.00-0.40 band where the hidden test appears to sit.
+
+Submissions so far: 2 of 5/day used on 2026-10-11; 2 count for final scoring.
+
 ## Candidate pool
 
 COCONUT 2.0 (Oct 2026, **CC0**, so legal to re-upload as a Kaggle dataset) plus all

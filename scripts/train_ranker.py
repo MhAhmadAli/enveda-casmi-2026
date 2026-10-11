@@ -197,6 +197,35 @@ def main() -> None:
                     args.save_model, compress=3)
         print(f"saved {len(models)} models to {args.save_model}")
 
+    # Where does the gain actually live? A local improvement concentrated in a band
+    # the hidden test does not occupy is worth nothing, which is what the 0.265 ->
+    # 0.270 leaderboard move showed after a +0.060 gain on the <=0.6 subset.
+    dist = {}
+    for n in args.features.split(","):
+        pth = f"reports/analog_distance_{n}.csv"
+        if os.path.exists(pth):
+            d = pd.read_csv(pth)
+            dist.update(dict(zip(d.key14, d.max_tanimoto_to_library)))
+    df["nearest"] = df.truth_key.map(dist)
+    bands = [(0.0, 0.4), (0.4, 0.5), (0.5, 0.6), (0.6, 0.7), (0.7, 0.8),
+             (0.8, 0.9), (0.9, 1.01)]
+    print()
+    print("Class-2 (disjoint) MRR by nearest-library-relative Tanimoto:")
+    print(f"{'band':>12} {'mols':>6} {'channel2':>9} {'ranker':>8} {'delta':>8}")
+    dj = (df.regime == "disjoint").to_numpy()
+    for lo, hi in bands:
+        m = dj & (df.nearest > lo).to_numpy() & (df.nearest <= hi).to_numpy()
+        if m.sum() == 0:
+            continue
+        sub = df[m].reset_index(drop=True)
+        r_rank, t = rank_lists(sub, oof[m])
+        r_c2, _ = rank_lists(sub, sub.c2.to_numpy())
+        keep = [i for i, b in enumerate(t) if b is not None]
+        tt = [t[i] for i in keep]
+        a = mrr([r_c2[i] for i in keep], tt)
+        b = mrr([r_rank[i] for i in keep], tt)
+        print(f"{lo:5.2f}-{hi:4.2f} {len(keep):6d} {a:9.4f} {b:8.4f} {b-a:+8.4f}")
+
     res = pd.DataFrame(results)
     print()
     print(res.to_string(index=False))

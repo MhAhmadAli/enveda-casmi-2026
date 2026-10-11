@@ -1,0 +1,68 @@
+[{"stream_name":"stderr","time":8.480891335,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.480940276,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.480946195,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.480950315,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":9.249013527,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":9.249053119,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":9.249058963,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":9.249063322,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":11.738601601,"data":"[    0.0s] competition data: /kaggle/input/competitions/enveda-CASMI26-molecule-id-mass-spectra\n"}
+,{"stream_name":"stdout","time":11.739637021,"data":"[    0.0s] candidate pool:   /kaggle/input/datasets/ahmadali1243534/casmi26-candidate-pool\n"}
+,{"stream_name":"stdout","time":11.740547191,"data":"[    0.0s] casmi package:    directory /kaggle/input/datasets/ahmadali1243534/casmi26-candidate-pool/casmi\n"}
+,{"stream_name":"stdout","time":16.470546827,"data":"[    4.7s] pool: 729,596 structures\n"}
+,{"stream_name":"stdout","time":16.697534745,"data":"[    5.0s]   row group 1/1, 93,500 peaks\n"}
+,{"stream_name":"stdout","time":16.699106788,"data":"[    5.0s] test: 1213 spectra, 400 molecules\n"}
+,{"stream_name":"stdout","time":58.487097259,"data":"[   46.8s]   row group 5/21, 39,906,128 peaks\n"}
+,{"stream_name":"stdout","time":103.156950826,"data":"[   91.4s]   row group 10/21, 83,348,955 peaks\n"}
+,{"stream_name":"stdout","time":134.536745372,"data":"[  122.8s]   row group 15/21, 114,422,825 peaks\n"}
+,{"stream_name":"stdout","time":157.574218133,"data":"[  145.8s]   row group 20/21, 133,407,612 peaks\n"}
+,{"stream_name":"stdout","time":158.067894679,"data":"[  146.2s]   row group 21/21, 133,560,514 peaks\n"}
+,{"stream_name":"stdout","time":163.452554794,"data":"[  151.7s] library: 2,539,608 spectra\n"}
+,{"stream_name":"stdout","time":164.910531679,"data":"[  153.2s] library usable: 2,430,955 spectra / 273,783 structures\n"}
+,{"stream_name":"stdout","time":169.89309358,"data":"[  158.2s] [test] library 2,430,955 spectra / 273,783 structures\n"}
+,{"stream_name":"stdout","time":390.055695498,"data":"[  378.3s] [test]   prefiltered direct\n"}
+,{"stream_name":"stdout","time":566.692305079,"data":"[  555.0s] [test]   prefiltered neutral-loss\n"}
+,{"stream_name":"stdout","time":577.969778745,"data":"[  566.2s] [test]   channels done\n"}
+,{"stream_name":"stdout","time":579.902781737,"data":"[  568.0s] [test] features: 52,979 rows over 400 molecules\n"}
+,{"stream_name":"stdout","time":581.916122211,"data":"[  570.2s] ranker: 4 models over 17 features, trained on 3709 molecules\n"}
+,{"stream_name":"stderr","time":581.94584312,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/base.py:380: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.9.1 when using version 1.6.1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\n"}
+,{"stream_name":"stderr","time":581.945876342,"data":"https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations\n"}
+,{"stream_name":"stderr","time":581.945880635,"data":"  warnings.warn(\n"}
+,{"stream_name":"stderr","time":581.94589936,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/base.py:380: InconsistentVersionWarning: Trying to unpickle estimator _BinMapper from version 1.9.1 when using version 1.6.1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\n"}
+,{"stream_name":"stderr","time":581.945902927,"data":"https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations\n"}
+,{"stream_name":"stderr","time":581.94590535,"data":"  warnings.warn(\n"}
+,{"stream_name":"stderr","time":581.945907734,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/base.py:380: InconsistentVersionWarning: Trying to unpickle estimator HistGradientBoostingClassifier from version 1.9.1 when using version 1.6.1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\n"}
+,{"stream_name":"stderr","time":581.945910569,"data":"https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations\n"}
+,{"stream_name":"stderr","time":581.945913066,"data":"  warnings.warn(\n"}
+,{"stream_name":"stderr","time":581.945915299,"data":"\n"}
+,{"stream_name":"stderr","time":581.945917558,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/base.py:380: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.9.1 when using version 1.6.1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\n"}
+,{"stream_name":"stderr","time":581.945920416,"data":"https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations\n"}
+,{"stream_name":"stderr","time":581.945923187,"data":"  warnings.warn(\n"}
+,{"stream_name":"stderr","time":581.945925456,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/base.py:380: InconsistentVersionWarning: Trying to unpickle estimator _BinMapper from version 1.9.1 when using version 1.6.1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\n"}
+,{"stream_name":"stderr","time":581.945928213,"data":"https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations\n"}
+,{"stream_name":"stderr","time":581.9459306,"data":"  warnings.warn(\n"}
+,{"stream_name":"stderr","time":581.945933784,"data":"/usr/local/lib/python3.13/dist-packages/sklearn/base.py:380: InconsistentVersionWarning: Trying to unpickle estimator HistGradientBoostingClassifier from version 1.9.1 when using version 1.6.1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\n"}
+,{"stream_name":"stderr","time":581.945936615,"data":"https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations\n"}
+,{"stream_name":"stderr","time":581.94593904,"data":"  warnings.warn(\n"}
+,{"stream_name":"stdout","time":584.444699163,"data":"[  572.7s] scored\n"}
+,{"stream_name":"stdout","time":585.073441345,"data":"[  573.3s] wrote submission.csv: 400 rows, candidates/row min 1 median 25 max 25\n"}
+,{"stream_name":"stdout","time":585.081333419,"data":"{\n"}
+,{"stream_name":"stdout","time":585.081366135,"data":" \"rows\": 400,\n"}
+,{"stream_name":"stdout","time":585.081371287,"data":" \"molecules_scored\": 400,\n"}
+,{"stream_name":"stdout","time":585.081375056,"data":" \"rows_filled_by_fallback\": 0\n"}
+,{"stream_name":"stdout","time":585.08137886,"data":"}\n"}
+,{"stream_name":"stdout","time":585.081382608,"data":"  molecule_id                                             smiles\n"}
+,{"stream_name":"stdout","time":585.081386019,"data":"0    m_005e53  CN(Cc1ncccc1C(=O)O)CC1(c2ccc(Br)cc2)CC1;Cc1cnc...\n"}
+,{"stream_name":"stdout","time":585.081406911,"data":"1    m_006153  COc1ccc(N2CC(C(=O)Nc3nncn3C3CC3)CC2=O)cc1;COc1...\n"}
+,{"stream_name":"stdout","time":585.081410945,"data":"2    m_00b5aa  COc1ccnc(CN2CCOCC3(CCCC3)C2)c1OC;CC(C)(C)C(=O)...\n"}
+,{"stream_name":"stdout","time":585.081414578,"data":"3    m_01e922  Cc1ccc(C(=O)OCC2CCCCC2)c(=O)[nH]1;COC[C@@H]1CC...\n"}
+,{"stream_name":"stdout","time":585.081417895,"data":"4    m_0259d4  O=C(NCCCn1ccnc1)NCCc1coc(-c2ccccc2)n1;Cc1ccc(-...\n"}
+,{"stream_name":"stderr","time":589.444483517,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":589.444535809,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":589.650669618,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":589.650697832,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":590.608367073,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":590.706121445,"data":"[NbConvertApp] Writing 26079 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":593.915423336,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":594.610423138,"data":"[NbConvertApp] Writing 339309 bytes to __results__.html\n"}
+]
