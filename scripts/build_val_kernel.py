@@ -30,10 +30,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 FORK = ROOT / "notebooks/kernels/fork438"
 OWNER = "ahmadali1243534"
-REGIMES = ("disjoint", "inlib")
+# kernel name -> (regime, model variant)
+#   base      the fork's models, with fpnet_full1 / engine-2 fp models swapped for held-out ones
+#   nod       + fe_D (DreaMS fine-tune, training set undocumented) replaced by fe_A
+#   foldsafe  + every FPNet the main engine uses (bank, fe_A/B/D) replaced by fpnet_fold0, which
+#             is documented to hold out the panel (dmitriigluzdov/casmi26-fold-safe-fpnet)
+VARIANTS = {"disjoint": ("disjoint", "base"), "inlib": ("inlib", "base"),
+            "disjoint_nod": ("disjoint", "nod"), "disjoint_foldsafe": ("disjoint", "foldsafe")}
+FOLDSAFE_DATASET = "dmitriigluzdov/casmi26-fold-safe-fpnet"
 
 VAL_BUILD = r'''# ===== VALIDATION BUILD (scripts/build_val_kernel.py): panel queries, answers removed =====
 VAL_REGIME = '__REGIME__'
+VAL_VARIANT = '__VARIANT__'
 VAL_PANEL_LIB = 'enveda-np-examples'
 import pyarrow as pa, pyarrow.parquet as pq, numpy as np, pandas as pd, shutil
 from rdkit import Chem, RDLogger
@@ -59,6 +67,16 @@ def val_mass(smi):
     m = Chem.MolFromSmiles(smi) if isinstance(smi, str) else None
     return Descriptors.ExactMolWt(m) if m is not None else np.nan
 
+
+_FOLD0 = sorted(glob.glob('/kaggle/input/**/fpnet_fold0.pt', recursive=True))
+VAL_FE_SWAP, VAL_BANK = {}, None
+if VAL_VARIANT == 'nod':
+    VAL_FE_SWAP = {'fe_D.pt': os.path.join(V4MOD, 'fe_A.pt')}
+elif VAL_VARIANT == 'foldsafe':
+    assert _FOLD0, 'fpnet_fold0.pt is not mounted'
+    VAL_FE_SWAP = {f: _FOLD0[0] for f in ('fe_A.pt', 'fe_B.pt', 'fe_D.pt')}
+    VAL_BANK = _FOLD0[0]
+print('VALIDATION variant', VAL_VARIANT, VAL_FE_SWAP, VAL_BANK)
 
 _t = time.time()
 _REAL_TEST, _REAL_TRAIN = os.path.join(COMP, 'test.parquet'), os.path.join(COMP, 'train.parquet')
@@ -202,7 +220,7 @@ for _name, _lists in STAGES.items():
                       top25=float(np.mean(_r > 0)), in_list=float(np.mean(_r80 > 0)))
     _rows += [dict(stage=_name, molecule_id=m, rank=int(x)) for m, x in zip(VAL_TRUTH, _r)]
 _libmax = {m: float(v[2]) for m, v in RAW_BASE.items()}
-RES['_meta'] = dict(regime=VAL_REGIME, molecules=len(VAL_TRUTH), runtime_s=round(time.time() - T0),
+RES['_meta'] = dict(regime=VAL_REGIME, variant=VAL_VARIANT, molecules=len(VAL_TRUTH), runtime_s=round(time.time() - T0),
                     lib_max_ge_0_9=float(np.mean([_libmax.get(m, 0) >= 0.9 for m in VAL_TRUTH])))
 pd.DataFrame(_rows).to_csv('/kaggle/working/val/ranks.csv', index=False)
 json.dump(RES, open('/kaggle/working/val/results.json', 'w'), indent=1)
@@ -232,6 +250,13 @@ ENG_FP = ("fp_models = sorted(p for p in glob.glob(\\'/kaggle/input/**/fp_*.pt\\
           "if \\'casmi26-fp-models-v2\\' in p)")
 ENG_FP_VAL = ("fp_models = sorted(p for p in glob.glob(\\'/kaggle/input/**/ours_fpnet_*.pt\\', recursive=True) "
               "if \\'casmi26-simulated-ranker-rows\\' in p)  # VALIDATION: leak-free retrains")
+BANK = "os.path.join(V4MOD, 'fpnet_0.pt')], device=dev)"
+BANK_VAL = "VAL_BANK or os.path.join(V4MOD, 'fpnet_0.pt')], device=dev)"
+FE = "V = v1engine.V1FE(E, [os.path.join(V4MOD, m['file']) for m in MAN['fe_models']], MAN['families'], device=dev)"
+FE_VAL = ("_FE = [os.path.join(V4MOD, m['file']) for m in MAN['fe_models']]\n"
+          "_FE = [VAL_FE_SWAP.get(os.path.basename(p), p) for p in _FE]\n"
+          "print('VALIDATION model views:', _FE, flush=True)\n"
+          "V = v1engine.V1FE(E, _FE, MAN['families'], device=dev)")
 RAW_INIT = "BASE, n_err = {}, 0"
 RAW_HOOK = "    if POOLPOP_MU > 0 and len(scs) > 1:"
 
@@ -245,7 +270,7 @@ def replace_once(src: str, old: str, new: str) -> str:
     return src.replace(old, new)
 
 
-def build(regime: str) -> dict:
+def build(regime: str, variant: str) -> dict:
     nb = json.loads((FORK / "fork438.ipynb").read_text())
     cells = nb["cells"]
     code = [i for i, c in enumerate(cells) if c["cell_type"] == "code"]
@@ -255,18 +280,20 @@ def build(regime: str) -> dict:
 
     src[c[2]] = replace_once(src[c[2]], ENG_FP, ENG_FP_VAL)
     src[c[5]] = replace_once(src[c[5]], FULL1, FULL1_VAL)
+    src[c[5]] = replace_once(src[c[5]], BANK, BANK_VAL)
+    src[c[5]] = replace_once(src[c[5]], FE, FE_VAL)
     s6 = replace_once(src[c[6]], RAW_INIT, RAW_INIT + "\nRAW_BASE = {}")
     src[c[6]] = replace_once(s6, RAW_HOOK, "    RAW_BASE[mid] = (list(smis), list(keys), lib_max, list(scs), "
                                            "list(forms), list(pids_))\n" + RAW_HOOK)
     for i in code:
         cells[i]["source"] = src[i]
 
-    inserts = {c[0]: VAL_BUILD.replace("__REGIME__", regime), c[6]: SNAP_POP, c[7]: SNAP_SIM,
+    inserts = {c[0]: VAL_BUILD.replace("__REGIME__", regime).replace("__VARIANT__", variant), c[6]: SNAP_POP, c[7]: SNAP_SIM,
                c[8]: SNAP_PC, c[11]: EVAL}
     for after in sorted(inserts, reverse=True):
         cells.insert(after + 1, code_cell(inserts[after]))
     cells.insert(0, {"cell_type": "markdown", "metadata": {}, "source":
-                     f"# CASMI26 fork validation ({regime})\n\nGenerated by `scripts/build_val_kernel.py`. "
+                     f"# CASMI26 fork validation ({regime}, models: {variant})\n\nGenerated by `scripts/build_val_kernel.py`. "
                      "Runs the 0.438 fork on the enveda-np-examples panel with the answers' spectra removed "
                      "and scores every stage.\n"})
     for cell in cells:
@@ -278,12 +305,14 @@ def build(regime: str) -> dict:
 
 def main() -> None:
     meta = json.loads((FORK / "kernel-metadata.json").read_text())
-    for regime in REGIMES:
-        out = ROOT / f"notebooks/kernels/val_{regime}"
+    for name, (regime, variant) in VARIANTS.items():
+        out = ROOT / f"notebooks/kernels/val_{name}"
         out.mkdir(parents=True, exist_ok=True)
-        (out / f"val_{regime}.ipynb").write_text(json.dumps(build(regime), indent=1))
-        m = dict(meta, id=f"{OWNER}/casmi26-val-{regime}", title=f"CASMI26 val {regime}",
-                 code_file=f"val_{regime}.ipynb", is_private=True)
+        (out / f"val_{name}.ipynb").write_text(json.dumps(build(regime, variant), indent=1))
+        slug = name.replace("_", "-")
+        m = dict(meta, id=f"{OWNER}/casmi26-val-{slug}", title=f"CASMI26 val {slug}",
+                 code_file=f"val_{name}.ipynb", is_private=True,
+                 dataset_sources=meta["dataset_sources"] + [FOLDSAFE_DATASET])
         (out / "kernel-metadata.json").write_text(json.dumps(m, indent=2))
         print("wrote", out)
 

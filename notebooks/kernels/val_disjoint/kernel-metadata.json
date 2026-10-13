@@ -20,7 +20,8 @@
     "prvsiyan/coconut-casmi26-candidates",
     "hengck23/hengck23-dreams-enveda-casmi26",
     "metric/rdkit-2026-3-3-wheel",
-    "eveliaveldrine/rdkit-wheels"
+    "eveliaveldrine/rdkit-wheels",
+    "dmitriigluzdov/casmi26-fold-safe-fpnet"
   ],
   "kernel_sources": [],
   "competition_sources": [
