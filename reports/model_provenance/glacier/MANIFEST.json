@@ -1,0 +1,170 @@
+{
+ "name": "casmi26-glacier",
+ "model": "GLACIER (ms-pred glacier.JointModel, MassSpecGym checkpoint)",
+ "ckpt_source_sha256": "5a47cecca707d3abd5a49c7dbac99d100aa2a586d5d4f848f1e8e35140d7db11",
+ "ckpt_tensors": 264,
+ "ckpt_params": 15108154,
+ "ms_pred_commit": "708148c2a8eb0c32120644436fefd2fe90cd2214",
+ "rdkit": "2025.3.6 via the casmi26-iceberg wheels (A1 panel scores were computed with it)",
+ "post": "drop <= 0, merge identical m/z (4 dp) by MAX, top 100, max-normalised",
+ "license": "ms-pred + GLACIER weights: MIT (src/ms_pred/LICENSE); see LICENSE-NOTICE.txt",
+ "total_mb": 58.3,
+ "files": {
+  "ckpt/glacier.pt": {
+   "bytes": 60531887,
+   "sha256": "9192e4c2eeafe83317d5a2c2641e1fc4d68934488757a4faafeb66f2ab397a12"
+  },
+  "dataset-metadata.json": {
+   "bytes": 551,
+   "sha256": "b58b3f1a65a562c8b795f162301d21301b9efbc67cfec32c00c2fa7f0e14937e"
+  },
+  "gl_fuse.py": {
+   "bytes": 7533,
+   "sha256": "ea390f5f29705c015f39c509cc2b86e6a360d0bb90db61c87c507068f38ae58e"
+  },
+  "gl_runner.py": {
+   "bytes": 39880,
+   "sha256": "5c4f74313ac54263d05d987c39d012d81ec57c5f35e1095ecd49a5bcb6440fca"
+  },
+  "LICENSE-NOTICE.txt": {
+   "bytes": 1489,
+   "sha256": "563c9951ffb47543beeff63df8006b0ba5ab9785a23acfb5311a6b4ceaf44f55"
+  },
+  "README.md": {
+   "bytes": 2423,
+   "sha256": "430b17c774e84f76204aa83b2672d39d31de9f1479eff8a2a3663bcc8ce000ac"
+  },
+  "shim/dgl/__init__.py": {
+   "bytes": 10029,
+   "sha256": "35dd2028bbb1fb14442d7a4cbbd9cb260c1063ab05dd556ddaf1f77aa2f3d2e2"
+  },
+  "shim/dgl/backend/__init__.py": {
+   "bytes": 36,
+   "sha256": "f85e782b33669b9567ba24c46931db87506637870d723c8696e66515ff0f9ee7"
+  },
+  "shim/dgl/backend/pytorch.py": {
+   "bytes": 964,
+   "sha256": "e7bf3d120f37ebc40fb8dec000f637ec516b75610b21717a4d7abe3cb40f37c7"
+  },
+  "shim/dgl/function.py": {
+   "bytes": 1803,
+   "sha256": "4dd78301a49129085e3234ff902999c7921979a5e09e5415a3aaf3a0aa9d27ff"
+  },
+  "shim/dgl/nn/__init__.py": {
+   "bytes": 1958,
+   "sha256": "cd78a6aaee83a58cadb14a9a41f8c8e92a07c3c2bba52f6a83b4eb8ac4fd62a2"
+  },
+  "shim/LinSATNet/__init__.py": {
+   "bytes": 3656,
+   "sha256": "a0ffdf64f610ad6a86ef560d3ff62f06a9c2b53ed13473d85eae87953f39e6af"
+  },
+  "shim/torch_scatter/__init__.py": {
+   "bytes": 3120,
+   "sha256": "d8f0b42adc06bb499514f68378c826900cbcb2e9764a4ea403bc160497c842a6"
+  },
+  "src/ms_pred/__init__.py": {
+   "bytes": 266,
+   "sha256": "e4a927730a084dd169e994b1fa712c5e17709e0a869f00aadb4709df9855c487"
+  },
+  "src/ms_pred/common/__init__.py": {
+   "bytes": 381,
+   "sha256": "521b8cd399abda6a52cd1cc3304d46557035c70f3332be50122c9e68032d1351"
+  },
+  "src/ms_pred/common/chem_utils.py": {
+   "bytes": 26034,
+   "sha256": "c9842ef76eb831394c53fdd5050d87842edaebd46427a722d43983286495f96e"
+  },
+  "src/ms_pred/common/denoising_utils.py": {
+   "bytes": 3478,
+   "sha256": "34f9658456896a4adcd4302c783d7253727fe527454bec2b7c91f224a4cc0051"
+  },
+  "src/ms_pred/common/fingerprint.py": {
+   "bytes": 1649,
+   "sha256": "d3032ecff1a43472af33ce1ea307223941b014290b7507c44e9ee028f5d764d3"
+  },
+  "src/ms_pred/common/misc_utils.py": {
+   "bytes": 96988,
+   "sha256": "bbee369888121c45384a4c93c5c0811bd3b4d8ba9bd038aa119f04b1ca4d1122"
+  },
+  "src/ms_pred/common/parallel_utils.py": {
+   "bytes": 13635,
+   "sha256": "60dbeac1f6d2b52009b40329790d6ca05fdd28efb70a1c23586616d6c984c691"
+  },
+  "src/ms_pred/common/splitter.py": {
+   "bytes": 2676,
+   "sha256": "47ea4c05697ddaa8bafe777c58ebb7ff0d9de762a5ee8345b6ec38cf9496827c"
+  },
+  "src/ms_pred/glacier/dataset.py": {
+   "bytes": 46377,
+   "sha256": "547a09d8629a45c8fad43dcb60277a36906b1d382520c959950562d109014360"
+  },
+  "src/ms_pred/glacier/joint_model.py": {
+   "bytes": 76110,
+   "sha256": "9481602423011e830c94b8fcd857ac2be3cb31b2c24d714a3ae0c1edd235c293"
+  },
+  "src/ms_pred/graphormer/__init__.py": {
+   "bytes": 351,
+   "sha256": "b31b131343597bb736ee984291cbe0688383b507cd6b22d4d9ca01159ac440f2"
+  },
+  "src/ms_pred/graphormer/graphormer_graph_encoder.py": {
+   "bytes": 6925,
+   "sha256": "074a59296c0a2903fd5018c27705ea1da2393f09c84ba30fb32acbf3827729ea"
+  },
+  "src/ms_pred/graphormer/graphormer_graph_encoder_layer.py": {
+   "bytes": 3593,
+   "sha256": "d98ba908616e231187afe2409409c06269e5d2017bd12c0d85c6ef093e8272f7"
+  },
+  "src/ms_pred/graphormer/graphormer_layers.py": {
+   "bytes": 5937,
+   "sha256": "26c8d693bebc8904a975aeb11cf343b9c7a0fd9a120f828ed597bd8180bc606d"
+  },
+  "src/ms_pred/graphormer/multihead_attention.py": {
+   "bytes": 2404,
+   "sha256": "f11b79e3e4f8147cbbe97638e27b7046dfb8c2ed714b35409925f9bb4c5f0815"
+  },
+  "src/ms_pred/iceberg/dag_data.py": {
+   "bytes": 36155,
+   "sha256": "80a4f2abd57a59077bf988c9a3f975de36cf856c189aadf9f871382054494814"
+  },
+  "src/ms_pred/iceberg/graph_mutate.py": {
+   "bytes": 9359,
+   "sha256": "06c343312d44eedc1498c5513b33bcf5b1bc950f05dcb87e18827a0a7a81c55d"
+  },
+  "src/ms_pred/LICENSE": {
+   "bytes": 1092,
+   "sha256": "cb323bf6812b7ebc608d6ded23cf0245ab4633d68b1998010ece3ea3d2810fe3"
+  },
+  "src/ms_pred/magma/fragmentation.py": {
+   "bytes": 28327,
+   "sha256": "5fc6ac347a09ea8486154ce827eea0ea810a0c7f6a277279ffd4c5abd1e93744"
+  },
+  "src/ms_pred/nn_utils/__init__.py": {
+   "bytes": 378,
+   "sha256": "2f7f5b3d2537b6bde6a28be84908826901cb2306756b680a57934c39831ade57"
+  },
+  "src/ms_pred/nn_utils/dgl_graph_ops.py": {
+   "bytes": 18955,
+   "sha256": "d65b239032eae4ec8cb2d0b9850fd773542722ff953c96827ab59000d13eba9f"
+  },
+  "src/ms_pred/nn_utils/dgl_modules.py": {
+   "bytes": 23408,
+   "sha256": "b98dfc02dad06a67e2c9ee61670ebc0c96a8b2a62859335888f8189d5677e2e4"
+  },
+  "src/ms_pred/nn_utils/form_embedder.py": {
+   "bytes": 10681,
+   "sha256": "30bb3670c8b21e01ebb3fb2548dac7f8e0cac589fd4cfccc51589ddf55c1ea4b"
+  },
+  "src/ms_pred/nn_utils/mol_graph.py": {
+   "bytes": 10573,
+   "sha256": "62d11349b0c9d06335384b6fabfcddffaf78ece4c1d6f5c18ac426746d1e7d89"
+  },
+  "src/ms_pred/nn_utils/nn_utils.py": {
+   "bytes": 41337,
+   "sha256": "f07a9018515ed0204b305741c5b13db9285d400ee7ff3e5bfa12db756a87146f"
+  },
+  "src/ms_pred/nn_utils/transformer_layer.py": {
+   "bytes": 30192,
+   "sha256": "8884d91afd479bef9b05d4a4527953ade8fd9353332ca3c6eddb8e1b048d2a92"
+  }
+ }
+}

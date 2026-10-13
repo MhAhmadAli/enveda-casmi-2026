@@ -1,0 +1,170 @@
+{
+ "name": "casmi26-iceberg",
+ "model": "ICEBERG 2.1 (ms-pred, MassSpecGym msg_all checkpoint)",
+ "ms_pred_commit": "708148c2a8eb0c32120644436fefd2fe90cd2214",
+ "rdkit": "2025.3.6 (pinned: FragmentEngine Kekulize differs in 2026.03)",
+ "license": "ms-pred: MIT (src/ms_pred/LICENSE)",
+ "total_mb": 63.8,
+ "files": {
+  "ckpt/gen.pt": {
+   "bytes": 14561244,
+   "sha256": "deef0451c1870d2125653bb212c9d95c5b5d9bf80156dfa9b22fedda7db49bea"
+  },
+  "ckpt/inten.pt": {
+   "bytes": 13793037,
+   "sha256": "c49e330e049d3a8b0095026ed694fcf70045c24305354853732aaa5f89d55068"
+  },
+  "dataset-metadata.json": {
+   "bytes": 554,
+   "sha256": "fdac52977fd258fb830ed28929068fdd30cc79031a6fe89860e3710321c16628"
+  },
+  "fuse.py": {
+   "bytes": 8349,
+   "sha256": "6d1bdf0c63ff8844d6994bb83cdadf07951ee40ed87ea5a2d870577c6fc76bb1"
+  },
+  "ice_runner.py": {
+   "bytes": 31551,
+   "sha256": "dc0d5d1e14053e2e7d9088817c620d6615372abc3afdd02be2fc7ff9ee0b2802"
+  },
+  "LICENSE-NOTICE.txt": {
+   "bytes": 1003,
+   "sha256": "2bdc24cdcfda1c536a17d8af6a85b6028b19369527d84db8cc81800228897bce"
+  },
+  "README.md": {
+   "bytes": 3879,
+   "sha256": "1a36864cb19161b84742f9cb8f323f795b5b3e8e1d739474b7b205acd2d8601f"
+  },
+  "shim/dgl/__init__.py": {
+   "bytes": 10029,
+   "sha256": "35dd2028bbb1fb14442d7a4cbbd9cb260c1063ab05dd556ddaf1f77aa2f3d2e2"
+  },
+  "shim/dgl/backend/__init__.py": {
+   "bytes": 36,
+   "sha256": "f85e782b33669b9567ba24c46931db87506637870d723c8696e66515ff0f9ee7"
+  },
+  "shim/dgl/backend/pytorch.py": {
+   "bytes": 964,
+   "sha256": "e7bf3d120f37ebc40fb8dec000f637ec516b75610b21717a4d7abe3cb40f37c7"
+  },
+  "shim/dgl/function.py": {
+   "bytes": 1803,
+   "sha256": "4dd78301a49129085e3234ff902999c7921979a5e09e5415a3aaf3a0aa9d27ff"
+  },
+  "shim/dgl/nn/__init__.py": {
+   "bytes": 1958,
+   "sha256": "cd78a6aaee83a58cadb14a9a41f8c8e92a07c3c2bba52f6a83b4eb8ac4fd62a2"
+  },
+  "shim/torch_scatter/__init__.py": {
+   "bytes": 3120,
+   "sha256": "d8f0b42adc06bb499514f68378c826900cbcb2e9764a4ea403bc160497c842a6"
+  },
+  "src/ms_pred/__init__.py": {
+   "bytes": 266,
+   "sha256": "e4a927730a084dd169e994b1fa712c5e17709e0a869f00aadb4709df9855c487"
+  },
+  "src/ms_pred/common/__init__.py": {
+   "bytes": 381,
+   "sha256": "521b8cd399abda6a52cd1cc3304d46557035c70f3332be50122c9e68032d1351"
+  },
+  "src/ms_pred/common/chem_utils.py": {
+   "bytes": 26034,
+   "sha256": "c9842ef76eb831394c53fdd5050d87842edaebd46427a722d43983286495f96e"
+  },
+  "src/ms_pred/common/denoising_utils.py": {
+   "bytes": 3478,
+   "sha256": "34f9658456896a4adcd4302c783d7253727fe527454bec2b7c91f224a4cc0051"
+  },
+  "src/ms_pred/common/fingerprint.py": {
+   "bytes": 1649,
+   "sha256": "d3032ecff1a43472af33ce1ea307223941b014290b7507c44e9ee028f5d764d3"
+  },
+  "src/ms_pred/common/misc_utils.py": {
+   "bytes": 96988,
+   "sha256": "bbee369888121c45384a4c93c5c0811bd3b4d8ba9bd038aa119f04b1ca4d1122"
+  },
+  "src/ms_pred/common/parallel_utils.py": {
+   "bytes": 13635,
+   "sha256": "60dbeac1f6d2b52009b40329790d6ca05fdd28efb70a1c23586616d6c984c691"
+  },
+  "src/ms_pred/common/splitter.py": {
+   "bytes": 2676,
+   "sha256": "47ea4c05697ddaa8bafe777c58ebb7ff0d9de762a5ee8345b6ec38cf9496827c"
+  },
+  "src/ms_pred/iceberg/dag_data.py": {
+   "bytes": 36155,
+   "sha256": "80a4f2abd57a59077bf988c9a3f975de36cf856c189aadf9f871382054494814"
+  },
+  "src/ms_pred/iceberg/gen_model.py": {
+   "bytes": 34864,
+   "sha256": "467a117823c4e1885636cbad4d4925f69c68722aea460cf8fc91e08cfcb6c755"
+  },
+  "src/ms_pred/iceberg/inten_model.py": {
+   "bytes": 34601,
+   "sha256": "821942bdcb0282dd229deb6cafcfd6f07ab29eeb9539446acaa88229d6341ff6"
+  },
+  "src/ms_pred/iceberg/joint_model.py": {
+   "bytes": 7968,
+   "sha256": "d1cd923d0729e6a0b141f97926e4ed8d4172b01ee4b0212781f3835f2f558f74"
+  },
+  "src/ms_pred/LICENSE": {
+   "bytes": 1092,
+   "sha256": "cb323bf6812b7ebc608d6ded23cf0245ab4633d68b1998010ece3ea3d2810fe3"
+  },
+  "src/ms_pred/magma/fragmentation.py": {
+   "bytes": 28327,
+   "sha256": "5fc6ac347a09ea8486154ce827eea0ea810a0c7f6a277279ffd4c5abd1e93744"
+  },
+  "src/ms_pred/magma/run_magma.py": {
+   "bytes": 23083,
+   "sha256": "b55f7b3914835e53641ca3e0c337e7b1b5acc61d914268fd26d61263d0f56b6d"
+  },
+  "src/ms_pred/nn_utils/__init__.py": {
+   "bytes": 378,
+   "sha256": "2f7f5b3d2537b6bde6a28be84908826901cb2306756b680a57934c39831ade57"
+  },
+  "src/ms_pred/nn_utils/dgl_graph_ops.py": {
+   "bytes": 18955,
+   "sha256": "d65b239032eae4ec8cb2d0b9850fd773542722ff953c96827ab59000d13eba9f"
+  },
+  "src/ms_pred/nn_utils/dgl_modules.py": {
+   "bytes": 23408,
+   "sha256": "b98dfc02dad06a67e2c9ee61670ebc0c96a8b2a62859335888f8189d5677e2e4"
+  },
+  "src/ms_pred/nn_utils/form_embedder.py": {
+   "bytes": 10681,
+   "sha256": "30bb3670c8b21e01ebb3fb2548dac7f8e0cac589fd4cfccc51589ddf55c1ea4b"
+  },
+  "src/ms_pred/nn_utils/mol_graph.py": {
+   "bytes": 10573,
+   "sha256": "62d11349b0c9d06335384b6fabfcddffaf78ece4c1d6f5c18ac426746d1e7d89"
+  },
+  "src/ms_pred/nn_utils/nn_utils.py": {
+   "bytes": 41337,
+   "sha256": "f07a9018515ed0204b305741c5b13db9285d400ee7ff3e5bfa12db756a87146f"
+  },
+  "src/ms_pred/nn_utils/transformer_layer.py": {
+   "bytes": 30192,
+   "sha256": "8884d91afd479bef9b05d4a4527953ade8fd9353332ca3c6eddb8e1b048d2a92"
+  },
+  "wheels/einops-0.8.2-py3-none-any.whl.ice": {
+   "bytes": 65638,
+   "sha256": "54058201ac7087911181bfec4af6091bb59380360f069276601256a76af08193"
+  },
+  "wheels/lightning_utilities-0.15.3-py3-none-any.whl.ice": {
+   "bytes": 31906,
+   "sha256": "6c55f1bee70084a1cbeaa41ada96e4b3a0fea5909e844dd335bd80f5a73c5f91"
+  },
+  "wheels/pytorch_lightning-2.6.6-py3-none-any.whl.ice": {
+   "bytes": 853045,
+   "sha256": "71f95c7b22f25c4f91cc659e1734bcdc6c69c8b66543f2ed2d78dbe29ce2f167"
+  },
+  "wheels/rdkit-2025.3.6-cp312-cp312-manylinux_2_28_x86_64.whl.ice": {
+   "bytes": 36119142,
+   "sha256": "ed5565d4d6423def7c52eb20a6263afcd979383757086dec92f57e77d7c7f856"
+  },
+  "wheels/torchmetrics-1.9.0-py3-none-any.whl.ice": {
+   "bytes": 983384,
+   "sha256": "bfdcbff3dd1d96b3374bb2496eb39f23c4b28b8a845b6a18c313688e0d2d9ca1"
+  }
+ }
+}

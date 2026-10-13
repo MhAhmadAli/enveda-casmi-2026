@@ -192,3 +192,35 @@ best submission.
 
 Kaggle CLI on macOS: there is no `timeout` command, so `timeout N kaggle ...` fails
 instantly and silently inside retry loops.
+
+## Provenance of the fork's models (2026-10-13)
+
+Read from the datasets' own READMEs, manifests and training code
+(`reports/model_provenance/`). Nothing had to be reverse-engineered.
+
+| model in the fork | trained on | held out | honest on the NP panel? |
+|---|---|---|---|
+| FPNet A/B (`v3-models`/`v4b` `fpnet_*.pt`, `fe_A/B`) | train via `casmi/traindata.py` | `holdout_folds=('np','nplib','syn','plusk','twin')` | **yes**: panel MRR 0.581 vs 0.934 on seen |
+| `fpnet_full1.pt` | name says full; no README | probably nothing | probably not |
+| prvsiyan `fp_merged_m1` / `fp_single_s2` | unknown | unknown | assume not |
+| megayak `ours_fpnet_*` | train minus **all 3,150 simulation structures** | NP panel + 6 library panels | **yes** |
+| dmitriigluzdov `fpnet_fold0.pt` | train minus identity fold 0 (55,102) + NP panel (265) | stated in `split.parquet` | **yes** |
+| `fe_D.pt` | DreaMS fine-tuned to fingerprints (MIT) | unknown | unknown |
+| main ranker `ranker_v4b.pkl` | 160 features, 4 boosters x 500 rounds, on "sim1x" simulation rows | simulation structures | probably |
+| ICEBERG 2.1 / GLACIER | MassSpecGym `msg_all` checkpoints | MassSpecGym's own split | unknown: the panel structures are in public libraries, so likely seen |
+
+Key facts:
+
+- **`enveda-np-examples` (the 250-structure NP panel) is held out by the public FPNet
+  training code by default.** Together with the leak-free megayak and fold-safe
+  checkpoints, an honest validation build of the fork is possible: swap the possibly
+  leaked models for the held-out ones and score the panel. Identity-disjoint folds are
+  published as `dmitriigluzdov/casmi26-identity-disjoint-validation-folds`.
+- **Natural products are much harder for the fingerprint model**: held-out identities
+  0.790 MRR vs the held-out NP panel 0.506.
+- **The popularity prior is strongly NP-specific** (fold-safe README, 12k held-out
+  queries): on the NP panel, fingerprint only 0.506, popularity alone **0.810**,
+  `z + 0.25 pop` 0.818, `z + 0.6 pop` **0.834**. On ordinary library compounds the same
+  prior hurts (0.815 -> 0.444 at 0.6). The fork uses 0.15-0.25. Caveat: the panel is
+  famous NPs (median pop 13.1); a molecule "newly detected in an extract" may be less
+  documented, so the right weight on the hidden test is unknown.
