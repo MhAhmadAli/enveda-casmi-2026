@@ -37,7 +37,7 @@ _key_cache: dict[str, str | None] = {}
 _comp_cache: dict[str, tuple | None] = {}
 
 POP_GRID = (0.0, 0.15, 0.25, 0.4, 0.6, 1.0)
-SIM_GRID = ((1.0, 1.0), (0.0, 0.0), (0.5, 0.5), (1.0, 0.0), (0.0, 1.0), (2.0, 2.0))
+SIM_GRID = ((0.0, 0.0), (1.0, 1.0), (0.5, 0.5), (1.0, 0.0), (0.0, 1.0), (2.0, 2.0))
 
 
 def metric_key(smiles: str) -> str | None:
@@ -132,7 +132,8 @@ def replay(dump_dir: Path) -> list[dict]:
             row = dict(dump=dump_dir.parent.name, pop_mu=mu, ice_lam=ice_lam, gl_lam=gl_lam,
                        mrr25=float(rr(ranks).mean()), top1=float(np.mean(ranks == 1)),
                        top25=float(np.mean(ranks > 0)), _rr=rr(ranks))
-            if math.isclose(mu, cfg["POOLPOP_MU"]) and (ice_lam, gl_lam) == (cfg["ICE_LAM"], cfg["GL_LAM"]):
+            # the fork ships BASE_ICE = False: simulators touch only the fused list, not the main one
+            if math.isclose(mu, cfg["POOLPOP_MU"]) and (ice_lam, gl_lam) == (0.0, 0.0):
                 ref = row
             rows.append(row)
         if math.isclose(mu, cfg["POOLPOP_MU"]):
@@ -152,13 +153,13 @@ def main() -> None:
     out = []
     for arg in sys.argv[1:]:
         rows = replay(Path(arg))
-        print(f"\n{arg}  (n={len(rows[0]['_rr'])}; delta vs shipped pop_mu/ice/gl, bootstrap 95% CI)")
+        print(f"\n{arg}  (n={len(rows[0]['_rr'])}; delta vs shipped: pop_mu as dumped, no main-list simulators, bootstrap 95% CI)")
         print(f"{'pop_mu':>6} {'ice':>4} {'gl':>4} {'mrr25':>7} {'top1':>6} {'top25':>6} {'delta':>7}  ci95")
         for r in sorted(rows, key=lambda r: -r["mrr25"]):
             print(f"{r['pop_mu']:6.2f} {r['ice_lam']:4.1f} {r['gl_lam']:4.1f} {r['mrr25']:7.4f} "
                   f"{r['top1']:6.3f} {r['top25']:6.3f} {r['delta']:+7.4f}  {r['ci95']}")
         out += [{k: v for k, v in r.items() if k != "_rr"} for r in rows]
-    with open(ROOT / "reports/val_replay.jsonl", "a") as f:
+    with open(ROOT / "reports/val_replay.jsonl", "w") as f:
         for r in out:
             f.write(json.dumps(r) + "\n")
 

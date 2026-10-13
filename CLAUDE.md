@@ -224,3 +224,38 @@ Key facts:
   prior hurts (0.815 -> 0.444 at 0.6). The fork uses 0.15-0.25. Caveat: the panel is
   famous NPs (median pop 13.1); a molecule "newly detected in an extract" may be less
   documented, so the right weight on the hidden test is unknown.
+
+## Fork validation on the NP panel: first results (2026-10-13)
+
+`scripts/build_val_kernel.py` -> kernels `casmi26-val-{disjoint,inlib}` (380 molecules =
+250 structures x polarity, ~3.3 h each on a T4). `scripts/replay_val.py` replays the
+popularity / simulator stages offline and reproduces the kernel's stage scores exactly.
+
+| stage (MRR@25) | disjoint | inlib |
+|---|---|---|
+| main engine, raw ranker | 0.913 | 0.873 |
+| + pool popularity (mu 0.15) | 0.950 | 0.935 |
+| engine 2 alone | **0.010** | 0.836 |
+| + gated PubChem merge | 0.892 | 0.884 |
+| + RRF fusion with engine 2 + simulator re-rank | **0.543** | 0.929 |
+| final | 0.543 | 0.929 |
+
+**The main engine leaks in `disjoint`.** With every spectrum of the answer removed it
+still ranks it first 87% of the time; the honest references on this panel are 0.42-0.58
+(fingerprint alone) and 0.69-0.71 (megayak's leak-free ranker). Engine 2 drops to 0.010
+in the same run, so the spectra really are gone. The fe_v4 families are documented and
+grep-verified to read no pool src / train_sid / chan, and the cross-scorer is off. Remaining
+suspects: `fe_D` (DreaMS fine-tune, undocumented training set), `fe_A`/`fe_B`, and the
+160-feature ranker trained on simulated queries that likely include panel molecules.
+Until the leak is found, absolute numbers and anything comparing the main engine with
+an honest component (fusion, PubChem merge) are not interpretable.
+
+What survives the leak because it is a re-ranking on the same lists (replay, paired,
+bootstrap 95% CI, n=380):
+
+- popularity is worth a lot: mu 0 vs the shipped 0.15 costs -0.037 / -0.062;
+- **mu 0.25 beats 0.15**: +0.006 [-0.001, +0.015] disjoint, +0.012 [+0.004, +0.021] inlib;
+  0.4 is flat, 0.6+ declines;
+- simulators on the main list at the full weight (1.0/1.0) hurt (-0.016 / -0.014),
+  consistent with the fork's own b420 finding; that is why it ships `BASE_ICE = False`.
+- ICEBERG only covers [M+H]+/[M+Na]+: 216 of 380 molecules got scores.
