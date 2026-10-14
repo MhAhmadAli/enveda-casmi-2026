@@ -259,3 +259,45 @@ bootstrap 95% CI, n=380):
 - simulators on the main list at the full weight (1.0/1.0) hurt (-0.016 / -0.014),
   consistent with the fork's own b420 finding; that is why it ships `BASE_ICE = False`.
 - ICEBERG only covers [M+H]+/[M+Na]+: 216 of 380 molecules got scores.
+
+### Leak hunt: it is not the fingerprint models (2026-10-14)
+
+| `disjoint`, MRR@25 | base | fe_D -> fe_A | all FPNets -> fold-safe `fpnet_fold0` |
+|---|---|---|---|
+| main engine, raw | 0.913 | 0.906 | 0.889 |
+| + popularity | 0.950 | 0.942 | 0.945 |
+| final | 0.543 | 0.540 | 0.570 |
+
+Swapping every fingerprint model the main engine uses for documented panel-held-out
+checkpoints costs only 0.024. So either the leak is in the ranker (`ranker_v4b.pkl`,
+trained on simulated queries that may include panel molecules) or a precomputed table
+(`fe_v4/res/fragnet/sets.pkl`, derivation priors, analog_struct tables), or there is no
+leak and the panel is simply easy: it is famous natural products whose close relatives
+stay in the library (npx median nearest-relative Tanimoto 0.777). The LB (0.438 overall)
+says the hidden test is far harder than this panel either way.
+
+**`disjoint` misrepresents engine 2 and therefore fusion.** Engine 2 builds its pool from
+COCONUT + ChEBI + structures *of the library file*; removing the answer's spectra removes
+the answer from its pool (in-list recall 0.024), apparently because prvsiyan's COCONUT
+file excludes train structures. A genuinely new hidden molecule in COCONUT would be in it.
+The 0.95 -> 0.54 collapse at fusion in `disjoint` is that artifact, not evidence that
+fusion hurts. `inlib` is unaffected (fusion there: 0.935 -> 0.929, neutral).
+
+Next, on the 5090 box (data/cache is there): stratify the validation molecules by
+nearest-relative Tanimoto (`scripts/analyze_analog_distance.py`) and read the main
+engine's MRR in the <=0.5 band, where the hidden test appears to sit. That separates
+"leaky" from "easy" without more GPU runs.
+
+### Sixth submission: the panel validation's popularity call was wrong on the LB (2026-10-14)
+
+| # | configuration | panel replay prediction | public LB |
+|---|---|---|---|
+| 6 | fork, `POOLPOP_MU` 0.15 -> 0.25 only (`notebooks/kernels/fork438_pop25`) | +0.006 / +0.012 | **0.422** (-0.016) |
+
+About 1 sigma, but the opposite sign to the prediction, and the second fork change in a
+row to lose. Consistent with the panel being famous NPs (median pop 13.1) while the
+hidden molecules are less documented: the fold-safe study shows a heavier popularity
+weight helps famous answers and hurts obscure ones. **Do not tune popularity-related
+weights on the NP panel.** The fork's 0.15 stays. Before trusting the validation again,
+rebuild it from molecules with no close library relative (nearest Tanimoto <= 0.5) and
+check that its deltas track the LB.
