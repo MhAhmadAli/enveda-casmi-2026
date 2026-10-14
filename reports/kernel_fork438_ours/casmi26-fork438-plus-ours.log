@@ -1,0 +1,65 @@
+[{"stream_name":"stderr","time":7.601293029,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.60135733,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.601363301,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.601366839,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":8.207173764,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.207202477,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.207206789,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.207211896,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":9.756679317,"data":"v17 popularity prior 0.25 200 /kaggle/input/datasets/dmitriigluzdov/casmi26-pubchem-popularity-prior\n"}
+,{"stream_name":"stdout","time":9.756711657,"data":"rdkit wheel: ['/kaggle/input/datasets/metric/rdkit-2026-3-3-wheel/rdkit-2026.3.3-cp313-cp313-manylinux_2_28_x86_64.whl']\n"}
+,{"stream_name":"stdout","time":13.527240088,"data":" \n"}
+,{"stream_name":"stdout","time":13.527285313,"data":"rdkit 2026.03.3\n"}
+,{"stream_name":"stdout","time":25.68517232,"data":"V4CODE /kaggle/input/datasets/ahmedberatozer/casmi26-v4b-models/code \n"}
+,{"stream_name":"stdout","time":25.685209788,"data":"V4MOD /kaggle/input/datasets/ahmedberatozer/casmi26-v4b-models \n"}
+,{"stream_name":"stdout","time":25.685214851,"data":"V3CODE /kaggle/input/datasets/ahmedberatozer/casmi26-v3-models/code \n"}
+,{"stream_name":"stdout","time":25.685218676,"data":"POOL /kaggle/input/datasets/ahmedberatozer/casmi26-v2-pool \n"}
+,{"stream_name":"stdout","time":25.685223871,"data":"PC /kaggle/input/datasets/ahmedberatozer/casmi26-pubchem-tier \n"}
+,{"stream_name":"stdout","time":25.685231647,"data":"COMP /kaggle/input/competitions/enveda-CASMI26-molecule-id-mass-spectra\n"}
+,{"stream_name":"stdout","time":25.685252789,"data":"64 files match MANIFEST.json; families ['derivation', 'frag2', 'analog_struct', 'model_views', 'fragnet'] 16s\n"}
+,{"stream_name":"stdout","time":26.863498145,"data":"RERUN False | sig 654e030e4173780e945252b4a5adf70b | COMP /kaggle/working/smoke_comp | ICE_BUDGET 300\n"}
+,{"stream_name":"stdout","time":637.779190282,"data":"engine fp models ['/kaggle/input/datasets/prvsiyan/casmi26-fp-models-v2/fp_merged_m1.pt', '/kaggle/input/datasets/prvsiyan/casmi26-fp-models-v2/fp_single_s2.pt']\n"}
+,{"stream_name":"stdout","time":637.779247511,"data":"[    74s] library mass index: formula 100.0%, timsTOF rows 45.5%\n"}
+,{"stream_name":"stdout","time":637.779253194,"data":"[    74s] library 2,539,608 spectra\n"}
+,{"stream_name":"stdout","time":637.779257854,"data":"[    77s] + ChEBI/LIPID MAPS 62,744 new structures\n"}
+,{"stream_name":"stdout","time":637.779268186,"data":"[    78s] COCONUT 499,133; training structures to fingerprint 275,810\n"}
+,{"stream_name":"stdout","time":637.779271698,"data":"[   327s] pool 774,943 structures\n"}
+,{"stream_name":"stdout","time":637.779274768,"data":"[   343s] index: 2,539,608 library rows; representatives 275,810\n"}
+,{"stream_name":"stdout","time":637.779277869,"data":"[   346s] fp models: 1 single + 1 merged on cuda\n"}
+,{"stream_name":"stdout","time":637.779281788,"data":"[   346s] test: 41 spectra / 12 molecules\n"}
+,{"stream_name":"stdout","time":637.779299123,"data":"[   357s]   channels 0/12\n"}
+,{"stream_name":"stdout","time":637.779315768,"data":"[   407s] MetFrag-lite on 1,811 candidates\n"}
+,{"stream_name":"stdout","time":637.779319755,"data":"[   534s] our ranker: 4 GBMs on 399,790 rows x 51 features\n"}
+,{"stream_name":"stdout","time":637.779323303,"data":"[   586s] prvsiyan ranker: 8 GBMs on 142,762 rows x 31 features\n"}
+,{"stream_name":"stdout","time":637.779326866,"data":"[   596s] submissions ready\n"}
+,{"stream_name":"stdout","time":637.779330184,"data":"engine lists 12 604s\n"}
+,{"stream_name":"stdout","time":637.779333625,"data":"\n"}
+,{"stream_name":"stdout","time":637.779336903,"data":"\n"}
+,{"stream_name":"stdout","time":637.779340212,"data":"engine lists 12 611s\n"}
+,{"stream_name":"stderr","time":638.146957249,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":638.147562908,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":638.147575999,"data":"    import sys;import papermill as pm;pm.execute_notebook(\"__notebook__.ipynb\",\"__notebook__.ipynb\",progress_bar=False,log_output=True,stdout_file=sys.stdout,stderr_file=sys.stderr,allow_errors=False,timeout=43200)\n"}
+,{"stream_name":"stderr","time":638.147598249,"data":"                                      ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":638.147603134,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 131, in execute_notebook\n"}
+,{"stream_name":"stderr","time":638.14761349,"data":"    raise_for_execution_errors(nb, output_path)\n"}
+,{"stream_name":"stderr","time":638.147617083,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":638.147620123,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 251, in raise_for_execution_errors\n"}
+,{"stream_name":"stderr","time":638.147623666,"data":"    raise error\n"}
+,{"stream_name":"stderr","time":638.147627142,"data":"papermill.exceptions.PapermillExecutionError: \n"}
+,{"stream_name":"stderr","time":638.147630629,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":638.147634222,"data":"Exception encountered at \"In [5]\":\n"}
+,{"stream_name":"stderr","time":638.147637527,"data":"  File \"/tmp/ipykernel_24/1535150178.py\", line 22\n"}
+,{"stream_name":"stderr","time":638.147640769,"data":"    print('\\n'.join(l for l in _r.stdout.splitlines() if l.startswith('[')][-15:]))\n"}
+,{"stream_name":"stderr","time":638.147645181,"data":"                                                                          ^\n"}
+,{"stream_name":"stderr","time":638.147648469,"data":"SyntaxError: closing parenthesis ']' does not match opening parenthesis '('\n"}
+,{"stream_name":"stderr","time":638.147652244,"data":"\n"}
+,{"stream_name":"stderr","time":638.147655865,"data":"\n"}
+,{"stream_name":"stderr","time":640.251028598,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":640.251059539,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":640.413316969,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":640.41334481,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":641.222323852,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":641.307319458,"data":"[NbConvertApp] Writing 156349 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":643.815841053,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":644.569098853,"data":"[NbConvertApp] Writing 702056 bytes to __results__.html\n"}
+]

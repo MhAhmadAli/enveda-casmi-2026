@@ -1,0 +1,23 @@
+{
+ "secs": 10106,
+ "merge": {
+  "untouched": 9,
+  "gentle": 358,
+  "aggressive": 6,
+  "no_pc": 7,
+  "promoted": 47
+ },
+ "n_errors": 0,
+ "ice_health": "ICE NOT RUN",
+ "gl_health": "GL NOT RUN",
+ "ice_n_scored": 216,
+ "gl_n_scored": 210,
+ "families": [
+  "derivation",
+  "frag2",
+  "analog_struct",
+  "model_views",
+  "fragnet"
+ ],
+ "gpu": "Tesla T4"
+}

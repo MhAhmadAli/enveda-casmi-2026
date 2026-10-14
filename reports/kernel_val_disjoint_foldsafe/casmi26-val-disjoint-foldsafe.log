@@ -1,0 +1,277 @@
+[{"stream_name":"stderr","time":7.643469641,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.643516917,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.64352096,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.643523687,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":8.29873363,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.298762984,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.298767831,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.298777373,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":9.943527895999999,"data":"v17 popularity prior 0.25 200 /kaggle/input/datasets/dmitriigluzdov/casmi26-pubchem-popularity-prior\n"}
+,{"stream_name":"stdout","time":9.943578915,"data":"rdkit wheel: ['/kaggle/input/datasets/metric/rdkit-2026-3-3-wheel/rdkit-2026.3.3-cp313-cp313-manylinux_2_28_x86_64.whl']\n"}
+,{"stream_name":"stdout","time":14.325007686,"data":" \n"}
+,{"stream_name":"stdout","time":14.325037784,"data":"rdkit 2026.03.3\n"}
+,{"stream_name":"stdout","time":35.183894963,"data":"V4CODE /kaggle/input/datasets/ahmedberatozer/casmi26-v4b-models/code \n"}
+,{"stream_name":"stdout","time":35.183937887,"data":"V4MOD /kaggle/input/datasets/ahmedberatozer/casmi26-v4b-models \n"}
+,{"stream_name":"stdout","time":35.183943068,"data":"V3CODE /kaggle/input/datasets/ahmedberatozer/casmi26-v3-models/code \n"}
+,{"stream_name":"stdout","time":35.183946964,"data":"POOL /kaggle/input/datasets/ahmedberatozer/casmi26-v2-pool \n"}
+,{"stream_name":"stdout","time":35.183950603,"data":"PC /kaggle/input/datasets/ahmedberatozer/casmi26-pubchem-tier \n"}
+,{"stream_name":"stdout","time":35.183954425,"data":"COMP /kaggle/input/competitions/enveda-CASMI26-molecule-id-mass-spectra\n"}
+,{"stream_name":"stdout","time":35.18395991,"data":"64 files match MANIFEST.json; families ['derivation', 'frag2', 'analog_struct', 'model_views', 'fragnet'] 26s\n"}
+,{"stream_name":"stdout","time":36.466993573,"data":"VALIDATION variant foldsafe {'fe_A.pt': '/kaggle/input/datasets/dmitriigluzdov/casmi26-fold-safe-fpnet/fpnet_fold0.pt', 'fe_B.pt': '/kaggle/input/datasets/dmitriigluzdov/casmi26-fold-safe-fpnet/fpnet_fold0.pt', 'fe_D.pt': '/kaggle/input/datasets/dmitriigluzdov/casmi26-fold-safe-fpnet/fpnet_fold0.pt'} /kaggle/input/datasets/dmitriigluzdov/casmi26-fold-safe-fpnet/fpnet_fold0.pt\n"}
+,{"stream_name":"stdout","time":36.467036087,"data":"train columns: ['ingest_lib', 'normalized_smiles', 'inchikey', 'inchikey14', 'molecular_formula', 'ionization_mode', 'instrument_type', 'adduct', 'adduct_orig', 'precursor_mz', 'precursor_error_ppm', 'ms2_mzs', 'ms2_normalized_intensities', 'num_peaks', 'base_peak_intensity', 'collision_energy_ev', 'collision_energy_orig', 'collision_energy_orig_units']\n"}
+,{"stream_name":"stdout","time":36.467042679,"data":"test columns: ['molecule_id', 'spectrum_id', 'ms2_mzs', 'ms2_normalized_intensities', 'base_peak_intensity', 'adduct', 'ionization_mode', 'instrument_type', 'precursor_mz', 'collision_energy_orig', 'collision_energy_ev', 'collision_energy_orig_units']\n"}
+,{"stream_name":"stdout","time":205.889243218,"data":"panel: 1184 spectra / 250 structures; same-structure spectra in train 57238; dropping 57238 (disjoint); 170s\n"}
+,{"stream_name":"stdout","time":318.960031743,"data":"VALIDATION disjoint: 1184 query spectra, 380 molecules, 250 structures -\u003e COMP=/tmp/vcomp (283s)\n"}
+,{"stream_name":"stdout","time":319.076153918,"data":"RERUN True | sig dea4207a04289ad116d224bb57ed9c13 | COMP /tmp/vcomp | ICE_BUDGET 5400\n"}
+,{"stream_name":"stdout","time":3307.14923584,"data":"engine fp models ['/kaggle/input/datasets/megayak/casmi26-simulated-ranker-rows/ours_fpnet_merged_26k.pt', '/kaggle/input/datasets/megayak/casmi26-simulated-ranker-rows/ours_fpnet_single_16k.pt']\n"}
+,{"stream_name":"stdout","time":3307.149283298,"data":"[    65s] library mass index: formula 100.0%, timsTOF rows 46.5%\n"}
+,{"stream_name":"stdout","time":3307.149290255,"data":"[    65s] library 2,482,370 spectra\n"}
+,{"stream_name":"stdout","time":3307.149294821,"data":"[    73s] + ChEBI/LIPID MAPS 62,744 new structures\n"}
+,{"stream_name":"stdout","time":3307.149299188,"data":"[    74s] COCONUT 499,133; training structures to fingerprint 275,548\n"}
+,{"stream_name":"stdout","time":3307.149303602,"data":"[   327s] pool 774,681 structures\n"}
+,{"stream_name":"stdout","time":3307.149307737,"data":"[   343s] index: 2,482,370 library rows; representatives 275,548\n"}
+,{"stream_name":"stdout","time":3307.14931194,"data":"[   348s] fp models: 1 single + 1 merged on cuda\n"}
+,{"stream_name":"stdout","time":3307.149316065,"data":"[   348s] test: 1,184 spectra / 380 molecules\n"}
+,{"stream_name":"stdout","time":3307.149320163,"data":"[   359s]   channels 0/380\n"}
+,{"stream_name":"stdout","time":3307.149324253,"data":"[   563s]   channels 50/380\n"}
+,{"stream_name":"stdout","time":3307.149328668,"data":"[   776s]   channels 100/380\n"}
+,{"stream_name":"stdout","time":3307.149332798,"data":"[  1008s]   channels 150/380\n"}
+,{"stream_name":"stdout","time":3307.149340542,"data":"[  1209s]   channels 200/380\n"}
+,{"stream_name":"stdout","time":3307.149343732,"data":"[  1448s]   channels 250/380\n"}
+,{"stream_name":"stdout","time":3307.14934646,"data":"[  1640s]   channels 300/380\n"}
+,{"stream_name":"stdout","time":3307.149349158,"data":"[  1845s]   channels 350/380\n"}
+,{"stream_name":"stdout","time":3307.149351874,"data":"[  1953s] MetFrag-lite on 21,618 candidates\n"}
+,{"stream_name":"stdout","time":3307.149354689,"data":"[  2179s] our ranker: 4 GBMs on 399,790 rows x 51 features\n"}
+,{"stream_name":"stdout","time":3307.149358293,"data":"[  2274s] prvsiyan ranker: 8 GBMs on 142,762 rows x 31 features\n"}
+,{"stream_name":"stdout","time":3307.149370514,"data":"[  2493s] submissions ready\n"}
+,{"stream_name":"stdout","time":3307.149375272,"data":"engine lists 380 2981s\n"}
+,{"stream_name":"stdout","time":3307.149380247,"data":"\n"}
+,{"stream_name":"stdout","time":3307.149384855,"data":"\n"}
+,{"stream_name":"stdout","time":3307.149389006,"data":"engine lists 380 2988s\n"}
+,{"stream_name":"stdout","time":3307.337973061,"data":"v17 patch appended to probe_core2: True\n"}
+,{"stream_name":"stdout","time":6856.280239004,"data":"logits for 380 molecules 24s\n"}
+,{"stream_name":"stdout","time":6856.280308333,"data":"  pubchem 25/380 218s\n"}
+,{"stream_name":"stdout","time":6856.280314902,"data":"  pubchem 50/380 464s\n"}
+,{"stream_name":"stdout","time":6856.280319698,"data":"  pubchem 75/380 684s\n"}
+,{"stream_name":"stdout","time":6856.280324151,"data":"  pubchem 100/380 957s\n"}
+,{"stream_name":"stdout","time":6856.280328755,"data":"  pubchem 125/380 1184s\n"}
+,{"stream_name":"stdout","time":6856.280333229,"data":"  pubchem 150/380 1550s\n"}
+,{"stream_name":"stdout","time":6856.280337823,"data":"  pubchem 175/380 1719s\n"}
+,{"stream_name":"stdout","time":6856.280343083,"data":"  pubchem 200/380 1882s\n"}
+,{"stream_name":"stdout","time":6856.280347846,"data":"  pubchem 225/380 2100s\n"}
+,{"stream_name":"stdout","time":6856.280362999,"data":"  pubchem 250/380 2365s\n"}
+,{"stream_name":"stdout","time":6856.280366908,"data":"  pubchem 275/380 2640s\n"}
+,{"stream_name":"stdout","time":6856.280370538,"data":"  pubchem 300/380 2827s\n"}
+,{"stream_name":"stdout","time":6856.280373912,"data":"  pubchem 325/380 3015s\n"}
+,{"stream_name":"stdout","time":6856.280377485,"data":"  pubchem 350/380 3337s\n"}
+,{"stream_name":"stdout","time":6856.280381143,"data":"  pubchem 375/380 3520s\n"}
+,{"stream_name":"stdout","time":6856.280384705,"data":"  pubchem 380/380 3546s\n"}
+,{"stream_name":"stdout","time":6856.280388369,"data":"pc_runner done 380 3546s\n"}
+,{"stream_name":"stdout","time":6856.280392119,"data":"\n"}
+,{"stream_name":"stdout","time":6856.280395562,"data":"\n"}
+,{"stream_name":"stdout","time":6856.280399215,"data":"pubchem lists 380 6847s\n"}
+,{"stream_name":"stdout","time":6865.9167436,"data":"rg 0: 130926 spectra, 8033732 peaks, total peaks 8033732, 9s\n"}
+,{"stream_name":"stdout","time":6870.684386247,"data":"rg 1: 131072 spectra, 7943857 peaks, total peaks 15977589, 14s\n"}
+,{"stream_name":"stdout","time":6875.440550869,"data":"rg 2: 131072 spectra, 7940932 peaks, total peaks 23918521, 19s\n"}
+,{"stream_name":"stdout","time":6880.128164661,"data":"rg 3: 131072 spectra, 7902093 peaks, total peaks 31820614, 24s\n"}
+,{"stream_name":"stdout","time":6884.87823209,"data":"rg 4: 131072 spectra, 7987759 peaks, total peaks 39808373, 28s\n"}
+,{"stream_name":"stdout","time":6889.595946297,"data":"rg 5: 131072 spectra, 7932300 peaks, total peaks 47740673, 33s\n"}
+,{"stream_name":"stdout","time":6894.333924716,"data":"rg 6: 131072 spectra, 7917009 peaks, total peaks 55657682, 38s\n"}
+,{"stream_name":"stdout","time":6899.113907059,"data":"rg 7: 131072 spectra, 7907716 peaks, total peaks 63565398, 43s\n"}
+,{"stream_name":"stdout","time":6903.67007881,"data":"rg 8: 129621 spectra, 8392208 peaks, total peaks 71957606, 47s\n"}
+,{"stream_name":"stdout","time":6907.39538128,"data":"rg 9: 125123 spectra, 10564431 peaks, total peaks 82522037, 51s\n"}
+,{"stream_name":"stdout","time":6910.372067534,"data":"rg 10: 124404 spectra, 6583289 peaks, total peaks 89105326, 54s\n"}
+,{"stream_name":"stdout","time":6915.216296602,"data":"rg 11: 122921 spectra, 10450774 peaks, total peaks 99556100, 59s\n"}
+,{"stream_name":"stdout","time":6917.769107609,"data":"rg 12: 127738 spectra, 4209775 peaks, total peaks 103765875, 61s\n"}
+,{"stream_name":"stdout","time":6920.407700203,"data":"rg 13: 130181 spectra, 4350618 peaks, total peaks 108116493, 64s\n"}
+,{"stream_name":"stdout","time":6923.040110353,"data":"rg 14: 129985 spectra, 4310084 peaks, total peaks 112426577, 67s\n"}
+,{"stream_name":"stdout","time":6925.697181681,"data":"rg 15: 129903 spectra, 4341795 peaks, total peaks 116768372, 69s\n"}
+,{"stream_name":"stdout","time":6928.220800503,"data":"rg 16: 123083 spectra, 3397541 peaks, total peaks 120165913, 72s\n"}
+,{"stream_name":"stdout","time":6930.71419685,"data":"rg 17: 123767 spectra, 3068681 peaks, total peaks 123234594, 74s\n"}
+,{"stream_name":"stdout","time":6933.151963528,"data":"rg 18: 119592 spectra, 3048054 peaks, total peaks 126282648, 77s\n"}
+,{"stream_name":"stdout","time":6934.206054102,"data":"rg 19: 47622 spectra, 4221652 peaks, total peaks 130504300, 78s\n"}
+,{"stream_name":"stdout","time":6934.372006677,"data":"rg 20: 0 spectra, 0 peaks, total peaks 130504300, 78s\n"}
+,{"stream_name":"stdout","time":6936.648109921,"data":"spectra 2482370 peaks 130504300 sid\u003c0: 0 nm nan: 326\n"}
+,{"stream_name":"stdout","time":6936.648139337,"data":"done 80s\n"}
+,{"stream_name":"stdout","time":6936.648146183,"data":"casmi from /kaggle/input/datasets/ahmedberatozer/casmi26-v4b-models/code/casmi/__init__.py\n"}
+,{"stream_name":"stdout","time":6936.648165621,"data":"cache built 6927s\n"}
+,{"stream_name":"stdout","time":6945.211842965,"data":"[Library] 2,482,370 spectra, 275,810 structures, 130,504,300 peaks (1.4s)\n"}
+,{"stream_name":"stdout","time":6959.96502703,"data":"[Pool] 710,701 structures, nbits 10226, frag yes (14.7s)\n"}
+,{"stream_name":"stdout","time":6964.965305314,"data":"engine FP bank: fpnet_0 (A) FALLBACK\n"}
+,{"stream_name":"stdout","time":6965.412834478,"data":"[Engine] reps 442,845 (0.4s)\n"}
+,{"stream_name":"stdout","time":6965.414284485,"data":"VALIDATION model views: ['/kaggle/input/datasets/dmitriigluzdov/casmi26-fold-safe-fpnet/fpnet_fold0.pt', '/kaggle/input/datasets/dmitriigluzdov/casmi26-fold-safe-fpnet/fpnet_fold0.pt', '/kaggle/input/datasets/dmitriigluzdov/casmi26-fold-safe-fpnet/fpnet_fold0.pt']\n"}
+,{"stream_name":"stdout","time":6971.214498271,"data":"derivation prior self-test mismatches: 0\n"}
+,{"stream_name":"stdout","time":6971.214522359,"data":"engine ready; ranker features 160 boosters 4 6962s\n"}
+,{"stream_name":"stdout","time":6971.725486558,"data":"v19 pool popularity re-rank, mu 0.15 pool 710701\n"}
+,{"stream_name":"stdout","time":7046.394889484,"data":"  25/380 molecules 7037s\n"}
+,{"stream_name":"stdout","time":7154.941754387,"data":"  50/380 molecules 7145s\n"}
+,{"stream_name":"stdout","time":7308.461879067,"data":"  75/380 molecules 7299s\n"}
+,{"stream_name":"stdout","time":7422.788089434,"data":"  100/380 molecules 7413s\n"}
+,{"stream_name":"stdout","time":7586.229110828,"data":"  125/380 molecules 7577s\n"}
+,{"stream_name":"stdout","time":7768.991189506,"data":"  150/380 molecules 7759s\n"}
+,{"stream_name":"stdout","time":7815.29143888,"data":"  175/380 molecules 7806s\n"}
+,{"stream_name":"stdout","time":7895.333899327,"data":"  200/380 molecules 7886s\n"}
+,{"stream_name":"stdout","time":8041.811018921,"data":"  225/380 molecules 8032s\n"}
+,{"stream_name":"stdout","time":8101.344624747,"data":"  250/380 molecules 8092s\n"}
+,{"stream_name":"stdout","time":8206.882551854,"data":"  275/380 molecules 8197s\n"}
+,{"stream_name":"stdout","time":8366.206790305,"data":"  300/380 molecules 8357s\n"}
+,{"stream_name":"stdout","time":8435.772196076,"data":"  325/380 molecules 8426s\n"}
+,{"stream_name":"stdout","time":8527.542704203,"data":"  350/380 molecules 8518s\n"}
+,{"stream_name":"stdout","time":8587.511745813,"data":"  375/380 molecules 8578s\n"}
+,{"stream_name":"stdout","time":8597.78402029,"data":"  380/380 molecules 8588s\n"}
+,{"stream_name":"stdout","time":8597.78768882,"data":"errors 0 | popularity re-ranked lists 380\n"}
+,{"stream_name":"stdout","time":8598.945124582,"data":"ICE_UNION: engine candidates added to ICE input: 20804\n"}
+,{"stream_name":"stdout","time":8600.245725003,"data":"ICE input molecules 380 candidates 29604 8591s\n"}
+,{"stream_name":"stdout","time":8603.677021685,"data":"[claw] site preseed rc 0 \n"}
+,{"stream_name":"stdout","time":8603.680434761,"data":"[claw] site ready; substituted ['rdkit-2025.3.6-cp312-cp312-manylinux_2_28_x86_64.whl.ice'] -\u003e ['rdkit-2025.3.6-cp313-cp313-manylinux_2_28_x86_64.whl']\n"}
+,{"stream_name":"stdout","time":10088.523154414,"data":"[ice     0.5s] stubbed (absent) modules: ['pygmtools']\n"}
+,{"stream_name":"stdout","time":10088.523196938,"data":"[ice    24.8s] ms_pred tautomer mode v2 cache /tmp/ice_ms_pred_cache\n"}
+,{"stream_name":"stdout","time":10088.523203432,"data":"[ice    25.8s] model loaded on cuda (rdkit 2025.03.6, torch 2.11.0+cu128, numba True)\n"}
+,{"stream_name":"stdout","time":10088.523208727,"data":"/kaggle/input/datasets/ahmedberatozer/casmi26-iceberg/src/ms_pred/nn_utils/nn_utils.py:1155: UserWarning: Sparse invariant checks are implicitly disabled. Memory errors (e.g. SEGFAULT) will occur when operating on a sparse tensor which violates the invariants, but checks incur performance overhead. To silence this warning, explicitly opt in or out. See `torch.sparse.check_sparse_tensor_invariants.__doc__` for guidance.  (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:760.)\n"}
+,{"stream_name":"stdout","time":10088.523223676,"data":"  adj = torch.sparse_coo_tensor(indices=torch.stack((row, col)), values=value, size=(N, N))\n"}
+,{"stream_name":"stdout","time":10088.52322723,"data":"[ice   176.6s] chunk: 20 mols 3088 jobs 143.2s (20/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10088.52323068,"data":"[ice   260.5s] chunk: 16 mols 3113 jobs 81.3s (36/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10088.523234099,"data":"[ice   343.4s] chunk: 19 mols 3009 jobs 79.2s (55/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10088.523237468,"data":"[ice   446.4s] chunk: 10 mols 3121 jobs 100.5s (65/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10088.523240904,"data":"[ice   544.6s] chunk: 15 mols 3422 jobs 95.2s (80/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10088.523244271,"data":"[ice   637.1s] chunk: 14 mols 3380 jobs 89.9s (94/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10088.523247691,"data":"[ice   725.0s] chunk: 15 mols 3083 jobs 84.3s (109/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10088.52325105,"data":"[ice   825.4s] chunk: 16 mols 3338 jobs 97.6s (125/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10088.523254486,"data":"[ice   928.0s] chunk: 13 mols 3381 jobs 97.8s (138/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10088.523257906,"data":"[ice  1012.3s] chunk: 16 mols 3183 jobs 81.2s (154/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10088.523266447,"data":"[ice  1132.0s] chunk: 15 mols 3188 jobs 115.9s (169/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10088.523270056,"data":"[ice  1231.8s] chunk: 13 mols 3022 jobs 97.0s (182/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10088.523286615,"data":"[ice  1322.1s] chunk: 14 mols 3271 jobs 87.0s (196/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10088.523290766,"data":"[ice  1418.6s] chunk: 11 mols 3267 jobs 94.2s (207/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10088.523294779,"data":"[ice  1481.6s] chunk: 9 mols 2180 jobs 61.4s (216/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10088.523300814,"data":"[ice  1481.6s] status ok {'n_mols': 380, 'n_mols_covered': 216, 'n_mols_scored': 216, 'n_cands': 29604, 'n_scored': 16971}\n"}
+,{"stream_name":"stdout","time":10088.523304912,"data":"\n"}
+,{"stream_name":"stdout","time":10088.523308161,"data":"{'status': 'ok', 'n_mols': 380, 'n_mols_covered': 216, 'n_mols_scored': 216, 'n_cands': 29604, 'n_scored': 16971, 'seconds': 1481.61, 'pred_per_s': 33.17, 'device': 'cuda', 'rdkit': '2025.03.6', 'max_mem_gb': 5.0}\n"}
+,{"stream_name":"stdout","time":10088.523313191,"data":"ICE meta {\"status\": \"ok\", \"n_mols\": 380, \"n_mols_scored\": 216, \"n_mols_covered\": 216, \"n_cands\": 29604, \"n_scored\": 16971, \"errors\": [], \"rdkit\": \"2025.03.6\", \"torch\": \"2.11.0+cu128\", \"device\": \"cuda\", \"t_load\": 25.79, \"n_pred\": 46563, \"n_pred_fail\": 0, \"t_pred\": 1403.81, \"n_bad_smiles\": 0, \"pred_per_s\": 33.17, \"max_mem_gb\": 5.0, \"seconds\": 1481.61, \"log_tail\": [\"[ice     0.5s] stubbed (absent) modules: ['pygmtools']\", \"[ice    24.8s] ms_pred tautomer mode v2 cache /tmp/ice_ms_pred_cache\", \"[ice    25.8s] model loaded on cuda (rdkit 2025.03.6, torch 2.11.0+cu128, numba True)\", \"[ice   176.6s] chunk: 20 mols 3088 jobs 143.2s (20/216 covered mols scored)\", \"[ice   260.5s] chunk: 16 mols 3113 jobs 81.3s (36/216 covered mols scored)\", \"[ice   343.4s] chunk: 19 mols 3009 jobs 79.2s (55/216 covered mols scored)\", \"[ice   446.4s] chunk: 10 mols 3121 jobs 100.5s (65/216 covered mols scored)\", \"[ice   544.6s] chunk: 15 mols 3422 jobs 95.2s (80/216 covered mols scored)\", \"[ice   637.1s] chunk: 14 mols 3380 jobs 89.9s (94/216 covered mols scored)\", \"[ice   725.0s] chunk: 15 mols 3083 jobs 84.3s (109/216 covered mols scored)\", \"[ice   825.4s] chunk: 16 mols 3338 jobs 97.6s (125/216 covered mols scored)\", \"[ice   928.0s] chunk: 13 mols 3381 jobs 97.8s (138/216 covered mols scored)\", \"[ice  1012.3s] chunk: 16 mols 3183 jobs 81.2s (154/216 covered mols scored)\", \"[ice  1132.0s] chunk: 15 mols 3188 jobs 115.9s (169/216 covered mols scored)\", \"[ice  1231.8s] chunk: 13 mols 3022 jobs 97.0s (182/216 cov\n"}
+,{"stream_name":"stdout","time":10088.887121779,"data":"v29 GLACIER [M+H]+ only: molecules 210 of 380\n"}
+,{"stream_name":"stdout","time":10592.149078187,"data":"[gl     0.2s] site ready (marker matches): /kaggle/working/ice_site\n"}
+,{"stream_name":"stdout","time":10592.149112847,"data":"[gl     0.3s] stubbed (absent) modules: ['pygmtools']\n"}
+,{"stream_name":"stdout","time":10592.149118771,"data":"[gl    14.6s] GLACIER loaded: 15,108,154 params \n"}
+,{"stream_name":"stdout","time":10592.149123246,"data":"[gl    14.6s] model loaded on cuda (rdkit 2025.03.6, torch 2.11.0+cu128, numba True, threads 2)\n"}
+,{"stream_name":"stdout","time":10592.149130796,"data":"/usr/local/lib/python3.13/dist-packages/torch/nn/modules/transformer.py:531: UserWarning: The PyTorch API of nested tensors is in prototype stage and will change in the near future. We recommend specifying layout=torch.jagged when constructing a nested tensor, as this layout receives active development, has better operator coverage, and works with torch.compile. (Triggered internally at /pytorch/aten/src/ATen/NestedTensorImpl.cpp:178.)\n"}
+,{"stream_name":"stdout","time":10592.149142976,"data":"  output = torch._nested_tensor_from_mask(\n"}
+,{"stream_name":"stdout","time":10592.149146057,"data":"[gl    78.1s] chunk: 21 mols 3242 jobs 58.9s (21/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10592.149149106,"data":"[gl   115.9s] chunk: 20 mols 3228 jobs 36.8s (41/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10592.149152158,"data":"[gl   156.4s] chunk: 19 mols 3201 jobs 39.4s (60/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10592.149155013,"data":"[gl   188.4s] chunk: 13 mols 3029 jobs 31.1s (73/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10592.149157816,"data":"[gl   221.6s] chunk: 18 mols 3274 jobs 32.3s (91/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10592.149160896,"data":"[gl   252.8s] chunk: 15 mols 3020 jobs 30.3s (106/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10592.149164484,"data":"[gl   284.6s] chunk: 16 mols 3130 jobs 30.9s (122/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10592.149180598,"data":"[gl   317.7s] chunk: 15 mols 3317 jobs 32.2s (137/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10592.149185569,"data":"[gl   354.7s] chunk: 17 mols 3060 jobs 35.9s (154/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10592.149190342,"data":"[gl   403.4s] chunk: 16 mols 3099 jobs 47.6s (170/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10592.149195284,"data":"[gl   441.3s] chunk: 15 mols 3081 jobs 36.8s (185/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10592.1491999,"data":"[gl   470.5s] chunk: 13 mols 3064 jobs 28.3s (198/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10592.149204145,"data":"[gl   500.6s] chunk: 12 mols 2738 jobs 29.4s (210/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10592.149217614,"data":"[gl   500.7s] status ok {'n_mols': 210, 'n_mols_covered': 210, 'n_mols_scored': 210, 'n_cands': 16424, 'n_scored': 16424}\n"}
+,{"stream_name":"stdout","time":10592.149221319,"data":"\n"}
+,{"stream_name":"stdout","time":10592.149226231,"data":"{'status': 'ok', 'n_mols': 210, 'n_mols_covered': 210, 'n_mols_scored': 210, 'n_cands': 16424, 'n_scored': 16424, 'seconds': 500.63, 'pred_per_s': 85.1, 'device': 'cuda', 'rdkit': '2025.03.6', 'max_mem_gb': 0.45}\n"}
+,{"stream_name":"stdout","time":10592.149231221,"data":"GL meta {\"model\": \"glacier\", \"status\": \"ok\", \"n_mols\": 210, \"n_mols_scored\": 210, \"n_mols_covered\": 210, \"n_cands\": 16424, \"n_scored\": 16424, \"errors\": [], \"rdkit\": \"2025.03.6\", \"torch\": \"2.11.0+cu128\", \"device\": \"cuda\", \"t_load\": 14.62, \"n_pred\": 39858, \"n_pred_fail\": 0, \"n_feat_fail\": 0, \"t_pred\": 468.35, \"n_bad_smiles\": 0, \"pred_per_s\": 85.1, \"bs_final\": 32, \"max_mem_gb\": 0.45, \"seconds\": 500.63, \"log_tail\": [\"[gl     0.2s] site ready (marker matches): /kaggle/working/ice_site\", \"[gl     0.3s] stubbed (absent) modules: ['pygmtools']\", \"[gl    14.6s] GLACIER loaded: 15,108,154 params \", \"[gl    14.6s] model loaded on cuda (rdkit 2025.03.6, torch 2.11.0+cu128, numba True, threads 2)\", \"[gl    78.1s] chunk: 21 mols 3242 jobs 58.9s (21/210 covered mols scored)\", \"[gl   115.9s] chunk: 20 mols 3228 jobs 36.8s (41/210 covered mols scored)\", \"[gl   156.4s] chunk: 19 mols 3201 jobs 39.4s (60/210 covered mols scored)\", \"[gl   188.4s] chunk: 13 mols 3029 jobs 31.1s (73/210 covered mols scored)\", \"[gl   221.6s] chunk: 18 mols 3274 jobs 32.3s (91/210 covered mols scored)\", \"[gl   252.8s] chunk: 15 mols 3020 jobs 30.3s (106/210 covered mols scored)\", \"[gl   284.6s] chunk: 16 mols 3130 jobs 30.9s (122/210 covered mols scored)\", \"[gl   317.7s] chunk: 15 mols 3317 jobs 32.2s (137/210 covered mols scored)\", \"[gl   354.7s] chunk: 17 mols 3060 jobs 35.9s (154/210 covered mols scored)\", \"[gl   403.4s] chunk: 16 mols 3099 jobs 47.6s (170/210 covered mols scored)\", \"[gl   441.3s] chunk: 15 mols 3081 job\n"}
+,{"stream_name":"stdout","time":10592.149249055,"data":"ICE rerank stats {'molecules': 0, 'changed_top25': 0, 'changed_top1': 0, 'pc_changed': 105} 10583s\n"}
+,{"stream_name":"stdout","time":10592.149252009,"data":"GL rerank stats {'molecules': 0, 'changed_vs_ice_top25': 0, 'changed_vs_ice_top1': 0, 'pc_molecules': 201, 'pc_changed_vs_ice_top25': 199, 'pc_changed_vs_ice_top1': 48} 10583s\n"}
+,{"stream_name":"stdout","time":10592.258341783,"data":"merge/promote self-test OK\n"}
+,{"stream_name":"stdout","time":10592.258374109,"data":"merge stats {'untouched': 9, 'gentle': 358, 'aggressive': 6, 'no_pc': 7, 'promoted': 47}\n"}
+,{"stream_name":"stdout","time":10592.258377847,"data":"CLAW STAGE HEALTH | ICE NOT RUN | GL NOT RUN\n"}
+,{"stream_name":"stdout","time":10592.264065872,"data":"CLAW STAGE SCORED | ice=216 gl=210\n"}
+,{"stream_name":"stdout","time":10592.279330977,"data":"done (380, 2) 10583s\n"}
+,{"stream_name":"stdout","time":10970.32056239,"data":"v14: ICE-only rerank applied to 170 molecules without GLACIER scores\n"}
+,{"stream_name":"stdout","time":10970.320611207,"data":"V1 inference complete; applying separately audited final pass next.\n"}
+,{"stream_name":"stdout","time":11260.720149038,"data":"{\n"}
+,{"stream_name":"stdout","time":11260.720183747,"data":"  \"experiment\": \"V1.1 metric-safe tail\",\n"}
+,{"stream_name":"stdout","time":11260.720196292,"data":"  \"rdkit\": \"2026.03.3\",\n"}
+,{"stream_name":"stdout","time":11260.720200201,"data":"  \"hidden_rerun\": true,\n"}
+,{"stream_name":"stdout","time":11260.720203192,"data":"  \"active_molecules\": 380,\n"}
+,{"stream_name":"stdout","time":11260.72020621,"data":"  \"output_rows\": 380,\n"}
+,{"stream_name":"stdout","time":11260.720209066,"data":"  \"changed_molecules\": 4,\n"}
+,{"stream_name":"stdout","time":11260.720219028,"data":"  \"invalid_removed\": 0,\n"}
+,{"stream_name":"stdout","time":11260.7202215,"data":"  \"equivalent_duplicates_removed\": 2,\n"}
+,{"stream_name":"stdout","time":11260.720223806,"data":"  \"existing_candidates_promoted\": 10,\n"}
+,{"stream_name":"stdout","time":11260.720226075,"data":"  \"ranked_candidates_added\": 6,\n"}
+,{"stream_name":"stdout","time":11260.720228303,"data":"  \"dreams_candidates_added\": 0,\n"}
+,{"stream_name":"stdout","time":11260.720230522,"data":"  \"monotone_rank_assertions_passed\": true,\n"}
+,{"stream_name":"stdout","time":11260.720232946,"data":"  \"metric_source_sha256\": \"c61d163f1bb768313fd0863822952f035f343924f37e3f5e4b5883ccef7e6201\",\n"}
+,{"stream_name":"stdout","time":11260.720235334,"data":"  \"baseline_sha256\": \"12dc0d207649a7a2a848fa5cce94786a1aa8da23f41fbc535a4f5b01d15415ee\",\n"}
+,{"stream_name":"stdout","time":11260.72023767,"data":"  \"submission_sha256\": \"fbe6a65ed8ea2ee0de5b9f31c21a00ff8b6e93e614fd82d41174a82815458924\",\n"}
+,{"stream_name":"stdout","time":11260.720240032,"data":"  \"runtime_seconds\": 11251.2,\n"}
+,{"stream_name":"stdout","time":11260.720242419,"data":"  \"validation_note\": \"Visible test is a smoke check only and overlaps training; no generalization score claimed.\"\n"}
+,{"stream_name":"stdout","time":11260.720244868,"data":"}\n"}
+,{"stream_name":"stdout","time":11515.038964607,"data":"{\n"}
+,{"stream_name":"stdout","time":11515.03899962,"data":" \"raw_main\": {\n"}
+,{"stream_name":"stdout","time":11515.039003702,"data":"  \"n\": 380,\n"}
+,{"stream_name":"stdout","time":11515.039006786,"data":"  \"mrr25\": 0.888653497661971,\n"}
+,{"stream_name":"stdout","time":11515.039009846,"data":"  \"top1\": 0.8368421052631579,\n"}
+,{"stream_name":"stdout","time":11515.039012874,"data":"  \"top5\": 0.95,\n"}
+,{"stream_name":"stdout","time":11515.039015676,"data":"  \"top25\": 0.9921052631578947,\n"}
+,{"stream_name":"stdout","time":11515.039018482,"data":"  \"in_list\": 0.9973684210526316\n"}
+,{"stream_name":"stdout","time":11515.039021562,"data":" },\n"}
+,{"stream_name":"stdout","time":11515.039024989,"data":" \"pop_main\": {\n"}
+,{"stream_name":"stdout","time":11515.03904276,"data":"  \"n\": 380,\n"}
+,{"stream_name":"stdout","time":11515.03904774,"data":"  \"mrr25\": 0.945080024622961,\n"}
+,{"stream_name":"stdout","time":11515.039052855,"data":"  \"top1\": 0.9184210526315789,\n"}
+,{"stream_name":"stdout","time":11515.039057814,"data":"  \"top5\": 0.9763157894736842,\n"}
+,{"stream_name":"stdout","time":11515.039062357,"data":"  \"top25\": 0.9973684210526316,\n"}
+,{"stream_name":"stdout","time":11515.039066499,"data":"  \"in_list\": 0.9973684210526316\n"}
+,{"stream_name":"stdout","time":11515.039070678,"data":" },\n"}
+,{"stream_name":"stdout","time":11515.039074704,"data":" \"sim_main\": {\n"}
+,{"stream_name":"stdout","time":11515.039078776,"data":"  \"n\": 380,\n"}
+,{"stream_name":"stdout","time":11515.039082824,"data":"  \"mrr25\": 0.945080024622961,\n"}
+,{"stream_name":"stdout","time":11515.039087007,"data":"  \"top1\": 0.9184210526315789,\n"}
+,{"stream_name":"stdout","time":11515.039091128,"data":"  \"top5\": 0.9763157894736842,\n"}
+,{"stream_name":"stdout","time":11515.039095277,"data":"  \"top25\": 0.9973684210526316,\n"}
+,{"stream_name":"stdout","time":11515.039099402,"data":"  \"in_list\": 0.9973684210526316\n"}
+,{"stream_name":"stdout","time":11515.039105387,"data":" },\n"}
+,{"stream_name":"stdout","time":11515.039112961,"data":" \"engine2\": {\n"}
+,{"stream_name":"stdout","time":11515.039115852,"data":"  \"n\": 380,\n"}
+,{"stream_name":"stdout","time":11515.039118562,"data":"  \"mrr25\": 0.009785762483130905,\n"}
+,{"stream_name":"stdout","time":11515.039142019,"data":"  \"top1\": 0.005263157894736842,\n"}
+,{"stream_name":"stdout","time":11515.039146882,"data":"  \"top5\": 0.015789473684210527,\n"}
+,{"stream_name":"stdout","time":11515.039151091,"data":"  \"top25\": 0.02368421052631579,\n"}
+,{"stream_name":"stdout","time":11515.039155009,"data":"  \"in_list\": 0.02368421052631579\n"}
+,{"stream_name":"stdout","time":11515.039158714,"data":" },\n"}
+,{"stream_name":"stdout","time":11515.039161831,"data":" \"pcmerge\": {\n"}
+,{"stream_name":"stdout","time":11515.039165078,"data":"  \"n\": 380,\n"}
+,{"stream_name":"stdout","time":11515.03916829,"data":"  \"mrr25\": 0.8876677591414434,\n"}
+,{"stream_name":"stdout","time":11515.039171557,"data":"  \"top1\": 0.8078947368421052,\n"}
+,{"stream_name":"stdout","time":11515.039174833,"data":"  \"top5\": 0.9657894736842105,\n"}
+,{"stream_name":"stdout","time":11515.039178174,"data":"  \"top25\": 0.9973684210526316,\n"}
+,{"stream_name":"stdout","time":11515.039181427,"data":"  \"in_list\": 0.9973684210526316\n"}
+,{"stream_name":"stdout","time":11515.039184817,"data":" },\n"}
+,{"stream_name":"stdout","time":11515.039187951,"data":" \"fused\": {\n"}
+,{"stream_name":"stdout","time":11515.039191222,"data":"  \"n\": 380,\n"}
+,{"stream_name":"stdout","time":11515.03919446,"data":"  \"mrr25\": 0.5697377257245678,\n"}
+,{"stream_name":"stdout","time":11515.039197722,"data":"  \"top1\": 0.28421052631578947,\n"}
+,{"stream_name":"stdout","time":11515.039201023,"data":"  \"top5\": 0.9447368421052632,\n"}
+,{"stream_name":"stdout","time":11515.039204303,"data":"  \"top25\": 0.9868421052631579,\n"}
+,{"stream_name":"stdout","time":11515.039207587,"data":"  \"in_list\": 0.9868421052631579\n"}
+,{"stream_name":"stdout","time":11515.039211035,"data":" },\n"}
+,{"stream_name":"stdout","time":11515.039220321,"data":" \"final\": {\n"}
+,{"stream_name":"stdout","time":11515.03923544,"data":"  \"n\": 380,\n"}
+,{"stream_name":"stdout","time":11515.039239519,"data":"  \"mrr25\": 0.5697377257245678,\n"}
+,{"stream_name":"stdout","time":11515.039243556,"data":"  \"top1\": 0.28421052631578947,\n"}
+,{"stream_name":"stdout","time":11515.039247862,"data":"  \"top5\": 0.9447368421052632,\n"}
+,{"stream_name":"stdout","time":11515.039251933,"data":"  \"top25\": 0.9868421052631579,\n"}
+,{"stream_name":"stdout","time":11515.039255292,"data":"  \"in_list\": 0.9868421052631579\n"}
+,{"stream_name":"stdout","time":11515.039258594,"data":" },\n"}
+,{"stream_name":"stdout","time":11515.039261769,"data":" \"_meta\": {\n"}
+,{"stream_name":"stdout","time":11515.039264982,"data":"  \"regime\": \"disjoint\",\n"}
+,{"stream_name":"stdout","time":11515.039268407,"data":"  \"variant\": \"foldsafe\",\n"}
+,{"stream_name":"stdout","time":11515.039271789,"data":"  \"molecules\": 380,\n"}
+,{"stream_name":"stdout","time":11515.039275105,"data":"  \"runtime_s\": 11505,\n"}
+,{"stream_name":"stdout","time":11515.039278427,"data":"  \"lib_max_ge_0_9\": 0.02368421052631579\n"}
+,{"stream_name":"stdout","time":11515.039281852,"data":" }\n"}
+,{"stream_name":"stdout","time":11515.039284984,"data":"}\n"}
+,{"stream_name":"stdout","time":11515.03928829,"data":"kept: ['__notebook__.ipynb', 'baseline_submission.csv', 'candidate_audit.csv', 'candidate_audit.json', 'eng_lists.json', 'pc_lists.json', 'pc_runner.py', 'probe_core2.py', 'run_manifest.json', 'submission.csv', 'val']\n"}
+,{"stream_name":"stderr","time":11520.547596246,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":11520.547637624,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":11520.729803294,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":11520.729828253,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":11521.592148435,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":11521.689951487,"data":"[NbConvertApp] Writing 180593 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":11524.178044446,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":11524.96657198,"data":"[NbConvertApp] Writing 739169 bytes to __results__.html\n"}
+]

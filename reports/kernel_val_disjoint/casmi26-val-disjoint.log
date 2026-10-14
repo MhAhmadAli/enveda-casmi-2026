@@ -1,0 +1,274 @@
+[{"stream_name":"stderr","time":8.09566203,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.095743125,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.095751729,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.095755575,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":8.757255525,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.757285325,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.757290225,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.75729412,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":10.410194905,"data":"v17 popularity prior 0.25 200 /kaggle/input/datasets/dmitriigluzdov/casmi26-pubchem-popularity-prior\n"}
+,{"stream_name":"stdout","time":10.410225843,"data":"rdkit wheel: ['/kaggle/input/datasets/metric/rdkit-2026-3-3-wheel/rdkit-2026.3.3-cp313-cp313-manylinux_2_28_x86_64.whl']\n"}
+,{"stream_name":"stdout","time":14.681522459,"data":" \n"}
+,{"stream_name":"stdout","time":14.681557056,"data":"rdkit 2026.03.3\n"}
+,{"stream_name":"stdout","time":29.216410934,"data":"V4CODE /kaggle/input/datasets/ahmedberatozer/casmi26-v4b-models/code \n"}
+,{"stream_name":"stdout","time":29.216450256,"data":"V4MOD /kaggle/input/datasets/ahmedberatozer/casmi26-v4b-models \n"}
+,{"stream_name":"stdout","time":29.216455052,"data":"V3CODE /kaggle/input/datasets/ahmedberatozer/casmi26-v3-models/code \n"}
+,{"stream_name":"stdout","time":29.216458646,"data":"POOL /kaggle/input/datasets/ahmedberatozer/casmi26-v2-pool \n"}
+,{"stream_name":"stdout","time":29.216462066,"data":"PC /kaggle/input/datasets/ahmedberatozer/casmi26-pubchem-tier \n"}
+,{"stream_name":"stdout","time":29.216465407,"data":"COMP /kaggle/input/competitions/enveda-CASMI26-molecule-id-mass-spectra\n"}
+,{"stream_name":"stdout","time":29.216468809,"data":"64 files match MANIFEST.json; families ['derivation', 'frag2', 'analog_struct', 'model_views', 'fragnet'] 19s\n"}
+,{"stream_name":"stdout","time":30.460046164,"data":"train columns: ['ingest_lib', 'normalized_smiles', 'inchikey', 'inchikey14', 'molecular_formula', 'ionization_mode', 'instrument_type', 'adduct', 'adduct_orig', 'precursor_mz', 'precursor_error_ppm', 'ms2_mzs', 'ms2_normalized_intensities', 'num_peaks', 'base_peak_intensity', 'collision_energy_ev', 'collision_energy_orig', 'collision_energy_orig_units']\n"}
+,{"stream_name":"stdout","time":30.460086416,"data":"test columns: ['molecule_id', 'spectrum_id', 'ms2_mzs', 'ms2_normalized_intensities', 'base_peak_intensity', 'adduct', 'ionization_mode', 'instrument_type', 'precursor_mz', 'collision_energy_orig', 'collision_energy_ev', 'collision_energy_orig_units']\n"}
+,{"stream_name":"stdout","time":207.016434851,"data":"panel: 1184 spectra / 250 structures; same-structure spectra in train 57238; dropping 57238 (disjoint); 177s\n"}
+,{"stream_name":"stdout","time":292.296402226,"data":"VALIDATION disjoint: 1184 query spectra, 380 molecules, 250 structures -\u003e COMP=/tmp/vcomp (262s)\n"}
+,{"stream_name":"stdout","time":292.402354821,"data":"RERUN True | sig dea4207a04289ad116d224bb57ed9c13 | COMP /tmp/vcomp | ICE_BUDGET 5400\n"}
+,{"stream_name":"stdout","time":3513.686041702,"data":"engine fp models ['/kaggle/input/datasets/megayak/casmi26-simulated-ranker-rows/ours_fpnet_merged_26k.pt', '/kaggle/input/datasets/megayak/casmi26-simulated-ranker-rows/ours_fpnet_single_16k.pt']\n"}
+,{"stream_name":"stdout","time":3513.686110178,"data":"[    68s] library mass index: formula 100.0%, timsTOF rows 46.5%\n"}
+,{"stream_name":"stdout","time":3513.686116951,"data":"[    69s] library 2,482,370 spectra\n"}
+,{"stream_name":"stdout","time":3513.686120969,"data":"[    73s] + ChEBI/LIPID MAPS 62,744 new structures\n"}
+,{"stream_name":"stdout","time":3513.686124774,"data":"[    74s] COCONUT 499,133; training structures to fingerprint 275,548\n"}
+,{"stream_name":"stdout","time":3513.686128594,"data":"[   340s] pool 774,681 structures\n"}
+,{"stream_name":"stdout","time":3513.686132432,"data":"[   358s] index: 2,482,370 library rows; representatives 275,548\n"}
+,{"stream_name":"stdout","time":3513.686136007,"data":"[   363s] fp models: 1 single + 1 merged on cuda\n"}
+,{"stream_name":"stdout","time":3513.686139858,"data":"[   363s] test: 1,184 spectra / 380 molecules\n"}
+,{"stream_name":"stdout","time":3513.686143358,"data":"[   375s]   channels 0/380\n"}
+,{"stream_name":"stdout","time":3513.686146899,"data":"[   595s]   channels 50/380\n"}
+,{"stream_name":"stdout","time":3513.686150646,"data":"[   831s]   channels 100/380\n"}
+,{"stream_name":"stdout","time":3513.68615401,"data":"[  1091s]   channels 150/380\n"}
+,{"stream_name":"stdout","time":3513.686157504,"data":"[  1317s]   channels 200/380\n"}
+,{"stream_name":"stdout","time":3513.686160874,"data":"[  1584s]   channels 250/380\n"}
+,{"stream_name":"stdout","time":3513.686164292,"data":"[  1799s]   channels 300/380\n"}
+,{"stream_name":"stdout","time":3513.686168887,"data":"[  2021s]   channels 350/380\n"}
+,{"stream_name":"stdout","time":3513.686172845,"data":"[  2133s] MetFrag-lite on 21,618 candidates\n"}
+,{"stream_name":"stdout","time":3513.686176671,"data":"[  2369s] our ranker: 4 GBMs on 399,790 rows x 51 features\n"}
+,{"stream_name":"stdout","time":3513.686181115,"data":"[  2468s] prvsiyan ranker: 8 GBMs on 142,762 rows x 31 features\n"}
+,{"stream_name":"stdout","time":3513.686185012,"data":"[  2696s] submissions ready\n"}
+,{"stream_name":"stdout","time":3513.686188742,"data":"engine lists 380 3215s\n"}
+,{"stream_name":"stdout","time":3513.686192523,"data":"\n"}
+,{"stream_name":"stdout","time":3513.686196102,"data":"\n"}
+,{"stream_name":"stdout","time":3513.686199455,"data":"engine lists 380 3221s\n"}
+,{"stream_name":"stdout","time":3513.873835979,"data":"v17 patch appended to probe_core2: True\n"}
+,{"stream_name":"stdout","time":7341.511273066,"data":"logits for 380 molecules 25s\n"}
+,{"stream_name":"stdout","time":7341.511342196,"data":"  pubchem 25/380 230s\n"}
+,{"stream_name":"stdout","time":7341.511348006,"data":"  pubchem 50/380 496s\n"}
+,{"stream_name":"stdout","time":7341.511353775,"data":"  pubchem 75/380 720s\n"}
+,{"stream_name":"stdout","time":7341.511357167,"data":"  pubchem 100/380 1015s\n"}
+,{"stream_name":"stdout","time":7341.511360461,"data":"  pubchem 125/380 1265s\n"}
+,{"stream_name":"stdout","time":7341.511363671,"data":"  pubchem 150/380 1673s\n"}
+,{"stream_name":"stdout","time":7341.511366837,"data":"  pubchem 175/380 1844s\n"}
+,{"stream_name":"stdout","time":7341.511370821,"data":"  pubchem 200/380 2023s\n"}
+,{"stream_name":"stdout","time":7341.511374108,"data":"  pubchem 225/380 2261s\n"}
+,{"stream_name":"stdout","time":7341.511377276,"data":"  pubchem 250/380 2551s\n"}
+,{"stream_name":"stdout","time":7341.511381135,"data":"  pubchem 275/380 2852s\n"}
+,{"stream_name":"stdout","time":7341.511395855,"data":"  pubchem 300/380 3057s\n"}
+,{"stream_name":"stdout","time":7341.51140141,"data":"  pubchem 325/380 3254s\n"}
+,{"stream_name":"stdout","time":7341.511417156,"data":"  pubchem 350/380 3601s\n"}
+,{"stream_name":"stdout","time":7341.511421232,"data":"  pubchem 375/380 3795s\n"}
+,{"stream_name":"stdout","time":7341.51142489,"data":"  pubchem 380/380 3824s\n"}
+,{"stream_name":"stdout","time":7341.511428554,"data":"pc_runner done 380 3825s\n"}
+,{"stream_name":"stdout","time":7341.511432372,"data":"\n"}
+,{"stream_name":"stdout","time":7341.511435967,"data":"\n"}
+,{"stream_name":"stdout","time":7341.511439621,"data":"pubchem lists 380 7332s\n"}
+,{"stream_name":"stdout","time":7351.715158401,"data":"rg 0: 130926 spectra, 8033732 peaks, total peaks 8033732, 10s\n"}
+,{"stream_name":"stdout","time":7356.818873116,"data":"rg 1: 131072 spectra, 7943857 peaks, total peaks 15977589, 15s\n"}
+,{"stream_name":"stdout","time":7361.961406736,"data":"rg 2: 131072 spectra, 7940932 peaks, total peaks 23918521, 20s\n"}
+,{"stream_name":"stdout","time":7367.077292616,"data":"rg 3: 131072 spectra, 7902093 peaks, total peaks 31820614, 25s\n"}
+,{"stream_name":"stdout","time":7372.226680008,"data":"rg 4: 131072 spectra, 7987759 peaks, total peaks 39808373, 30s\n"}
+,{"stream_name":"stdout","time":7377.323139736,"data":"rg 5: 131072 spectra, 7932300 peaks, total peaks 47740673, 36s\n"}
+,{"stream_name":"stdout","time":7382.478900461,"data":"rg 6: 131072 spectra, 7917009 peaks, total peaks 55657682, 41s\n"}
+,{"stream_name":"stdout","time":7387.534398873,"data":"rg 7: 131072 spectra, 7907716 peaks, total peaks 63565398, 46s\n"}
+,{"stream_name":"stdout","time":7392.448980337,"data":"rg 8: 129621 spectra, 8392208 peaks, total peaks 71957606, 51s\n"}
+,{"stream_name":"stdout","time":7396.416924547,"data":"rg 9: 125123 spectra, 10564431 peaks, total peaks 82522037, 55s\n"}
+,{"stream_name":"stdout","time":7399.573251039,"data":"rg 10: 124404 spectra, 6583289 peaks, total peaks 89105326, 58s\n"}
+,{"stream_name":"stdout","time":7404.738676181,"data":"rg 11: 122921 spectra, 10450774 peaks, total peaks 99556100, 63s\n"}
+,{"stream_name":"stdout","time":7407.46632166,"data":"rg 12: 127738 spectra, 4209775 peaks, total peaks 103765875, 66s\n"}
+,{"stream_name":"stdout","time":7410.308008427,"data":"rg 13: 130181 spectra, 4350618 peaks, total peaks 108116493, 69s\n"}
+,{"stream_name":"stdout","time":7413.204077388,"data":"rg 14: 129985 spectra, 4310084 peaks, total peaks 112426577, 71s\n"}
+,{"stream_name":"stdout","time":7416.046904969,"data":"rg 15: 129903 spectra, 4341795 peaks, total peaks 116768372, 74s\n"}
+,{"stream_name":"stdout","time":7418.767364145,"data":"rg 16: 123083 spectra, 3397541 peaks, total peaks 120165913, 77s\n"}
+,{"stream_name":"stdout","time":7421.492753426,"data":"rg 17: 123767 spectra, 3068681 peaks, total peaks 123234594, 80s\n"}
+,{"stream_name":"stdout","time":7424.096606919,"data":"rg 18: 119592 spectra, 3048054 peaks, total peaks 126282648, 82s\n"}
+,{"stream_name":"stdout","time":7425.237738671,"data":"rg 19: 47622 spectra, 4221652 peaks, total peaks 130504300, 83s\n"}
+,{"stream_name":"stdout","time":7425.424665677,"data":"rg 20: 0 spectra, 0 peaks, total peaks 130504300, 84s\n"}
+,{"stream_name":"stdout","time":7427.979613216,"data":"spectra 2482370 peaks 130504300 sid\u003c0: 0 nm nan: 326\n"}
+,{"stream_name":"stdout","time":7427.979651905,"data":"done 86s\n"}
+,{"stream_name":"stdout","time":7427.979658691,"data":"casmi from /kaggle/input/datasets/ahmedberatozer/casmi26-v4b-models/code/casmi/__init__.py\n"}
+,{"stream_name":"stdout","time":7427.979663685,"data":"cache built 7418s\n"}
+,{"stream_name":"stdout","time":7436.693372017,"data":"[Library] 2,482,370 spectra, 275,810 structures, 130,504,300 peaks (1.6s)\n"}
+,{"stream_name":"stdout","time":7445.582781939,"data":"[Pool] 710,701 structures, nbits 10226, frag yes (8.9s)\n"}
+,{"stream_name":"stdout","time":7448.439877299,"data":"engine FP bank: fpnet_0 (A) FALLBACK\n"}
+,{"stream_name":"stdout","time":7448.943934621,"data":"[Engine] reps 442,845 (0.5s)\n"}
+,{"stream_name":"stdout","time":7456.939398169,"data":"derivation prior self-test mismatches: 0\n"}
+,{"stream_name":"stdout","time":7456.939438673,"data":"engine ready; ranker features 160 boosters 4 7447s\n"}
+,{"stream_name":"stdout","time":7457.448750402,"data":"v19 pool popularity re-rank, mu 0.15 pool 710701\n"}
+,{"stream_name":"stdout","time":7541.631017115,"data":"  25/380 molecules 7532s\n"}
+,{"stream_name":"stdout","time":7662.625515065,"data":"  50/380 molecules 7653s\n"}
+,{"stream_name":"stdout","time":7834.259027084,"data":"  75/380 molecules 7824s\n"}
+,{"stream_name":"stdout","time":7961.46846912,"data":"  100/380 molecules 7951s\n"}
+,{"stream_name":"stdout","time":8141.293239921,"data":"  125/380 molecules 8131s\n"}
+,{"stream_name":"stdout","time":8339.359010915,"data":"  150/380 molecules 8329s\n"}
+,{"stream_name":"stdout","time":8388.524465891,"data":"  175/380 molecules 8379s\n"}
+,{"stream_name":"stdout","time":8474.50754872,"data":"  200/380 molecules 8465s\n"}
+,{"stream_name":"stdout","time":8631.363210793,"data":"  225/380 molecules 8621s\n"}
+,{"stream_name":"stdout","time":8695.85895939,"data":"  250/380 molecules 8686s\n"}
+,{"stream_name":"stdout","time":8809.289855926,"data":"  275/380 molecules 8799s\n"}
+,{"stream_name":"stdout","time":8973.231277951,"data":"  300/380 molecules 8963s\n"}
+,{"stream_name":"stdout","time":9046.594939757,"data":"  325/380 molecules 9037s\n"}
+,{"stream_name":"stdout","time":9145.558678712,"data":"  350/380 molecules 9136s\n"}
+,{"stream_name":"stdout","time":9209.788936518,"data":"  375/380 molecules 9200s\n"}
+,{"stream_name":"stdout","time":9220.464228146,"data":"  380/380 molecules 9211s\n"}
+,{"stream_name":"stdout","time":9220.466733511,"data":"errors 0 | popularity re-ranked lists 380\n"}
+,{"stream_name":"stdout","time":9222.100695438,"data":"ICE_UNION: engine candidates added to ICE input: 20783\n"}
+,{"stream_name":"stdout","time":9223.507253956,"data":"ICE input molecules 380 candidates 29583 9214s\n"}
+,{"stream_name":"stdout","time":9227.27937191,"data":"[claw] site preseed rc 0 \n"}
+,{"stream_name":"stdout","time":9227.282899292,"data":"[claw] site ready; substituted ['rdkit-2025.3.6-cp312-cp312-manylinux_2_28_x86_64.whl.ice'] -\u003e ['rdkit-2025.3.6-cp313-cp313-manylinux_2_28_x86_64.whl']\n"}
+,{"stream_name":"stdout","time":10822.991673445,"data":"[ice     0.5s] stubbed (absent) modules: ['pygmtools']\n"}
+,{"stream_name":"stdout","time":10822.991714068,"data":"[ice    24.8s] ms_pred tautomer mode v2 cache /tmp/ice_ms_pred_cache\n"}
+,{"stream_name":"stdout","time":10822.991738596,"data":"[ice    26.0s] model loaded on cuda (rdkit 2025.03.6, torch 2.11.0+cu128, numba True)\n"}
+,{"stream_name":"stdout","time":10822.991746575,"data":"/kaggle/input/datasets/ahmedberatozer/casmi26-iceberg/src/ms_pred/nn_utils/nn_utils.py:1155: UserWarning: Sparse invariant checks are implicitly disabled. Memory errors (e.g. SEGFAULT) will occur when operating on a sparse tensor which violates the invariants, but checks incur performance overhead. To silence this warning, explicitly opt in or out. See `torch.sparse.check_sparse_tensor_invariants.__doc__` for guidance.  (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:760.)\n"}
+,{"stream_name":"stdout","time":10822.991754736,"data":"  adj = torch.sparse_coo_tensor(indices=torch.stack((row, col)), values=value, size=(N, N))\n"}
+,{"stream_name":"stdout","time":10822.991759729,"data":"[ice   190.3s] chunk: 20 mols 3125 jobs 155.8s (20/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10822.99178018,"data":"[ice   281.2s] chunk: 16 mols 3128 jobs 88.2s (36/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10822.991783325,"data":"[ice   396.9s] chunk: 20 mols 3819 jobs 111.4s (56/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10822.991785953,"data":"[ice   521.2s] chunk: 14 mols 3515 jobs 120.4s (70/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10822.991788498,"data":"[ice   609.6s] chunk: 15 mols 3037 jobs 85.6s (85/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10822.99179134,"data":"[ice   704.8s] chunk: 11 mols 3179 jobs 92.8s (96/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10822.991793847,"data":"[ice   795.0s] chunk: 18 mols 3118 jobs 86.0s (114/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10822.991825354,"data":"[ice   899.1s] chunk: 13 mols 3073 jobs 101.2s (127/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10822.991828109,"data":"[ice   995.7s] chunk: 14 mols 3221 jobs 92.0s (141/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10822.991830743,"data":"[ice  1092.0s] chunk: 16 mols 3006 jobs 92.5s (157/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10822.991833512,"data":"[ice  1219.7s] chunk: 14 mols 3322 jobs 123.6s (171/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10822.991836176,"data":"[ice  1335.8s] chunk: 15 mols 3238 jobs 112.6s (186/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10822.991838831,"data":"[ice  1431.6s] chunk: 11 mols 3078 jobs 93.2s (197/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10822.991841425,"data":"[ice  1533.3s] chunk: 11 mols 3235 jobs 98.9s (208/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10822.991843998,"data":"[ice  1592.4s] chunk: 8 mols 1794 jobs 57.6s (216/216 covered mols scored)\n"}
+,{"stream_name":"stdout","time":10822.991849073,"data":"[ice  1592.4s] status ok {'n_mols': 380, 'n_mols_covered': 216, 'n_mols_scored': 216, 'n_cands': 29583, 'n_scored': 16925}\n"}
+,{"stream_name":"stdout","time":10822.991852228,"data":"\n"}
+,{"stream_name":"stdout","time":10822.991854795,"data":"{'status': 'ok', 'n_mols': 380, 'n_mols_covered': 216, 'n_mols_scored': 216, 'n_cands': 29583, 'n_scored': 16925, 'seconds': 1592.38, 'pred_per_s': 30.84, 'device': 'cuda', 'rdkit': '2025.03.6', 'max_mem_gb': 5.03}\n"}
+,{"stream_name":"stdout","time":10822.991858651,"data":"ICE meta {\"status\": \"ok\", \"n_mols\": 380, \"n_mols_scored\": 216, \"n_mols_covered\": 216, \"n_cands\": 29583, \"n_scored\": 16925, \"errors\": [], \"rdkit\": \"2025.03.6\", \"torch\": \"2.11.0+cu128\", \"device\": \"cuda\", \"t_load\": 26.03, \"n_pred\": 46567, \"n_pred_fail\": 0, \"t_pred\": 1509.75, \"n_bad_smiles\": 0, \"pred_per_s\": 30.84, \"max_mem_gb\": 5.03, \"seconds\": 1592.38, \"log_tail\": [\"[ice     0.5s] stubbed (absent) modules: ['pygmtools']\", \"[ice    24.8s] ms_pred tautomer mode v2 cache /tmp/ice_ms_pred_cache\", \"[ice    26.0s] model loaded on cuda (rdkit 2025.03.6, torch 2.11.0+cu128, numba True)\", \"[ice   190.3s] chunk: 20 mols 3125 jobs 155.8s (20/216 covered mols scored)\", \"[ice   281.2s] chunk: 16 mols 3128 jobs 88.2s (36/216 covered mols scored)\", \"[ice   396.9s] chunk: 20 mols 3819 jobs 111.4s (56/216 covered mols scored)\", \"[ice   521.2s] chunk: 14 mols 3515 jobs 120.4s (70/216 covered mols scored)\", \"[ice   609.6s] chunk: 15 mols 3037 jobs 85.6s (85/216 covered mols scored)\", \"[ice   704.8s] chunk: 11 mols 3179 jobs 92.8s (96/216 covered mols scored)\", \"[ice   795.0s] chunk: 18 mols 3118 jobs 86.0s (114/216 covered mols scored)\", \"[ice   899.1s] chunk: 13 mols 3073 jobs 101.2s (127/216 covered mols scored)\", \"[ice   995.7s] chunk: 14 mols 3221 jobs 92.0s (141/216 covered mols scored)\", \"[ice  1092.0s] chunk: 16 mols 3006 jobs 92.5s (157/216 covered mols scored)\", \"[ice  1219.7s] chunk: 14 mols 3322 jobs 123.6s (171/216 covered mols scored)\", \"[ice  1335.8s] chunk: 15 mols 3238 jobs 112.6s (186/216\n"}
+,{"stream_name":"stdout","time":10823.647587633,"data":"v29 GLACIER [M+H]+ only: molecules 210 of 380\n"}
+,{"stream_name":"stdout","time":11375.900602289,"data":"[gl     0.2s] site ready (marker matches): /kaggle/working/ice_site\n"}
+,{"stream_name":"stdout","time":11375.900644833,"data":"[gl     0.3s] stubbed (absent) modules: ['pygmtools']\n"}
+,{"stream_name":"stdout","time":11375.900650411,"data":"[gl    16.1s] GLACIER loaded: 15,108,154 params \n"}
+,{"stream_name":"stdout","time":11375.900653806,"data":"[gl    16.1s] model loaded on cuda (rdkit 2025.03.6, torch 2.11.0+cu128, numba True, threads 2)\n"}
+,{"stream_name":"stdout","time":11375.900658369,"data":"/usr/local/lib/python3.13/dist-packages/torch/nn/modules/transformer.py:531: UserWarning: The PyTorch API of nested tensors is in prototype stage and will change in the near future. We recommend specifying layout=torch.jagged when constructing a nested tensor, as this layout receives active development, has better operator coverage, and works with torch.compile. (Triggered internally at /pytorch/aten/src/ATen/NestedTensorImpl.cpp:178.)\n"}
+,{"stream_name":"stdout","time":11375.900663132,"data":"  output = torch._nested_tensor_from_mask(\n"}
+,{"stream_name":"stdout","time":11375.900667413,"data":"[gl    85.6s] chunk: 21 mols 3263 jobs 64.7s (21/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":11375.900670995,"data":"[gl   126.8s] chunk: 20 mols 3233 jobs 40.2s (41/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":11375.900673992,"data":"[gl   171.7s] chunk: 19 mols 3155 jobs 43.7s (60/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":11375.900676927,"data":"[gl   206.8s] chunk: 13 mols 3052 jobs 34.2s (73/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":11375.900679862,"data":"[gl   242.3s] chunk: 18 mols 3238 jobs 34.6s (91/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":11375.900682871,"data":"[gl   277.4s] chunk: 16 mols 3051 jobs 34.0s (107/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":11375.900685807,"data":"[gl   309.9s] chunk: 15 mols 3032 jobs 31.7s (122/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":11375.900688744,"data":"[gl   345.4s] chunk: 15 mols 3245 jobs 34.5s (137/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":11375.900691743,"data":"[gl   398.4s] chunk: 18 mols 3345 jobs 51.8s (155/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":11375.90069477,"data":"[gl   444.5s] chunk: 16 mols 3181 jobs 45.1s (171/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":11375.900697687,"data":"[gl   487.9s] chunk: 17 mols 3053 jobs 42.1s (188/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":11375.900700629,"data":"[gl   517.8s] chunk: 11 mols 3129 jobs 29.2s (199/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":11375.900703559,"data":"[gl   549.3s] chunk: 11 mols 2597 jobs 30.7s (210/210 covered mols scored)\n"}
+,{"stream_name":"stdout","time":11375.900758944,"data":"[gl   549.3s] status ok {'n_mols': 210, 'n_mols_covered': 210, 'n_mols_scored': 210, 'n_cands': 16391, 'n_scored': 16391}\n"}
+,{"stream_name":"stdout","time":11375.900768278,"data":"\n"}
+,{"stream_name":"stdout","time":11375.900780411,"data":"{'status': 'ok', 'n_mols': 210, 'n_mols_covered': 210, 'n_mols_scored': 210, 'n_cands': 16391, 'n_scored': 16391, 'seconds': 549.29, 'pred_per_s': 77.32, 'device': 'cuda', 'rdkit': '2025.03.6', 'max_mem_gb': 0.45}\n"}
+,{"stream_name":"stdout","time":11375.900791482,"data":"GL meta {\"model\": \"glacier\", \"status\": \"ok\", \"n_mols\": 210, \"n_mols_scored\": 210, \"n_mols_covered\": 210, \"n_cands\": 16391, \"n_scored\": 16391, \"errors\": [], \"rdkit\": \"2025.03.6\", \"torch\": \"2.11.0+cu128\", \"device\": \"cuda\", \"t_load\": 16.07, \"n_pred\": 39785, \"n_pred_fail\": 0, \"n_feat_fail\": 0, \"t_pred\": 514.55, \"n_bad_smiles\": 0, \"pred_per_s\": 77.32, \"bs_final\": 32, \"max_mem_gb\": 0.45, \"seconds\": 549.29, \"log_tail\": [\"[gl     0.2s] site ready (marker matches): /kaggle/working/ice_site\", \"[gl     0.3s] stubbed (absent) modules: ['pygmtools']\", \"[gl    16.1s] GLACIER loaded: 15,108,154 params \", \"[gl    16.1s] model loaded on cuda (rdkit 2025.03.6, torch 2.11.0+cu128, numba True, threads 2)\", \"[gl    85.6s] chunk: 21 mols 3263 jobs 64.7s (21/210 covered mols scored)\", \"[gl   126.8s] chunk: 20 mols 3233 jobs 40.2s (41/210 covered mols scored)\", \"[gl   171.7s] chunk: 19 mols 3155 jobs 43.7s (60/210 covered mols scored)\", \"[gl   206.8s] chunk: 13 mols 3052 jobs 34.2s (73/210 covered mols scored)\", \"[gl   242.3s] chunk: 18 mols 3238 jobs 34.6s (91/210 covered mols scored)\", \"[gl   277.4s] chunk: 16 mols 3051 jobs 34.0s (107/210 covered mols scored)\", \"[gl   309.9s] chunk: 15 mols 3032 jobs 31.7s (122/210 covered mols scored)\", \"[gl   345.4s] chunk: 15 mols 3245 jobs 34.5s (137/210 covered mols scored)\", \"[gl   398.4s] chunk: 18 mols 3345 jobs 51.8s (155/210 covered mols scored)\", \"[gl   444.5s] chunk: 16 mols 3181 jobs 45.1s (171/210 covered mols scored)\", \"[gl   487.9s] chunk: 17 mols 3053 jo\n"}
+,{"stream_name":"stdout","time":11375.900823467,"data":"ICE rerank stats {'molecules': 0, 'changed_top25': 0, 'changed_top1': 0, 'pc_changed': 105} 11366s\n"}
+,{"stream_name":"stdout","time":11375.900826843,"data":"GL rerank stats {'molecules': 0, 'changed_vs_ice_top25': 0, 'changed_vs_ice_top1': 0, 'pc_molecules': 201, 'pc_changed_vs_ice_top25': 200, 'pc_changed_vs_ice_top1': 48} 11366s\n"}
+,{"stream_name":"stdout","time":11376.020932317,"data":"merge/promote self-test OK\n"}
+,{"stream_name":"stdout","time":11376.020965459,"data":"merge stats {'untouched': 9, 'gentle': 358, 'aggressive': 6, 'no_pc': 7, 'promoted': 47}\n"}
+,{"stream_name":"stdout","time":11376.020969428,"data":"CLAW STAGE HEALTH | ICE NOT RUN | GL NOT RUN\n"}
+,{"stream_name":"stdout","time":11376.020972317,"data":"CLAW STAGE SCORED | ice=216 gl=210\n"}
+,{"stream_name":"stdout","time":11376.033398512,"data":"done (380, 2) 11366s\n"}
+,{"stream_name":"stdout","time":11787.902309066,"data":"v14: ICE-only rerank applied to 170 molecules without GLACIER scores\n"}
+,{"stream_name":"stdout","time":11787.902348779,"data":"V1 inference complete; applying separately audited final pass next.\n"}
+,{"stream_name":"stdout","time":12098.128159218,"data":"{\n"}
+,{"stream_name":"stdout","time":12098.128216084,"data":"  \"experiment\": \"V1.1 metric-safe tail\",\n"}
+,{"stream_name":"stdout","time":12098.128221059,"data":"  \"rdkit\": \"2026.03.3\",\n"}
+,{"stream_name":"stdout","time":12098.128224347,"data":"  \"hidden_rerun\": true,\n"}
+,{"stream_name":"stdout","time":12098.12822748,"data":"  \"active_molecules\": 380,\n"}
+,{"stream_name":"stdout","time":12098.128230541,"data":"  \"output_rows\": 380,\n"}
+,{"stream_name":"stdout","time":12098.128233404,"data":"  \"changed_molecules\": 4,\n"}
+,{"stream_name":"stdout","time":12098.128237357,"data":"  \"invalid_removed\": 0,\n"}
+,{"stream_name":"stdout","time":12098.128256114,"data":"  \"equivalent_duplicates_removed\": 2,\n"}
+,{"stream_name":"stdout","time":12098.128261453,"data":"  \"existing_candidates_promoted\": 27,\n"}
+,{"stream_name":"stdout","time":12098.128266322,"data":"  \"ranked_candidates_added\": 6,\n"}
+,{"stream_name":"stdout","time":12098.128271734,"data":"  \"dreams_candidates_added\": 0,\n"}
+,{"stream_name":"stdout","time":12098.128276348,"data":"  \"monotone_rank_assertions_passed\": true,\n"}
+,{"stream_name":"stdout","time":12098.128280877,"data":"  \"metric_source_sha256\": \"c61d163f1bb768313fd0863822952f035f343924f37e3f5e4b5883ccef7e6201\",\n"}
+,{"stream_name":"stdout","time":12098.128296794,"data":"  \"baseline_sha256\": \"f48eed67669d0cec836a45a7a0355cfc7afdd179691d11877c2492cc59edeff4\",\n"}
+,{"stream_name":"stdout","time":12098.128306288,"data":"  \"submission_sha256\": \"2da820bc702cac149aa41210020e9e50e6601fd47bec5c0c7d135d07e918569f\",\n"}
+,{"stream_name":"stdout","time":12098.1283091,"data":"  \"runtime_seconds\": 12088.2,\n"}
+,{"stream_name":"stdout","time":12098.128311545,"data":"  \"validation_note\": \"Visible test is a smoke check only and overlaps training; no generalization score claimed.\"\n"}
+,{"stream_name":"stdout","time":12098.12831413,"data":"}\n"}
+,{"stream_name":"stdout","time":12367.987383392,"data":"{\n"}
+,{"stream_name":"stdout","time":12367.987436048,"data":" \"raw_main\": {\n"}
+,{"stream_name":"stdout","time":12367.987443684,"data":"  \"n\": 380,\n"}
+,{"stream_name":"stdout","time":12367.987449359,"data":"  \"mrr25\": 0.9127553258145366,\n"}
+,{"stream_name":"stdout","time":12367.9874541,"data":"  \"top1\": 0.868421052631579,\n"}
+,{"stream_name":"stdout","time":12367.9874586,"data":"  \"top5\": 0.9763157894736842,\n"}
+,{"stream_name":"stdout","time":12367.987463096,"data":"  \"top25\": 0.9973684210526316,\n"}
+,{"stream_name":"stdout","time":12367.987467463,"data":"  \"in_list\": 0.9973684210526316\n"}
+,{"stream_name":"stdout","time":12367.987471896,"data":" },\n"}
+,{"stream_name":"stdout","time":12367.987476098,"data":" \"pop_main\": {\n"}
+,{"stream_name":"stdout","time":12367.987480488,"data":"  \"n\": 380,\n"}
+,{"stream_name":"stdout","time":12367.987484836,"data":"  \"mrr25\": 0.9500281954887219,\n"}
+,{"stream_name":"stdout","time":12367.987489246,"data":"  \"top1\": 0.9236842105263158,\n"}
+,{"stream_name":"stdout","time":12367.987498474,"data":"  \"top5\": 0.9842105263157894,\n"}
+,{"stream_name":"stdout","time":12367.987502244,"data":"  \"top25\": 0.9973684210526316,\n"}
+,{"stream_name":"stdout","time":12367.987505227,"data":"  \"in_list\": 0.9973684210526316\n"}
+,{"stream_name":"stdout","time":12367.987508124,"data":" },\n"}
+,{"stream_name":"stdout","time":12367.987511464,"data":" \"sim_main\": {\n"}
+,{"stream_name":"stdout","time":12367.987529226,"data":"  \"n\": 380,\n"}
+,{"stream_name":"stdout","time":12367.987534669,"data":"  \"mrr25\": 0.9500281954887219,\n"}
+,{"stream_name":"stdout","time":12367.987539577,"data":"  \"top1\": 0.9236842105263158,\n"}
+,{"stream_name":"stdout","time":12367.987544731,"data":"  \"top5\": 0.9842105263157894,\n"}
+,{"stream_name":"stdout","time":12367.987549206,"data":"  \"top25\": 0.9973684210526316,\n"}
+,{"stream_name":"stdout","time":12367.987553532,"data":"  \"in_list\": 0.9973684210526316\n"}
+,{"stream_name":"stdout","time":12367.987557876,"data":" },\n"}
+,{"stream_name":"stdout","time":12367.987562056,"data":" \"engine2\": {\n"}
+,{"stream_name":"stdout","time":12367.987566395,"data":"  \"n\": 380,\n"}
+,{"stream_name":"stdout","time":12367.987570732,"data":"  \"mrr25\": 0.009785762483130905,\n"}
+,{"stream_name":"stdout","time":12367.987575162,"data":"  \"top1\": 0.005263157894736842,\n"}
+,{"stream_name":"stdout","time":12367.987579505,"data":"  \"top5\": 0.015789473684210527,\n"}
+,{"stream_name":"stdout","time":12367.987583858,"data":"  \"top25\": 0.02368421052631579,\n"}
+,{"stream_name":"stdout","time":12367.987588228,"data":"  \"in_list\": 0.02368421052631579\n"}
+,{"stream_name":"stdout","time":12367.987607674,"data":" },\n"}
+,{"stream_name":"stdout","time":12367.987624242,"data":" \"pcmerge\": {\n"}
+,{"stream_name":"stdout","time":12367.987630046,"data":"  \"n\": 380,\n"}
+,{"stream_name":"stdout","time":12367.987635003,"data":"  \"mrr25\": 0.8924100314889789,\n"}
+,{"stream_name":"stdout","time":12367.987648956,"data":"  \"top1\": 0.8131578947368421,\n"}
+,{"stream_name":"stdout","time":12367.987652764,"data":"  \"top5\": 0.9789473684210527,\n"}
+,{"stream_name":"stdout","time":12367.98765624,"data":"  \"top25\": 0.9973684210526316,\n"}
+,{"stream_name":"stdout","time":12367.98765971,"data":"  \"in_list\": 0.9973684210526316\n"}
+,{"stream_name":"stdout","time":12367.98766324,"data":" },\n"}
+,{"stream_name":"stdout","time":12367.987666892,"data":" \"fused\": {\n"}
+,{"stream_name":"stdout","time":12367.987670315,"data":"  \"n\": 380,\n"}
+,{"stream_name":"stdout","time":12367.987673686,"data":"  \"mrr25\": 0.5432321466989658,\n"}
+,{"stream_name":"stdout","time":12367.98767725,"data":"  \"top1\": 0.23684210526315788,\n"}
+,{"stream_name":"stdout","time":12367.987680755,"data":"  \"top5\": 0.9552631578947368,\n"}
+,{"stream_name":"stdout","time":12367.987684294,"data":"  \"top25\": 0.9947368421052631,\n"}
+,{"stream_name":"stdout","time":12367.98768781,"data":"  \"in_list\": 0.9947368421052631\n"}
+,{"stream_name":"stdout","time":12367.987691262,"data":" },\n"}
+,{"stream_name":"stdout","time":12367.987694671,"data":" \"final\": {\n"}
+,{"stream_name":"stdout","time":12367.987703113,"data":"  \"n\": 380,\n"}
+,{"stream_name":"stdout","time":12367.987706256,"data":"  \"mrr25\": 0.5432321466989658,\n"}
+,{"stream_name":"stdout","time":12367.987738749,"data":"  \"top1\": 0.23684210526315788,\n"}
+,{"stream_name":"stdout","time":12367.987743971,"data":"  \"top5\": 0.9552631578947368,\n"}
+,{"stream_name":"stdout","time":12367.98774759,"data":"  \"top25\": 0.9947368421052631,\n"}
+,{"stream_name":"stdout","time":12367.987751101,"data":"  \"in_list\": 0.9947368421052631\n"}
+,{"stream_name":"stdout","time":12367.987754634,"data":" },\n"}
+,{"stream_name":"stdout","time":12367.987758026,"data":" \"_meta\": {\n"}
+,{"stream_name":"stdout","time":12367.987761508,"data":"  \"regime\": \"disjoint\",\n"}
+,{"stream_name":"stdout","time":12367.987765108,"data":"  \"molecules\": 380,\n"}
+,{"stream_name":"stdout","time":12367.987768698,"data":"  \"runtime_s\": 12358,\n"}
+,{"stream_name":"stdout","time":12367.987772219,"data":"  \"lib_max_ge_0_9\": 0.02368421052631579\n"}
+,{"stream_name":"stdout","time":12367.987775924,"data":" }\n"}
+,{"stream_name":"stdout","time":12367.987779285,"data":"}\n"}
+,{"stream_name":"stdout","time":12367.987782808,"data":"kept: ['__notebook__.ipynb', 'baseline_submission.csv', 'candidate_audit.csv', 'candidate_audit.json', 'eng_lists.json', 'pc_lists.json', 'pc_runner.py', 'probe_core2.py', 'run_manifest.json', 'submission.csv', 'val']\n"}
+,{"stream_name":"stderr","time":12374.183354243,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":12374.183394844,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":12374.373935126,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":12374.373966,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":12375.210551523,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":12375.3199495,"data":"[NbConvertApp] Writing 179135 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":12377.998298499,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":12378.860189831,"data":"[NbConvertApp] Writing 734764 bytes to __results__.html\n"}
+]
